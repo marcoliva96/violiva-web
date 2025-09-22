@@ -22,6 +22,10 @@ export function ConfiguratorWizard({
   onNextStep,
   bookingData
 }: ConfiguratorWizardProps) {
+  // Scroll automático al cambiar de paso
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [currentStep])
   const [selectedPack, setSelectedPack] = useState<string>('')
   const [selectedSongs, setSelectedSongs] = useState<string[]>([])
   const [customSongs, setCustomSongs] = useState<Array<{title: string, source?: string}>>([])

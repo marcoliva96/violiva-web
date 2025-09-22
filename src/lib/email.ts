@@ -4,8 +4,8 @@ import nodemailer from 'nodemailer'
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER || 'marcoliva96@gmail.com',
-    pass: process.env.EMAIL_PASS || 'your-app-password' // Necesitarás una contraseña de aplicación
+    user: process.env.EMAIL_USER || 'documentsoliva96@gmail.com',
+    pass: process.env.EMAIL_PASS || 'Axblue7-d20' // Contraseña de aplicación
   }
 })
 
@@ -165,8 +165,8 @@ ${customSongs.map(song => `<li><strong>${song.title}</strong>${song.url ? ` - UR
   }
 
   const mailOptions = {
-    from: process.env.EMAIL_USER || 'marcoliva96@gmail.com',
-    to: 'marcoliva96@gmail.com',
+    from: process.env.EMAIL_USER || 'documentsoliva96@gmail.com',
+    to: 'documentsoliva96@gmail.com',
     subject: `Nueva solicitud de boda - ${client.firstName} ${client.lastName}`,
     html: emailContent
   }
