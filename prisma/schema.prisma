@@ -1,0 +1,153 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String    @id @default(cuid())
+  email      String    @unique
+  name       String?
+  password   String?   // only if using credentials; otherwise null for OAuth
+  role       Role      @default(ADMIN)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  // relationships
+  actions    Action[]
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model Client {
+  id            String       @id @default(cuid())
+  firstName     String
+  lastName      String
+  email         String       @unique
+  phone         String?
+  partnerName   String?
+  weddingDate   DateTime?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  status        ClientStatus @default(CONTACTED)
+  notes         String?
+  // relations
+  bookings      Booking[]
+}
+
+enum ClientStatus {
+  CONTACTED
+  NEGOTIATING
+  CONFIRMED
+  PAID
+  REALIZED
+  CANCELLED
+}
+
+model Booking {
+  id             String        @id @default(cuid())
+  clientId       String
+  client         Client        @relation(fields: [clientId], references: [id])
+  date           DateTime
+  venue          String?
+  pack           BookingPack
+  priceCents     Int
+  finalPrice     Int?          // Precio final acordado en centavos
+  currency       String        @default("EUR")
+  state          BookingState  @default(PENDING)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  // relations
+  selections     Selection[]
+  contract       Contract?
+  source         String?       // e.g. "web-form"
+}
+
+enum BookingPack {
+  CEREMONIA
+  APERITIVO_1H
+  APERITIVO_1_5H
+  CEREMONIA_APERITIVO_1H
+  CEREMONIA_APERITIVO_1_5H
+}
+
+enum BookingState {
+  PENDING
+  CONFIRMED
+  PAID
+  COMPLETED
+  CANCELLED
+}
+
+model Song {
+  id          String   @id @default(cuid())
+  title       String
+  composer    String?
+  genre       String?
+  durationSec Int?
+  isFeatured  Boolean  @default(false)
+  s3Key       String   // key/path in S3 (private)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  // relations
+  selections  Selection[]
+}
+
+model Selection {
+  id         String   @id @default(cuid())
+  bookingId  String
+  booking    Booking  @relation(fields: [bookingId], references: [id])
+  songId     String?
+  song       Song?    @relation(fields: [songId], references: [id])
+  customTitle String? // if client provided a custom song suggestion
+  customSource String? // link uploaded by client (private)
+  moment     String?  // ceremony moment (e.g. "entrada_ella", "salida")
+  status     SelectionStatus @default(PENDING)
+  orderIndex Int?
+}
+
+enum SelectionStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  IN_PREPARATION
+  READY
+}
+
+model Contract {
+  id         String   @id @default(cuid())
+  bookingId  String   @unique
+  booking    Booking  @relation(fields: [bookingId], references: [id])
+  pdfUrl     String   // signed URL to stored PDF in S3 or doc store
+  generatedAt DateTime @default(now())
+  sentAt     DateTime?
+  signedAt   DateTime?
+  notes      String?
+}
+
+model Action {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String
+  payload   Json?
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id          String      @id @default(cuid())
+  clientName  String
+  rating      Int         // 1-5 stars
+  comment     String
+  weddingDate DateTime?
+  isApproved  Boolean     @default(false)
+  isFeatured  Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
