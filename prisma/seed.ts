@@ -106,9 +106,14 @@ async function main() {
 
   for (const song of songs) {
     await prisma.song.upsert({
-      where: { s3Key: song.s3Key },
+      where: { 
+        id: song.s3Key.replace('songs/', '').replace('.mp3', '')
+      },
       update: {},
-      create: song,
+      create: {
+        ...song,
+        id: song.s3Key.replace('songs/', '').replace('.mp3', '')
+      },
     })
   }
 
@@ -134,7 +139,7 @@ async function main() {
       clientId: client1.id,
       date: new Date('2024-06-15T16:00:00Z'),
       venue: 'Masía El Olivar',
-      pack: 'STANDARD',
+      pack: 'CEREMONIA_APERITIVO_1H',
       priceCents: 50000,
       state: 'CONFIRMED',
       source: 'web-form',
@@ -171,7 +176,7 @@ async function main() {
       phone: '+34 600 000 002',
       partnerName: 'David Ruiz',
       weddingDate: new Date('2024-07-20T17:00:00Z'),
-      status: 'PENDING',
+      status: 'CONTACTED',
     },
   })
 
@@ -180,7 +185,7 @@ async function main() {
       clientId: client2.id,
       date: new Date('2024-07-20T17:00:00Z'),
       venue: 'Hotel Palace Barcelona',
-      pack: 'PREMIUM',
+      pack: 'CEREMONIA_APERITIVO_1_5H',
       priceCents: 70000,
       state: 'PENDING',
       source: 'web-form',
