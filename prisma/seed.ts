@@ -194,6 +194,81 @@ async function main() {
 
   console.log('Sample booking created:', booking2.id)
 
+  // Create sample reviews
+  const reviews = [
+    {
+      clientName: 'María y Carlos',
+      rating: 5,
+      comment: 'Increíble experiencia. Violiva hizo que nuestra boda fuera perfecta. La música fue exactamente lo que queríamos y todos nuestros invitados quedaron encantados.',
+      weddingDate: new Date('2024-05-15'),
+      isApproved: true,
+      isFeatured: true
+    },
+    {
+      clientName: 'Ana y David',
+      rating: 5,
+      comment: 'Profesional, elegante y con un repertorio espectacular. Violiva supo crear el ambiente perfecto para nuestro día especial. Totalmente recomendable.',
+      weddingDate: new Date('2024-06-20'),
+      isApproved: true,
+      isFeatured: true
+    },
+    {
+      clientName: 'Laura y Miguel',
+      rating: 5,
+      comment: 'Una actuación magistral que hizo que nuestra ceremonia fuera aún más especial. Violiva tiene un talento increíble y sabe cómo conectar con las emociones.',
+      weddingDate: new Date('2024-07-10'),
+      isApproved: true,
+      isFeatured: true
+    },
+    {
+      clientName: 'Carmen y Roberto',
+      rating: 5,
+      comment: 'Desde el primer momento supimos que era la elección perfecta. Violiva no solo toca el violín, sino que transmite emociones que llegan al corazón.',
+      weddingDate: new Date('2024-08-05'),
+      isApproved: true,
+      isFeatured: true
+    },
+    {
+      clientName: 'Isabel y Fernando',
+      rating: 5,
+      comment: 'Un artista excepcional que hizo de nuestra boda un momento inolvidable. La música fue el complemento perfecto para nuestro día más especial.',
+      weddingDate: new Date('2024-09-12'),
+      isApproved: true,
+      isFeatured: true
+    },
+    {
+      clientName: 'Patricia y Antonio',
+      rating: 5,
+      comment: 'Violiva transformó nuestro cóctel en una experiencia única. Los invitados no paraban de preguntar quién era el violinista. ¡Simplemente perfecto!',
+      weddingDate: new Date('2024-10-18'),
+      isApproved: true,
+      isFeatured: true
+    },
+    {
+      clientName: 'Sofia y Pablo',
+      rating: 5,
+      comment: 'La elegancia y el talento de Violiva hicieron que nuestra boda fuera aún más especial. Una actuación que recordaremos para siempre.',
+      weddingDate: new Date('2024-11-22'),
+      isApproved: true,
+      isFeatured: true
+    },
+    {
+      clientName: 'Elena y Jorge',
+      rating: 5,
+      comment: 'Violiva supo capturar perfectamente el estilo que queríamos para nuestra boda. Una actuación llena de sentimiento y profesionalidad.',
+      weddingDate: new Date('2024-12-08'),
+      isApproved: true,
+      isFeatured: true
+    }
+  ]
+
+  for (const review of reviews) {
+    await prisma.review.create({
+      data: review
+    })
+  }
+
+  console.log('Reviews created:', reviews.length)
   console.log('Seed completed successfully!')
 }
 
