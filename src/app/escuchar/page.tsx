@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { AudioPlayer } from '@/components/AudioPlayer'
 import { SongCard } from '@/components/SongCard'
 import { Search, Settings } from 'lucide-react'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface Song {
   id: string
@@ -16,6 +17,7 @@ interface Song {
 }
 
 export default function EscucharPage() {
+  const { t } = useTranslation()
   const [songs, setSongs] = useState<Song[]>([])
   const [filteredSongs, setFilteredSongs] = useState<Song[]>([])
   const [loading, setLoading] = useState(true)
@@ -116,7 +118,7 @@ export default function EscucharPage() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando canciones...</p>
+          <p className="text-gray-600">{t('listen.loading')}</p>
         </div>
       </div>
     )
@@ -126,33 +128,33 @@ export default function EscucharPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 py-8">
-          <h1 className="text-4xl font-serif font-bold text-gray-900 mb-4">
-            Escucha nuestro repertorio
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          <h1 className="text-3xl font-serif font-bold text-gray-900 mb-3">
+            {t('listen.title')}
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Descubre las canciones que pueden hacer de tu boda un momento único
+          <p className="text-lg text-gray-600 mb-6">
+            {t('listen.subtitle')}
           </p>
 
           {/* Search and Filters */}
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
+          <div className="flex flex-col md:flex-row gap-3 mb-6">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="text"
-                placeholder="Buscar por título o compositor..."
+                placeholder={t('listen.searchPlaceholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
               />
             </div>
             
             <select
               value={selectedGenre}
               onChange={(e) => setSelectedGenre(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
             >
-              <option value="">Todos los géneros</option>
+              <option value="">{t('listen.allGenres')}</option>
               {genres.map(genre => (
                 <option key={genre} value={genre}>{genre}</option>
               ))}
@@ -161,10 +163,10 @@ export default function EscucharPage() {
             <Button
               variant={showFeaturedOnly ? "default" : "outline"}
               onClick={() => setShowFeaturedOnly(!showFeaturedOnly)}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 text-sm px-3 py-2"
             >
               <Settings className="h-4 w-4" />
-              Destacadas
+              {t('listen.featured')}
             </Button>
           </div>
         </div>
@@ -187,13 +189,13 @@ export default function EscucharPage() {
       )}
 
       {/* Songs Grid */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-6">
         {filteredSongs.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No se encontraron canciones con los filtros seleccionados</p>
+            <p className="text-gray-500 text-lg">{t('listen.noResults')}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {filteredSongs.map((song) => (
               <SongCard
                 key={song.id}

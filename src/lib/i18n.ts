@@ -72,6 +72,7 @@ export const translations = {
     // Configure page
     configure: {
       title: 'Configura tu boda',
+      subtitle: 'Selecciona el pack que mejor se adapte a tu boda',
       steps: {
         pack: 'Elige tu pack',
         ceremony: 'Momentos de la ceremonia',
@@ -116,18 +117,50 @@ export const translations = {
         songTitle: 'Título de la canción',
         songSource: 'Artista/Compositor'
       },
-      client: {
-        title: 'Tus datos',
-        subtitle: 'Necesitamos algunos datos para crear tu propuesta personalizada',
-        firstName: 'Nombre',
-        lastName: 'Apellido',
-        email: 'Email',
-        phone: 'Teléfono',
-        partnerName: 'Nombre de tu pareja',
-        weddingDate: 'Fecha de la boda',
-        venue: 'Lugar de la boda',
-        availabilityLink: 'Consulta la disponibilidad antes de elegir'
-      }
+        client: {
+          title: 'Tus datos',
+          subtitle: 'Necesitamos algunos datos para crear tu propuesta personalizada',
+          firstName: 'Nombre',
+          lastName: 'Apellidos',
+          email: 'Email',
+          phone: 'Teléfono',
+          partnerName: 'Nombre de tu pareja',
+          weddingDate: 'Fecha de la boda',
+          venue: 'Lugar de la boda',
+          availabilityLink: 'Consulta la disponibilidad antes de elegir',
+          languagePreference: 'Preferencia de idioma de contacto',
+          confirmationMessage: '¡Perfecto! Me pondré en contacto contigo en menos de 24 horas',
+          confirmationDetails: 'Te contactaré para:',
+          confirmationList: [
+            'Confirmar todos los detalles de tu boda',
+            'Acordar las canciones específicas',
+            'Cerrar el contrato y formalizar el servicio'
+          ]
+        },
+        packs: {
+          CEREMONIA: 'Solo Ceremonia',
+          COCTEL: 'Solo Cóctel',
+          CEREMONIA_APERITIVO_1H: 'Ceremonia + Aperitivo (1h)',
+          CEREMONIA_APERITIVO_1_5H: 'Ceremonia + Aperitivo (1.5h)'
+        },
+        buttons: {
+          back: 'Atrás',
+          next: 'Siguiente',
+          submit: 'Enviar solicitud',
+          confirm: 'Confirmar y enviar',
+          cancel: 'Cancelar'
+        }
+    },
+    // Listen page
+    listen: {
+      title: 'Escucha nuestro repertorio',
+      subtitle: 'Descubre las canciones que pueden hacer de tu boda un momento único',
+      searchPlaceholder: 'Buscar por título o compositor...',
+      allGenres: 'Todos los géneros',
+      featured: 'Destacadas',
+      loading: 'Cargando canciones...',
+      noResults: 'No se encontraron canciones con los filtros seleccionados',
+      listen: 'Escuchar'
     },
     // Admin
     admin: {
@@ -216,6 +249,7 @@ export const translations = {
     // Configure page
     configure: {
       title: 'Configura el teu casament',
+      subtitle: 'Selecciona el pack que millor s\'adapti al teu casament',
       steps: {
         pack: 'Tria el teu pack',
         ceremony: 'Moments de la cerimònia',
@@ -260,18 +294,50 @@ export const translations = {
         songTitle: 'Títol de la cançó',
         songSource: 'Artista/Compositor'
       },
-      client: {
-        title: 'Les teves dades',
-        subtitle: 'Necessitem algunes dades per crear la teva proposta personalitzada',
-        firstName: 'Nom',
-        lastName: 'Cognom',
-        email: 'Email',
-        phone: 'Telèfon',
-        partnerName: 'Nom del teu company',
-        weddingDate: 'Data del casament',
-        venue: 'Lloc del casament',
-        availabilityLink: 'Consulta la disponibilitat abans de triar'
-      }
+        client: {
+          title: 'Les teves dades',
+          subtitle: 'Necessitem algunes dades per crear la teva proposta personalitzada',
+          firstName: 'Nom',
+          lastName: 'Cognoms',
+          email: 'Email',
+          phone: 'Telèfon',
+          partnerName: 'Nom del teu company',
+          weddingDate: 'Data del casament',
+          venue: 'Lloc del casament',
+          availabilityLink: 'Consulta la disponibilitat abans de triar',
+          languagePreference: 'Preferència d\'idioma de contacte',
+          confirmationMessage: 'Perfecte! Em posaré en contacte amb tu en menys de 24 hores',
+          confirmationDetails: 'Et contactaré per:',
+          confirmationList: [
+            'Confirmar tots els detalls del teu casament',
+            'Acordar les cançons específiques',
+            'Tancar el contracte i formalitzar el servei'
+          ]
+        },
+        packs: {
+          CEREMONIA: 'Només Cerimònia',
+          COCTEL: 'Només Còctel',
+          CEREMONIA_APERITIVO_1H: 'Cerimònia + Aperitiu (1h)',
+          CEREMONIA_APERITIVO_1_5H: 'Cerimònia + Aperitiu (1.5h)'
+        },
+        buttons: {
+          back: 'Enrere',
+          next: 'Següent',
+          submit: 'Enviar sol·licitud',
+          confirm: 'Confirmar i enviar',
+          cancel: 'Cancel·lar'
+        }
+    },
+    // Listen page
+    listen: {
+      title: 'Escolta el nostre repertori',
+      subtitle: 'Descobreix les cançons que poden fer del teu casament un moment únic',
+      searchPlaceholder: 'Buscar per títol o compositor...',
+      allGenres: 'Tots els gèneres',
+      featured: 'Destacades',
+      loading: 'Carregant cançons...',
+      noResults: 'No s\'han trobat cançons amb els filtres seleccionats',
+      listen: 'Escoltar'
     },
     // Admin
     admin: {

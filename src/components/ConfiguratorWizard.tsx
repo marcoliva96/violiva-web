@@ -347,7 +347,7 @@ export function ConfiguratorWizard({
           {t('configure.steps.pack')}
         </h2>
         <p className="text-gray-600 mb-8">
-          Selecciona el pack que mejor se adapte a tu boda
+          {t('configure.subtitle')}
         </p>
 
         <div className="grid md:grid-cols-3 gap-6 mb-8">
