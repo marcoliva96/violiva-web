@@ -67,7 +67,14 @@ export async function POST(request: NextRequest) {
       })
 
       // Create song selections
-      const selections = []
+      const selections: Array<{
+        bookingId: string
+        songId?: string
+        customTitle?: string
+        customSource?: string
+        orderIndex: number
+        moment?: string
+      }> = []
       let orderIndex = 0
       
       // Add ceremony songs
@@ -106,7 +113,7 @@ export async function POST(request: NextRequest) {
       await sendBookingNotification({
         client,
         pack,
-        weddingDate,
+        weddingDate: weddingDate || new Date().toISOString(),
         venue,
         ceremonyMoments,
         ceremonySongs,

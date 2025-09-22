@@ -46,7 +46,13 @@ export function ConfiguratorWizard({
   const [loadingDates, setLoadingDates] = useState(false)
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
-  const [songs, setSongs] = useState<Record<string, unknown>[]>([])
+  const [songs, setSongs] = useState<Array<{
+    id: string
+    title: string
+    composer?: string
+    genre?: string
+    durationSec?: number
+  }>>([])
   const [searchQuery, setSearchQuery] = useState('')
   const [playingSong, setPlayingSong] = useState<string | null>(null)
   const [selectedMoment, setSelectedMoment] = useState<string | null>(null)
@@ -237,7 +243,7 @@ export function ConfiguratorWizard({
 
     if (selectedSongs.includes(songId)) {
       setSelectedSongs(prev => prev.filter(id => id !== songId))
-    } else if (selectedSongs.length < pack.maxSongs) {
+    } else if (selectedSongs.length < 3) { // Máximo 3 canciones
       setSelectedSongs(prev => [...prev, songId])
     }
   }
@@ -649,7 +655,7 @@ export function ConfiguratorWizard({
     const getSelectedSong = (momentId: string) => {
       const songId = ceremonySongs[momentId]
       if (!songId || songId === 'custom') return null
-      return songs.find((song: any) => song.id === songId)
+      return songs.find((song: any) => song.id === songId) || null
     }
 
     const handleCustomSongSubmit = (momentId: string) => {
@@ -861,14 +867,15 @@ export function ConfiguratorWizard({
                         const isCustomSong = ceremonySongs[moment.id]?.startsWith('custom_')
                         
                         if (isCustomSong) {
-                          const customSong = customSongs.find(song => song.id === ceremonySongs[moment.id])
+                          const customSongId = ceremonySongs[moment.id]?.replace('custom_', '')
+                          const customSong = customSongs[parseInt(customSongId || '0')]
                           return customSong ? (
                             <div>
                               <div className="flex items-center justify-between mb-3">
                                 <div>
                                   <p className="font-medium text-black">{customSong.title}</p>
                                   <p className="text-sm text-orange-600">Canción personalizada</p>
-                                  <p className="text-xs text-gray-500">URL: {customSong.url}</p>
+                                  {customSong.source && <p className="text-xs text-gray-500">URL: {customSong.source}</p>}
                                 </div>
                                 <button
                                   disabled
@@ -1243,10 +1250,10 @@ export function ConfiguratorWizard({
           Elige tus canciones
         </h2>
         <p className="text-gray-600 mb-4">
-          Selecciona hasta {selectedPackData?.maxSongs} canciones de nuestro repertorio
+          Selecciona hasta 3 canciones de nuestro repertorio
         </p>
         <p className="text-sm text-amber-600 mb-8">
-          {selectedSongs.length} de {selectedPackData?.maxSongs} canciones seleccionadas
+          {selectedSongs.length} de 3 canciones seleccionadas
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">

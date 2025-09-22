@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from '@/hooks/useTranslation'
+import { Button } from '@/components/ui/button'
 import { Plus, Edit, Trash2, Music, Star, Upload, Play, Pause, Save, X } from 'lucide-react'
 
 interface Song {

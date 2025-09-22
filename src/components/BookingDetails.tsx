@@ -27,6 +27,7 @@ interface Booking {
   }>
   contract?: {
     id: string
+    pdfUrl: string
     generatedAt: string
     sentAt?: string
     signedAt?: string
