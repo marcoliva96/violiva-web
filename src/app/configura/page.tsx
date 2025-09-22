@@ -16,7 +16,22 @@ export default function ConfiguraPage() {
   }
 
   const handleBack = () => {
-    setCurrentStep(prev => Math.max(1, prev - 1))
+    // Lógica inteligente de navegación hacia atrás basada en el pack
+    const pack = bookingData?.pack as string
+    
+    if (currentStep === 5) { // Fecha
+      if (pack === 'COCTEL') {
+        setCurrentStep(3) // Ir a Cóctel
+      } else if (pack === 'CEREMONIA') {
+        setCurrentStep(2) // Ir a Momentos de ceremonia
+      } else if (pack === 'CEREMONIA_APERITIVO_1H' || pack === 'CEREMONIA_APERITIVO_1_5H') {
+        setCurrentStep(4) // Ir a Cóctel
+      } else {
+        setCurrentStep(4) // Por defecto, ir a Cóctel
+      }
+    } else {
+      setCurrentStep(prev => Math.max(1, prev - 1))
+    }
   }
 
   const handleNextStep = (step: number) => {

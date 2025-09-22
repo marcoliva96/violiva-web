@@ -59,22 +59,44 @@ export function ConfiguratorWizard({
   const [duplicateSongWarning, setDuplicateSongWarning] = useState<string | null>(null)
   const [firstPersonName, setFirstPersonName] = useState('')
   const [secondPersonName, setSecondPersonName] = useState('')
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
+  const [showConfirmation, setShowConfirmation] = useState(false)
 
   // Scroll automático al cambiar de paso
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [currentStep])
 
-  // Pre-llenar nombres en la fase de datos si están disponibles
-  useEffect(() => {
-    if (currentStep === 6 && firstPersonName && secondPersonName) {
-      setClientData(prev => ({
-        ...prev,
-        firstName: firstPersonName,
-        lastName: secondPersonName
-      }))
+  // Pre-llenado de nombres removido - el usuario debe introducir sus datos manualmente
+
+  // Función de validación del formulario
+  const validateForm = () => {
+    const errors: Record<string, string> = {}
+    
+    if (!clientData.firstName.trim()) {
+      errors.firstName = 'El nombre es obligatorio'
     }
-  }, [currentStep, firstPersonName, secondPersonName])
+    if (!clientData.lastName.trim()) {
+      errors.lastName = 'El apellido es obligatorio'
+    }
+    if (!clientData.email.trim()) {
+      errors.email = 'El email es obligatorio'
+    } else if (!/\S+@\S+\.\S+/.test(clientData.email)) {
+      errors.email = 'El email no es válido'
+    }
+    if (!clientData.phone.trim()) {
+      errors.phone = 'El teléfono es obligatorio'
+    }
+    if (!clientData.weddingDate) {
+      errors.weddingDate = 'La fecha de la boda es obligatoria'
+    }
+    if (!clientData.venue.trim()) {
+      errors.venue = 'El lugar es obligatorio'
+    }
+    
+    setFormErrors(errors)
+    return Object.keys(errors).length === 0
+  }
 
   // Preseleccionar momentos obligatorios cuando se carga el componente
   useEffect(() => {
@@ -1618,9 +1640,14 @@ export function ConfiguratorWizard({
                   type="text"
                   value={clientData.firstName}
                   onChange={(e) => setClientData(prev => ({ ...prev, firstName: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black"
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black ${
+                    formErrors.firstName ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   required
                 />
+                {formErrors.firstName && (
+                  <p className="text-red-500 text-sm mt-1">{formErrors.firstName}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-black mb-1">
@@ -1630,9 +1657,14 @@ export function ConfiguratorWizard({
                   type="text"
                   value={clientData.lastName}
                   onChange={(e) => setClientData(prev => ({ ...prev, lastName: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black"
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black ${
+                    formErrors.lastName ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   required
                 />
+                {formErrors.lastName && (
+                  <p className="text-red-500 text-sm mt-1">{formErrors.lastName}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-black mb-1">
@@ -1642,20 +1674,31 @@ export function ConfiguratorWizard({
                   type="email"
                   value={clientData.email}
                   onChange={(e) => setClientData(prev => ({ ...prev, email: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black"
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black ${
+                    formErrors.email ? 'border-red-500' : 'border-gray-300'
+                  }`}
                   required
                 />
+                {formErrors.email && (
+                  <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-black mb-1">
-                  Teléfono
+                  Teléfono *
                 </label>
                 <input
                   type="tel"
                   value={clientData.phone}
                   onChange={(e) => setClientData(prev => ({ ...prev, phone: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black"
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black ${
+                    formErrors.phone ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  required
                 />
+                {formErrors.phone && (
+                  <p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-black mb-1">
@@ -1676,8 +1719,14 @@ export function ConfiguratorWizard({
                   type="text"
                   value={clientData.venue}
                   onChange={(e) => setClientData(prev => ({ ...prev, venue: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black"
+                  className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black ${
+                    formErrors.venue ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  required
                 />
+                {formErrors.venue && (
+                  <p className="text-red-500 text-sm mt-1">{formErrors.venue}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-black mb-1">
@@ -1775,23 +1824,176 @@ export function ConfiguratorWizard({
             Atrás
           </Button>
           <Button
-            onClick={() => onSubmit({
-              client: clientData,
-              pack: selectedPack,
-              weddingDate: clientData.weddingDate,
-              venue: clientData.venue,
-              ceremonyMoments,
-              ceremonySongs,
-              cocktailStyles,
-              cocktailComment,
-              customSongs,
-              firstPersonName,
-              secondPersonName
-            })}
+            onClick={() => {
+              if (validateForm()) {
+                setShowConfirmation(true)
+              }
+            }}
             className="bg-amber-600 hover:bg-amber-700 text-white"
           >
             Enviar solicitud
           </Button>
+        </div>
+      </div>
+    )
+  }
+
+  // Modal de confirmación
+  if (showConfirmation) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="p-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Confirma tu solicitud</h2>
+            
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-2">Datos personales:</h3>
+                <p><strong>Nombre:</strong> {clientData.firstName} {clientData.lastName}</p>
+                <p><strong>Email:</strong> {clientData.email}</p>
+                <p><strong>Teléfono:</strong> {clientData.phone}</p>
+                <p><strong>Pareja:</strong> {clientData.partnerName || 'No especificado'}</p>
+                <p><strong>Idioma de contacto:</strong> {clientData.languagePreference === 'castellano' ? 'Castellano' : 'Català'}</p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-2">Detalles de la boda:</h3>
+                <p><strong>Pack seleccionado:</strong> {
+                  selectedPack === 'CEREMONIA' ? 'Solo Ceremonia' :
+                  selectedPack === 'COCTEL' ? 'Solo Cóctel' :
+                  selectedPack === 'CEREMONIA_APERITIVO_1H' ? 'Ceremonia + Aperitivo (1h)' :
+                  selectedPack === 'CEREMONIA_APERITIVO_1_5H' ? 'Ceremonia + Aperitivo (1.5h)' :
+                  selectedPack
+                }</p>
+                <p><strong>Fecha:</strong> {clientData.weddingDate ? new Date(clientData.weddingDate).toLocaleDateString('es-ES') : 'No especificada'}</p>
+                <p><strong>Lugar:</strong> {clientData.venue || 'No especificado'}</p>
+              </div>
+
+              {ceremonyMoments.length > 0 && (
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Momentos de la ceremonia:</h3>
+                  <ul className="list-disc list-inside">
+                    {ceremonyMoments.map(moment => {
+                      let displayName = ''
+                      if (moment === 'primera_entrada' && firstPersonName) {
+                        displayName = `Entrada ${firstPersonName}`
+                      } else if (moment === 'segunda_entrada' && secondPersonName) {
+                        displayName = `Entrada ${secondPersonName}`
+                      } else {
+                        const defaultNames = {
+                          'primera_entrada': 'Primera entrada',
+                          'segunda_entrada': 'Segunda entrada',
+                          'comunion': 'Comunión',
+                          'pausas': 'Pausas',
+                          'anillos': 'Anillos',
+                          'parlamentos': 'Parlamentos',
+                          'salida': 'Salida'
+                        }
+                        displayName = defaultNames[moment as keyof typeof defaultNames] || moment
+                      }
+                      return <li key={moment}>{displayName}</li>
+                    })}
+                  </ul>
+                </div>
+              )}
+
+              {Object.keys(ceremonySongs).length > 0 && (
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Canciones seleccionadas:</h3>
+                  <ul className="list-disc list-inside">
+                    {Object.entries(ceremonySongs).map(([moment, songId]) => {
+                      let displayName = ''
+                      if (moment === 'primera_entrada' && firstPersonName) {
+                        displayName = `Entrada ${firstPersonName}`
+                      } else if (moment === 'segunda_entrada' && secondPersonName) {
+                        displayName = `Entrada ${secondPersonName}`
+                      } else {
+                        const defaultNames = {
+                          'primera_entrada': 'Primera entrada',
+                          'segunda_entrada': 'Segunda entrada',
+                          'comunion': 'Comunión',
+                          'pausas': 'Pausas',
+                          'anillos': 'Anillos',
+                          'parlamentos': 'Parlamentos',
+                          'salida': 'Salida'
+                        }
+                        displayName = defaultNames[moment as keyof typeof defaultNames] || moment
+                      }
+                      return <li key={moment}><strong>{displayName}:</strong> Canción ID {songId}</li>
+                    })}
+                  </ul>
+                </div>
+              )}
+
+              {cocktailStyles.length > 0 && (
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Estilos para el cóctel:</h3>
+                  <ul className="list-disc list-inside">
+                    {cocktailStyles.map(style => {
+                      const styleNames = {
+                        'clasica': 'Clásica',
+                        'jazz': 'Jazz',
+                        'pop': 'Pop',
+                        'folk': 'Folk',
+                        'latin': 'Latina',
+                        'rock': 'Rock'
+                      }
+                      return <li key={style}>{styleNames[style as keyof typeof styleNames] || style}</li>
+                    })}
+                  </ul>
+                </div>
+              )}
+
+              {cocktailComment && (
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Comentarios para el cóctel:</h3>
+                  <p className="text-gray-700">{cocktailComment}</p>
+                </div>
+              )}
+
+              {customSongs.length > 0 && (
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Canciones personalizadas:</h3>
+                  <ul className="list-disc list-inside">
+                    {customSongs.map((song, index) => (
+                      <li key={index}><strong>{song.title}</strong>{song.source ? ` - URL: ${song.source}` : ''}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            <div className="flex justify-end space-x-4 mt-6">
+              <Button
+                variant="outline"
+                onClick={() => setShowConfirmation(false)}
+                className="border-gray-300 text-gray-700 hover:bg-gray-50"
+              >
+                Cancelar
+              </Button>
+              <Button
+                onClick={() => {
+                  const finalData = {
+                    client: clientData,
+                    pack: selectedPack,
+                    weddingDate: clientData.weddingDate,
+                    venue: clientData.venue,
+                    ceremonyMoments,
+                    ceremonySongs,
+                    cocktailStyles,
+                    cocktailComment,
+                    customSongs,
+                    firstPersonName,
+                    secondPersonName
+                  }
+                  onSubmit(finalData)
+                }}
+                className="bg-amber-600 hover:bg-amber-700 text-white"
+              >
+                Confirmar y enviar
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     )
