@@ -1574,7 +1574,11 @@ export function ConfiguratorWizard({
             )}
 
             <div className="flex justify-between">
-              <Button variant="outline" onClick={onBack}>
+              <Button 
+                variant="outline" 
+                onClick={onBack}
+                className="border-black text-black hover:bg-black hover:text-white"
+              >
                 Atrás
               </Button>
               <Button
@@ -1676,7 +1680,11 @@ export function ConfiguratorWizard({
             </div>
 
             <div className="flex justify-between">
-              <Button variant="outline" onClick={onBack}>
+              <Button 
+                variant="outline" 
+                onClick={onBack}
+                className="border-black text-black hover:bg-black hover:text-white"
+              >
                 Atrás
               </Button>
               <Button
@@ -1721,9 +1729,33 @@ export function ConfiguratorWizard({
           <p><strong>Precio:</strong> {totalPrice}€</p>
           <p><strong>Email:</strong> {clientData.email}</p>
         </div>
-        <Button asChild className="bg-amber-600 hover:bg-amber-700 text-white">
-          <Link href="/">Volver al inicio</Link>
-        </Button>
+        <div className="flex justify-between">
+          <Button 
+            variant="outline" 
+            onClick={onBack}
+            className="border-black text-black hover:bg-black hover:text-white"
+          >
+            Atrás
+          </Button>
+          <Button
+            onClick={() => onSubmit({
+              client: clientData,
+              pack: selectedPack,
+              weddingDate: clientData.weddingDate,
+              venue: clientData.venue,
+              ceremonyMoments,
+              ceremonySongs,
+              cocktailStyles,
+              cocktailComment,
+              customSongs,
+              firstPersonName,
+              secondPersonName
+            })}
+            className="bg-amber-600 hover:bg-amber-700 text-white"
+          >
+            Enviar solicitud
+          </Button>
+        </div>
       </div>
     )
   }
