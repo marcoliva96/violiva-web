@@ -6,6 +6,8 @@ import AdminDashboard from '@/components/AdminDashboard'
 import { LoginForm } from '@/components/LoginForm'
 import { Loader2 } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
+
 export default function AdminPage() {
   const { data: session, status } = useSession()
   const [loading, setLoading] = useState(true)

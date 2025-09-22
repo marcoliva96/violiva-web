@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useTranslation } from '@/hooks/useTranslation'
+
 import { 
   Calendar, 
   Users, 
@@ -23,6 +24,8 @@ import SongManager from '@/components/SongManager'
 import PhotoManager from '@/components/PhotoManager'
 import VideoManager from '@/components/VideoManager'
 import { useRouter } from 'next/navigation'
+
+export const dynamic = 'force-dynamic'
 
 interface Booking {
   id: string
