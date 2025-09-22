@@ -8,6 +8,7 @@
     "build:vercel": "DATABASE_URL= NEXTAUTH_SECRET=build-secret NEXTAUTH_URL=http://localhost:3000 prisma generate && next build",
     "start": "next start",
     "lint": "eslint src/",
+    "test": "echo \"No tests configured\" && exit 0",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
