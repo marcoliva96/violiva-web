@@ -6,6 +6,7 @@ import { ArrowRight, Music, Calendar, Star, CheckCircle, Users, Clock } from 'lu
 import { useState, useEffect } from 'react'
 import ReviewsCarousel from '@/components/ReviewsCarousel'
 import ReviewForm from '@/components/ReviewForm'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface Review {
   id: string
@@ -16,6 +17,7 @@ interface Review {
 }
 
 export default function HomePage() {
+  const { t } = useTranslation()
   const [reviews, setReviews] = useState<Review[]>([])
 
   useEffect(() => {
@@ -40,13 +42,13 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
               <div className="text-center mb-8">
                 <h1 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-4">
-                  Música a medida para vuestro momento más especial
+                  {t('home.title')}
                 </h1>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-4">
-                  Más de 10 años creando momentos únicos e irrepetibles en bodas. Mi experiencia y pasión por la música se unen para hacer de vuestro día especial algo inolvidable.
+                  {t('home.subtitle')}
                 </p>
                 <p className="text-sm text-gray-500 italic max-w-3xl mx-auto">
-                  Sistema "Configurar boda" exclusivo y pionero: creado por y para parejas, que os permite escuchar con total fidelidad cómo sonará vuestra boda con mis servicios. Una experiencia innovadora que os brinda la seguridad de saber exactamente cómo sonará cada momento especial.
+                  {t('home.systemDescription')}
                 </p>
               </div>
         </div>
@@ -112,11 +114,8 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">
-              Experiencias (500+)
+              {t('home.experiences.title')}
             </h2>
-            <p className="text-xl text-gray-600">
-              Lo que dicen las parejas sobre su experiencia
-            </p>
           </div>
 
 
@@ -137,11 +136,8 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">
-              Servicios que ofrece
+              {t('home.services.title')}
             </h2>
-            <p className="text-xl text-gray-600">
-              Violiva plantea una alternativa distinta al resto de formaciones
-            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">

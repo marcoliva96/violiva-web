@@ -19,9 +19,27 @@ export const translations = {
     },
     // Home page
     home: {
-      title: 'Música para tu boda perfecta',
-      subtitle: 'Violín en vivo para crear momentos únicos e inolvidables',
+      title: 'Música a medida para vuestro momento más especial 💍',
+      subtitle: 'Más de 10 años creando momentos únicos e irrepetibles en bodas. Mi experiencia y pasión por la música se unen para hacer de vuestro día especial algo inolvidable.',
+      systemDescription: 'Sistema "Configurar boda" exclusivo y pionero: creado por y para parejas, que os permite escuchar con total fidelidad cómo sonará vuestra boda con mis servicios. Una experiencia innovadora que os brinda la seguridad de saber exactamente cómo sonará cada momento especial.',
       cta: 'Descubre mi propuesta',
+      proposal: {
+        title: 'Mi propuesta',
+        ceremony: {
+          title: 'Ceremonia',
+          description: 'Para vuestra ceremonia, violín acompañado de bases profesionales pre-grabadas en estudio de grabación. Un sonido íntimo y elegante que realza cada momento especial sin robar protagonismo. Música clásica y contemporánea que crea la atmósfera perfecta para vuestro "sí, quiero".'
+        },
+        cocktail: {
+          title: 'Cóctel',
+          description: 'Para el cóctel, violín, guitarra y saxo con repertorio variado y actual. Una experiencia musical envolvente que da estilo y elegancia a vuestro aperitivo. Música que conecta con todos vuestros invitados, creando un ambiente único y memorable.'
+        }
+      },
+      experiences: {
+        title: 'Experiencias (173 valoraciones)'
+      },
+      services: {
+        title: 'Ventajas destacadas'
+      },
       features: {
         title: '¿Por qué elegirme?',
         experience: 'Experiencia',
@@ -196,9 +214,27 @@ export const translations = {
     },
     // Home page
     home: {
-      title: 'Música per al teu casament perfecte',
-      subtitle: 'Violí en viu per crear moments únics i inoblidables',
+      title: 'Música a mida pel vostre moment més especial 💍',
+      subtitle: 'Més de 10 anys creant moments únics i irrepetibles en casaments. La meva experiència i passió per la música s\'uneixen per fer del vostre dia especial quelcom inoblidable.',
+      systemDescription: 'Sistema "Configurar casament" exclusiu i pioner: creat per i per a parelles, que us permet escoltar amb total fidelitat com sonarà el vostre casament amb els meus serveis. Una experiència innovadora que us brinda la seguretat de saber exactament com sonarà cada moment especial.',
       cta: 'Descobreix la meva proposta',
+      proposal: {
+        title: 'La meva proposta',
+        ceremony: {
+          title: 'Cerimònia',
+          description: 'Per a la vostra cerimònia, violí acompanyat de bases professionals pre-gravades en estudi de gravació. Un so íntim i elegant que realça cada moment especial sense robar protagonisme. Música clàssica i contemporània que crea l\'atmosfera perfecta per al vostre "sí, vull".'
+        },
+        cocktail: {
+          title: 'Còctel',
+          description: 'Per al còctel, violí, guitarra i saxo amb repertori variat i actual. Una experiència musical embolcallant que dóna estil i elegància al vostre aperitiu. Música que connecta amb tots els vostres convidats, creant un ambient únic i memorable.'
+        }
+      },
+      experiences: {
+        title: 'Experiències (173 valoracions)'
+      },
+      services: {
+        title: 'Avantatges destacats'
+      },
       features: {
         title: 'Per què triar-me?',
         experience: 'Experiència',
