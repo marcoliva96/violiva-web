@@ -26,6 +26,17 @@ export function ConfiguratorWizard({
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [currentStep])
+
+  // Pre-llenar nombres en la fase de datos si están disponibles
+  useEffect(() => {
+    if (currentStep === 6 && firstPersonName && secondPersonName) {
+      setClientData(prev => ({
+        ...prev,
+        firstName: firstPersonName,
+        lastName: secondPersonName
+      }))
+    }
+  }, [currentStep, firstPersonName, secondPersonName])
   const [selectedPack, setSelectedPack] = useState<string>('')
   const [selectedSongs, setSelectedSongs] = useState<string[]>([])
   const [customSongs, setCustomSongs] = useState<Array<{title: string, source?: string}>>([])
@@ -522,7 +533,11 @@ export function ConfiguratorWizard({
         )}
 
         <div className="flex justify-between mt-6">
-          <Button variant="outline" onClick={onBack}>
+          <Button 
+            variant="outline" 
+            onClick={onBack}
+            className="border-black text-black hover:bg-black hover:text-white"
+          >
             Atrás
           </Button>
           <Button
@@ -966,7 +981,11 @@ export function ConfiguratorWizard({
         )}
 
         <div className="flex justify-between mt-8">
-          <Button variant="outline" onClick={onBack}>
+          <Button 
+            variant="outline" 
+            onClick={onBack}
+            className="border-black text-black hover:bg-black hover:text-white"
+          >
             Atrás
           </Button>
               <Button
@@ -1098,7 +1117,11 @@ export function ConfiguratorWizard({
         </div>
 
         <div className="flex justify-between">
-          <Button variant="outline" onClick={onBack}>
+          <Button 
+            variant="outline" 
+            onClick={onBack}
+            className="border-black text-black hover:bg-black hover:text-white"
+          >
             Atrás
           </Button>
               <Button
@@ -1224,7 +1247,11 @@ export function ConfiguratorWizard({
         </div>
 
         <div className="flex justify-between">
-          <Button variant="outline" onClick={onBack}>
+          <Button 
+            variant="outline" 
+            onClick={onBack}
+            className="border-black text-black hover:bg-black hover:text-white"
+          >
             Atrás
           </Button>
               <Button
@@ -1285,7 +1312,11 @@ export function ConfiguratorWizard({
         </div>
 
         <div className="flex justify-between">
-          <Button variant="outline" onClick={onBack}>
+          <Button 
+            variant="outline" 
+            onClick={onBack}
+            className="border-black text-black hover:bg-black hover:text-white"
+          >
             Atrás
           </Button>
           <Button
@@ -1371,7 +1402,11 @@ export function ConfiguratorWizard({
         </Button>
 
         <div className="flex justify-between">
-          <Button variant="outline" onClick={onBack}>
+          <Button 
+            variant="outline" 
+            onClick={onBack}
+            className="border-black text-black hover:bg-black hover:text-white"
+          >
             Atrás
           </Button>
           <Button
