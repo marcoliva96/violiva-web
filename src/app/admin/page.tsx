@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
-import { AdminDashboard } from '@/components/AdminDashboard'
+import AdminDashboard from '@/components/AdminDashboard'
 import { LoginForm } from '@/components/LoginForm'
 import { Loader2 } from 'lucide-react'
 
