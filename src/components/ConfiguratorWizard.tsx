@@ -51,7 +51,8 @@ export function ConfiguratorWizard({
     phone: '',
     partnerName: '',
     weddingDate: '',
-    venue: ''
+    venue: '',
+    languagePreference: 'castellano'
   })
   const [busyDates, setBusyDates] = useState<string[]>([])
   const [loadingDates, setLoadingDates] = useState(false)
@@ -1676,6 +1677,41 @@ export function ConfiguratorWizard({
                   onChange={(e) => setClientData(prev => ({ ...prev, venue: e.target.value }))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black"
                 />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-black mb-1">
+                  Preferencia de idioma de contacto
+                </label>
+                <select
+                  value={clientData.languagePreference}
+                  onChange={(e) => setClientData(prev => ({ ...prev, languagePreference: e.target.value }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black"
+                >
+                  <option value="castellano">Castellano</option>
+                  <option value="catalan">Català</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Mensaje de confirmación */}
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <CheckCircle className="h-5 w-5 text-amber-600" />
+                </div>
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-amber-800">
+                    ¡Perfecto! Me pondré en contacto contigo en menos de 24 horas
+                  </h3>
+                  <div className="mt-2 text-sm text-amber-700">
+                    <p>Te contactaré para:</p>
+                    <ul className="list-disc list-inside mt-1 space-y-1">
+                      <li>Confirmar todos los detalles de tu boda</li>
+                      <li>Acordar las canciones específicas</li>
+                      <li>Cerrar el contrato y formalizar el servicio</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
 
