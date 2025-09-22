@@ -3,6 +3,12 @@ import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
   try {
+    if (!request.url) {
+      return NextResponse.json(
+        { error: 'URL no válida' },
+        { status: 400 }
+      )
+    }
     const { searchParams } = new URL(request.url)
     const genre = searchParams.get('genre')
     const q = searchParams.get('q')

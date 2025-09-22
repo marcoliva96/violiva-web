@@ -8,6 +8,12 @@ export async function DELETE(
 ) {
   try {
     const { id } = params
+    if (!request.url) {
+      return NextResponse.json(
+        { error: 'URL no válida' },
+        { status: 400 }
+      )
+    }
     const { searchParams } = new URL(request.url)
     const type = searchParams.get('type') || 'audio'
 

@@ -17,6 +17,12 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    if (!request.url) {
+      return NextResponse.json(
+        { error: 'URL no válida' },
+        { status: 400 }
+      )
+    }
     const { searchParams } = new URL(request.url)
     const state = searchParams.get('state')
     const from = searchParams.get('from')
