@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:vercel": "DATABASE_URL= next build",
+    "build:vercel": "DATABASE_URL= NEXTAUTH_SECRET=build-secret NEXTAUTH_URL=http://localhost:3000 next build",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "prisma generate",
