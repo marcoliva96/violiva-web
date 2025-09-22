@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Music, Menu, X } from 'lucide-react'
+import { Guitar, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from '@/hooks/useTranslation'
 import { LanguageSelector } from '@/components/LanguageSelector'
@@ -18,10 +18,10 @@ export function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="bg-amber-100 p-2 rounded-full">
-              <Music className="h-6 w-6 text-amber-600" />
+              <Guitar className="h-6 w-6 text-amber-600" />
             </div>
             <span className="text-xl font-serif font-bold text-gray-900">
-              Violiva
+              Violiva music
             </span>
           </Link>
 

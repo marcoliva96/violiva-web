@@ -39,8 +39,8 @@ export default function HomePage() {
       <section className="bg-gradient-to-br from-amber-50 to-rose-50 py-12">
         <div className="max-w-6xl mx-auto px-4">
               <div className="text-center mb-8">
-                <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4">
-                  Violiva music
+                <h1 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-4">
+                  Violín, Guitarra y Saxo acompañados de bases profesionales pre-grabadas en estudio de grabación
                 </h1>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-4">
                   Más de 10 años creando momentos únicos e irrepetibles en bodas. Mi experiencia y pasión por la música se unen para hacer de vuestro día especial algo inolvidable.
@@ -60,12 +60,26 @@ export default function HomePage() {
               <h2 className="text-3xl font-serif font-bold text-gray-900 mb-6">
                 Mi propuesta
               </h2>
-              <p className="text-lg text-gray-600 mb-6">
-                La propuesta de Violiva se basa en ofreceros una sesión musical llena de éxitos para dar estilo y elegancia a vuestro aperitivo o cóctel. Dispone de equipo propio y bases instrumentales de calidad, por lo que la experiencia es envolvente, comparable a grupos con numerosos integrantes. Dará un toque especial a la velada sin robar protagonismo ni desviar toda la atención.
-              </p>
-              <p className="text-lg text-gray-600 mb-6">
-                Repertorio variado, atemporal, al gusto de todos vuestros invitados.
-              </p>
+              
+              {/* Ceremonia */}
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Ceremonia</h3>
+                <p className="text-lg text-gray-600 mb-4">
+                  Para vuestra ceremonia, violín acompañado de bases profesionales pre-grabadas en estudio de grabación. 
+                  Un sonido íntimo y elegante que realza cada momento especial sin robar protagonismo. 
+                  Música clásica y contemporánea que crea la atmósfera perfecta para vuestro "sí, quiero".
+                </p>
+              </div>
+
+              {/* Cóctel */}
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Cóctel</h3>
+                <p className="text-lg text-gray-600 mb-4">
+                  Para el cóctel, violín, guitarra y saxo con repertorio variado y actual. 
+                  Una experiencia musical envolvente que da estilo y elegancia a vuestro aperitivo. 
+                  Música que conecta con todos vuestros invitados, creando un ambiente único y memorable.
+                </p>
+              </div>
               
               <div className="grid md:grid-cols-2 gap-8 mb-8">
                 <div className="text-center">
