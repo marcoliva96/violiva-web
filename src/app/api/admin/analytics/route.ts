@@ -2,9 +2,23 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { safeDbOperation } from '@/lib/db-safe'
 
 export async function GET(request: NextRequest) {
   try {
+    // Return empty data during build
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json({
+        totalBookings: 0,
+        totalRevenue: 0,
+        averageBookingValue: 0,
+        bookingsByMonth: [],
+        popularPacks: [],
+        popularSongs: [],
+        clientGrowth: []
+      })
+    }
+
     const session = await getServerSession(authOptions)
     
     if (!session?.user) {
