@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:vercel": "DATABASE_URL= next build",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "prisma generate",

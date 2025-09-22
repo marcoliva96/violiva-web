@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { prisma } from '@/lib/prisma'
-import { safeDbOperation } from '@/lib/db-safe'
 
 export async function GET(request: NextRequest) {
   try {
-    // Return empty data during build
+    // Return empty data during build or if no database
     if (!process.env.DATABASE_URL) {
       return NextResponse.json({
         totalBookings: 0,
@@ -24,6 +22,9 @@ export async function GET(request: NextRequest) {
     if (!session?.user) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
     }
+
+    // Import prisma only when needed
+    const { prisma } = await import('@/lib/prisma')
 
     const { searchParams } = new URL(request.url)
     const range = searchParams.get('range') || '6months'
@@ -49,131 +50,98 @@ export async function GET(request: NextRequest) {
         startDate = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate())
     }
 
-    // Get basic stats
-    const [totalBookings, totalRevenue, bookingsByMonth, popularPacks, popularSongs, clientGrowth] = await Promise.all([
-      // Total bookings
-      prisma.booking.count({
-        where: {
-          createdAt: { gte: startDate }
-        }
-      }),
+    // Get basic stats with error handling
+    let totalBookings = 0
+    let totalRevenue = 0
+    let bookingsByMonth: any[] = []
+    let popularPacks: any[] = []
+    let popularSongs: any[] = []
+    let clientGrowth: any[] = []
 
-      // Total revenue
-      prisma.booking.aggregate({
-        where: {
-          createdAt: { gte: startDate }
-        },
-        _sum: {
-          priceCents: true
-        }
-      }),
-
-      // Bookings by month
-      prisma.booking.groupBy({
-        by: ['createdAt'],
-        where: {
-          createdAt: { gte: startDate }
-        },
-        _count: {
-          id: true
-        },
-        _sum: {
-          priceCents: true
-        }
-      }),
-
-      // Popular packs
-      prisma.booking.groupBy({
-        by: ['pack'],
-        where: {
-          createdAt: { gte: startDate }
-        },
-        _count: {
-          id: true
-        },
-        orderBy: {
-          _count: {
-            id: 'desc'
-          }
-        },
-        take: 5
-      }),
-
-      // Popular songs (from selections)
-      prisma.selection.groupBy({
-        by: ['songId'],
-        where: {
-          songId: { not: null },
-          booking: {
-            createdAt: { gte: startDate }
-          }
-        },
-        _count: {
-          id: true
-        },
-        orderBy: {
-          _count: {
-            id: 'desc'
-          }
-        },
-        take: 5
-      }),
-
-      // Client growth
-      prisma.client.groupBy({
-        by: ['createdAt'],
-        where: {
-          createdAt: { gte: startDate }
-        },
-        _count: {
-          id: true
-        }
-      })
-    ])
-
-    // Process monthly data
-    const monthlyData = bookingsByMonth.map(item => ({
-      month: item.createdAt.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }),
-      count: item._count.id,
-      revenue: item._sum.priceCents || 0
-    }))
-
-    // Get song titles for popular songs
-    const popularSongsWithTitles = await Promise.all(
-      popularSongs.map(async (song) => {
-        const songData = await prisma.song.findUnique({
-          where: { id: song.songId! },
-          select: { title: true }
+    try {
+      const [bookings, revenue, monthlyData, packs, songs, growth] = await Promise.all([
+        prisma.booking.count({
+          where: { createdAt: { gte: startDate } }
+        }),
+        prisma.booking.aggregate({
+          where: { createdAt: { gte: startDate } },
+          _sum: { priceCents: true }
+        }),
+        prisma.booking.groupBy({
+          by: ['createdAt'],
+          where: { createdAt: { gte: startDate } },
+          _count: { id: true },
+          _sum: { priceCents: true }
+        }),
+        prisma.booking.groupBy({
+          by: ['pack'],
+          where: { createdAt: { gte: startDate } },
+          _count: { id: true },
+          orderBy: { _count: { id: 'desc' } },
+          take: 5
+        }),
+        prisma.selection.groupBy({
+          by: ['songId'],
+          where: {
+            songId: { not: null },
+            booking: { createdAt: { gte: startDate } }
+          },
+          _count: { id: true },
+          orderBy: { _count: { id: 'desc' } },
+          take: 5
+        }),
+        prisma.client.groupBy({
+          by: ['createdAt'],
+          where: { createdAt: { gte: startDate } },
+          _count: { id: true }
         })
-        return {
-          title: songData?.title || 'Unknown',
-          count: song._count.id
-        }
-      })
-    )
+      ])
 
-    // Process client growth
-    const clientGrowthData = clientGrowth.map(item => ({
-      month: item.createdAt.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }),
-      newClients: item._count.id
-    }))
+      totalBookings = bookings
+      totalRevenue = revenue._sum.priceCents || 0
+      bookingsByMonth = monthlyData.map(item => ({
+        month: item.createdAt.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }),
+        count: item._count.id,
+        revenue: item._sum.priceCents || 0
+      }))
+      popularPacks = packs.map(pack => ({
+        pack: pack.pack,
+        count: pack._count.id
+      }))
+      popularSongs = await Promise.all(
+        songs.map(async (song) => {
+          const songData = await prisma.song.findUnique({
+            where: { id: song.songId! },
+            select: { title: true }
+          })
+          return {
+            title: songData?.title || 'Unknown',
+            count: song._count.id
+          }
+        })
+      )
+      clientGrowth = growth.map(item => ({
+        month: item.createdAt.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }),
+        newClients: item._count.id
+      }))
+    } catch (error) {
+      console.error('Error fetching analytics data:', error)
+      // Return empty data if database query fails
+    }
 
     const analytics = {
       totalBookings,
-      totalRevenue: totalRevenue._sum.priceCents || 0,
-      averageBookingValue: totalBookings > 0 ? (totalRevenue._sum.priceCents || 0) / totalBookings : 0,
-      bookingsByMonth: monthlyData,
-      popularPacks: popularPacks.map(pack => ({
-        pack: pack.pack,
-        count: pack._count.id
-      })),
-      popularSongs: popularSongsWithTitles,
-      clientGrowth: clientGrowthData
+      totalRevenue,
+      averageBookingValue: totalBookings > 0 ? totalRevenue / totalBookings : 0,
+      bookingsByMonth,
+      popularPacks,
+      popularSongs,
+      clientGrowth
     }
 
     return NextResponse.json(analytics)
   } catch (error) {
-    console.error('Error fetching analytics:', error)
+    console.error('Error in analytics API:', error)
     return NextResponse.json(
       { error: 'Error interno del servidor' },
       { status: 500 }
