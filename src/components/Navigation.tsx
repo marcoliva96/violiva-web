@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { Guitar, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from '@/hooks/useTranslation'
 import { LanguageSelector } from '@/components/LanguageSelector'
@@ -18,7 +19,13 @@ export function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="bg-amber-100 p-2 rounded-full">
-              <Guitar className="h-6 w-6 text-amber-600" />
+              <Image 
+                src="/icono_violin.png" 
+                alt="Violín" 
+                width={24} 
+                height={24} 
+                className="text-amber-600"
+              />
             </div>
             <span className="text-xl font-serif font-bold text-gray-900">
               Violiva music

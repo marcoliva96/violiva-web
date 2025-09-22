@@ -40,7 +40,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
               <div className="text-center mb-8">
                 <h1 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-4">
-                  Violín, Guitarra y Saxo acompañados de bases profesionales pre-grabadas en estudio de grabación
+                  Música a medida para vuestro momento más especial
                 </h1>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-4">
                   Más de 10 años creando momentos únicos e irrepetibles en bodas. Mi experiencia y pasión por la música se unen para hacer de vuestro día especial algo inolvidable.
