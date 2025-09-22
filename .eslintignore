@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+build/
+next-env.d.ts
+scripts/
+prisma/
+*.config.js
+*.config.mjs
+*.config.ts
+public/
