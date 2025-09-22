@@ -12,9 +12,7 @@ const nextConfig = {
   },
   // Configuración para Vercel
   output: 'standalone',
-  experimental: {
-    serverComponentsExternalPackages: ['@prisma/client'],
-  },
+  serverExternalPackages: ['@prisma/client'],
   // Configuración para archivos estáticos
   async headers() {
     return [
