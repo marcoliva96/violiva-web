@@ -29,6 +29,8 @@ export default function ConfiguraPage() {
       } else {
         setCurrentStep(4) // Por defecto, ir a Cóctel
       }
+    } else if (currentStep === 4 && pack === 'COCTEL') { // Cóctel para pack COCTEL
+      setCurrentStep(3) // Ir a Canciones
     } else {
       setCurrentStep(prev => Math.max(1, prev - 1))
     }

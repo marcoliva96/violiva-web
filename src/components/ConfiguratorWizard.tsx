@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Music, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface ConfiguratorWizardProps {
   currentStep: number
@@ -22,6 +23,7 @@ export function ConfiguratorWizard({
   onNextStep,
   bookingData
 }: ConfiguratorWizardProps) {
+  const { t } = useTranslation()
   const [selectedPack, setSelectedPack] = useState<string>('')
   const [selectedSongs, setSelectedSongs] = useState<string[]>([])
   const [customSongs, setCustomSongs] = useState<Array<{title: string, source?: string}>>([])
@@ -123,7 +125,7 @@ export function ConfiguratorWizard({
 
   // Preseleccionar todos los estilos de cóctel cuando se accede a la pantalla
   useEffect(() => {
-    if ((currentStep === 4 && selectedPack === 'APERITIVO_1H') || (currentStep === 4 && selectedPack === 'APERITIVO_1_5H') || (currentStep === 4 && selectedPack === 'CEREMONIA_APERITIVO_1H') || (currentStep === 4 && selectedPack === 'CEREMONIA_APERITIVO_1_5H')) {
+    if ((currentStep === 4 && selectedPack === 'COCTEL') || (currentStep === 4 && selectedPack === 'APERITIVO_1H') || (currentStep === 4 && selectedPack === 'APERITIVO_1_5H') || (currentStep === 4 && selectedPack === 'CEREMONIA_APERITIVO_1H') || (currentStep === 4 && selectedPack === 'CEREMONIA_APERITIVO_1_5H')) {
       const styleOptions = [
         { id: 'clasica', name: 'Clásica' },
         { id: 'jazz', name: 'Jazz' },
@@ -240,7 +242,7 @@ export function ConfiguratorWizard({
 
   const fetchSongs = async () => {
     try {
-      const response = await fetch('/api/songs?featured=true')
+      const response = await fetch('/api/songs')
       if (response.ok) {
         const data = await response.json()
         setSongs(Array.isArray(data) ? data : [])
@@ -342,7 +344,7 @@ export function ConfiguratorWizard({
     return (
       <div className="bg-white rounded-lg shadow-md p-8">
         <h2 className="text-2xl font-serif font-bold text-gray-900 mb-6">
-          Elige tu pack
+          {t('configure.steps.pack')}
         </h2>
         <p className="text-gray-600 mb-8">
           Selecciona el pack que mejor se adapte a tu boda
@@ -1081,12 +1083,6 @@ export function ConfiguratorWizard({
           >
             Seleccionar todo
           </button>
-          <button
-            onClick={handleDeselectAll}
-            className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-md text-sm font-medium"
-          >
-            Deseleccionar todo
-          </button>
         </div>
 
         {/* Indicador de selección */}
@@ -1210,12 +1206,6 @@ export function ConfiguratorWizard({
             className="bg-orange-100 hover:bg-orange-200 text-orange-800 px-4 py-2 rounded-md text-sm font-medium"
           >
             Seleccionar todo
-          </button>
-          <button
-            onClick={handleDeselectAll}
-            className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-md text-sm font-medium"
-          >
-            Deseleccionar todo
           </button>
         </div>
 
