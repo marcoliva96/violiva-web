@@ -42,7 +42,12 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
               <div className="text-center mb-8">
                 <h1 className="text-2xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-4">
-                  {t('home.title')}
+                  {t('home.title').split('\n').map((line, index) => (
+                    <span key={index}>
+                      {line}
+                      {index < t('home.title').split('\n').length - 1 && <br />}
+                    </span>
+                  ))}
                 </h1>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-4">
                   {t('home.subtitle')}

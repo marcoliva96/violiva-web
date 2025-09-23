@@ -214,7 +214,7 @@ export const translations = {
     },
     // Home page
     home: {
-      title: 'Música a mida pel vostre moment més especial 💍',
+      title: 'Música a mida per acompanyar\nvostre moment més especial 💍',
       subtitle: 'Més de 10 anys creant moments únics i irrepetibles en casaments. La meva experiència i passió per la música s\'uneixen per fer del vostre dia especial quelcom inoblidable.',
       systemDescription: 'Sistema "Configurar casament" exclusiu i pioner: creat per i per a parelles, que us permet escoltar amb total fidelitat com sonarà el vostre casament amb els meus serveis. Una experiència innovadora que us brinda la seguretat de saber exactament com sonarà cada moment especial.',
       cta: 'Descobreix la meva proposta',
