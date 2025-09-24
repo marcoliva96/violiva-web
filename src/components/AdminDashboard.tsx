@@ -89,11 +89,44 @@ export default function AdminDashboard() {
     try {
       setLoading(true)
       
-      // Fetch bookings
-      const bookingsResponse = await fetch('/api/admin/bookings')
-      if (bookingsResponse.ok) {
-        const bookingsData = await bookingsResponse.json()
-        setBookings(bookingsData.bookings || [])
+      // Fetch pending bookings (solicitudes)
+      const pendingBookingsResponse = await fetch('/api/admin/bookings?state=PENDING')
+      if (pendingBookingsResponse.ok) {
+        const pendingData = await pendingBookingsResponse.json()
+        setBookings(pendingData.bookings || [])
+        console.log('Pending bookings:', pendingData.bookings?.length)
+      }
+
+      // Fetch confirmed bookings (clientes)
+      const confirmedBookingsResponse = await fetch('/api/admin/bookings?state=CONFIRMED')
+      if (confirmedBookingsResponse.ok) {
+        const confirmedData = await confirmedBookingsResponse.json()
+        // Convert bookings to clients format for display
+        const clientsFromBookings = confirmedData.bookings?.map((booking: any) => ({
+          id: booking.client.id,
+          firstName: booking.client.firstName,
+          lastName: booking.client.lastName,
+          email: booking.client.email,
+          phone: booking.client.phone,
+          partnerName: booking.client.partnerName,
+          weddingDate: booking.client.weddingDate,
+          createdAt: booking.client.createdAt,
+          bookings: [{
+            id: booking.id,
+            date: booking.date,
+            venue: booking.venue,
+            ceremonyVenue: booking.ceremonyVenue,
+            cocktailVenue: booking.cocktailVenue,
+            pack: booking.pack,
+            priceCents: booking.priceCents,
+            state: booking.state,
+            languagePreference: booking.languagePreference,
+            createdAt: booking.createdAt,
+            selections: booking.selections || []
+          }]
+        })) || []
+        setClients(clientsFromBookings)
+        console.log('Confirmed clients:', clientsFromBookings.length)
       }
 
       // Fetch songs
@@ -101,21 +134,6 @@ export default function AdminDashboard() {
       if (songsResponse.ok) {
         const songsData = await songsResponse.json()
         setSongs(songsData || [])
-      }
-
-      // Fetch clients
-      const clientsResponse = await fetch('/api/admin/clients')
-      console.log('Clients response status:', clientsResponse.status)
-      if (clientsResponse.ok) {
-        const clientsData = await clientsResponse.json()
-        console.log('Clients data received:', clientsData)
-        console.log('Clients array:', clientsData.clients)
-        console.log('Clients length:', clientsData.clients?.length)
-        setClients(clientsData.clients || [])
-      } else {
-        const errorText = await clientsResponse.text()
-        console.error('Error fetching clients:', errorText)
-        setClients([])
       }
     } catch (error) {
       console.error('Error fetching data:', error)
@@ -144,6 +162,30 @@ export default function AdminDashboard() {
       month: 'long',
       day: 'numeric'
     })
+  }
+
+  const confirmBooking = async (bookingId: string) => {
+    try {
+      const response = await fetch(`/api/admin/bookings/${bookingId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          state: 'CONFIRMED'
+        })
+      })
+
+      if (response.ok) {
+        // Refresh data
+        fetchData()
+        console.log('Booking confirmed successfully')
+      } else {
+        console.error('Error confirming booking')
+      }
+    } catch (error) {
+      console.error('Error confirming booking:', error)
+    }
   }
 
   if (loading) {
@@ -316,13 +358,21 @@ export default function AdminDashboard() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex space-x-2">
-                          <Button variant="ghost" size="sm">
+                          <Button variant="ghost" size="sm" title="Ver detalles">
                             <Eye className="h-4 w-4" />
                           </Button>
-                          <Button variant="ghost" size="sm">
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm">
+                          {booking.state === 'PENDING' && (
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              onClick={() => confirmBooking(booking.id)}
+                              className="text-green-600 hover:text-green-700"
+                              title="Confirmar solicitud"
+                            >
+                              ✓
+                            </Button>
+                          )}
+                          <Button variant="ghost" size="sm" title="Descargar">
                             <Download className="h-4 w-4" />
                           </Button>
                         </div>
