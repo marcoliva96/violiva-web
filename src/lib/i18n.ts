@@ -13,6 +13,7 @@ export const translations = {
       gallery: 'Galería',
       listen: 'Escuchar',
       configure: 'Configurar',
+      configureCatalan: 'Configura la teva boda',
       availability: 'Disponibilidad',
       contact: 'Contacto',
       admin: 'Admin'
@@ -266,7 +267,7 @@ export const translations = {
       proposal: 'La meva proposta',
       gallery: 'Galeria',
       listen: 'Escoltar',
-      configure: 'Configurar',
+      configure: 'Configura la teva boda',
       availability: 'Disponibilitat',
       contact: 'Contacte',
       admin: 'Admin'
@@ -362,6 +363,38 @@ export const translations = {
           ]
         }
       }
+    },
+    // Calendar months
+    calendar: {
+      months: {
+        january: 'Gener',
+        february: 'Febrer',
+        march: 'Març',
+        april: 'Abril',
+        may: 'Maig',
+        june: 'Juny',
+        july: 'Juliol',
+        august: 'Agost',
+        september: 'Setembre',
+        october: 'Octubre',
+        november: 'Novembre',
+        december: 'Desembre'
+      },
+      days: {
+        monday: 'Dilluns',
+        tuesday: 'Dimarts',
+        wednesday: 'Dimecres',
+        thursday: 'Dijous',
+        friday: 'Divendres',
+        saturday: 'Dissabte',
+        sunday: 'Diumenge'
+      }
+    },
+    // Statistics
+    stats: {
+      weddings: 'Casaments realitzats',
+      experience: 'Anys d\'experiència',
+      satisfied: 'Clients satisfets'
     },
     // Proposal page
     proposal: {

@@ -1821,33 +1821,27 @@ export function ConfiguratorWizard({
         <h2 className="text-2xl font-serif font-bold text-gray-900 mb-4">
           ¡Solicitud enviada correctamente!
         </h2>
-        <p className="text-gray-600 mb-8">
-          Hemos recibido tu solicitud. Pronto recibirás un email con la propuesta detallada.
+        <p className="text-gray-600 mb-4">
+          Hemos recibido tu solicitud.
         </p>
-        <div className="bg-amber-50 rounded-lg p-6 mb-8">
-          <h3 className="font-semibold text-gray-900 mb-2">Resumen de tu solicitud:</h3>
-          <p><strong>Pack:</strong> {selectedPackData?.name}</p>
-          <p><strong>Precio:</strong> {totalPrice}€</p>
-          <p><strong>Email:</strong> {clientData.email}</p>
-        </div>
-        <div className="flex justify-between">
-          <Button 
-            variant="outline" 
-            onClick={onBack}
-            className="border-black text-black hover:bg-black hover:text-white"
-          >
-            Atrás
-          </Button>
-          <Button
-            onClick={() => {
-              if (validateForm()) {
-                setShowConfirmation(true)
-              }
-            }}
-            className="bg-amber-600 hover:bg-amber-700 text-white"
-          >
-            Enviar solicitud
-          </Button>
+        <p className="text-gray-600 mb-4">
+          Me pondré en contacto contigo en menos de 24 horas
+        </p>
+        <p className="text-gray-600 mb-6">
+          Te contactaré para:
+        </p>
+        <ul className="text-gray-600 mb-8 text-left max-w-md mx-auto">
+          <li className="mb-2">• Confirmar todos los detalles de tu boda</li>
+          <li className="mb-2">• Acordar las canciones específicas</li>
+          <li className="mb-2">• Cerrar el contrato y formalizar el servicio</li>
+        </ul>
+        <div className="text-center">
+          <p className="text-gray-500 mb-4">
+            Puedes seguir explorando la web o cerrar esta ventana.
+          </p>
+          <Link href="/" className="text-amber-600 hover:text-amber-700 font-medium">
+            Volver al inicio
+          </Link>
         </div>
       </div>
     )
@@ -1992,14 +1986,16 @@ export function ConfiguratorWizard({
                     client: clientData,
                     pack: selectedPack,
                     weddingDate: clientData.weddingDate,
-                    venue: clientData.venue,
+                    ceremonyVenue: clientData.ceremonyVenue,
+                    cocktailVenue: clientData.cocktailVenue,
                     ceremonyMoments,
                     ceremonySongs,
                     cocktailStyles,
                     cocktailComment,
                     customSongs,
                     firstPersonName,
-                    secondPersonName
+                    secondPersonName,
+                    languagePreference: clientData.languagePreference
                   }
                   onSubmit(finalData)
                 }}
