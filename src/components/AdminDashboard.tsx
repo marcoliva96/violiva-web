@@ -30,6 +30,7 @@ interface Booking {
     phone?: string
     partnerName?: string
     weddingDate?: string
+    status: string // Estado del cliente
   }
   date: string
   venue?: string
@@ -38,7 +39,7 @@ interface Booking {
   pack: string
   priceCents: number
   finalPrice?: number
-  state: string
+  state: string // Estado del booking
   languagePreference?: string
   visible: boolean
   createdAt: string
@@ -130,10 +131,11 @@ export default function AdminDashboard() {
 
   const getStateColor = (state: string) => {
     switch (state) {
-      case 'PENDING': return 'bg-yellow-100 text-yellow-800'
+      case 'CONTACTED': return 'bg-yellow-100 text-yellow-800'
+      case 'NEGOTIATING': return 'bg-orange-100 text-orange-800'
       case 'CONFIRMED': return 'bg-green-100 text-green-800'
       case 'PAID': return 'bg-blue-100 text-blue-800'
-      case 'COMPLETED': return 'bg-purple-100 text-purple-800'
+      case 'REALIZED': return 'bg-purple-100 text-purple-800'
       case 'CANCELLED': return 'bg-red-100 text-red-800'
       default: return 'bg-gray-100 text-gray-800'
     }
@@ -141,10 +143,11 @@ export default function AdminDashboard() {
 
   const getStateLabel = (state: string) => {
     switch (state) {
-      case 'PENDING': return 'Pendiente'
+      case 'CONTACTED': return 'Contactado'
+      case 'NEGOTIATING': return 'Negociando'
       case 'CONFIRMED': return 'Confirmado'
       case 'PAID': return 'Pagado'
-      case 'COMPLETED': return 'Completado'
+      case 'REALIZED': return 'Realizado'
       case 'CANCELLED': return 'Cancelado'
       default: return state
     }
@@ -188,7 +191,21 @@ export default function AdminDashboard() {
   }
 
   const changeState = async (bookingId: string, newState: string) => {
-    await updateBooking(bookingId, { state: newState })
+    // Actualizar el estado del cliente asociado al booking
+    const response = await fetch(`/api/admin/clients/${bookingId}/status`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ status: newState })
+    })
+
+    if (response.ok) {
+      fetchData()
+      console.log('Client status updated successfully')
+    } else {
+      console.error('Error updating client status')
+    }
   }
 
   const showBookingDetails = (booking: Booking) => {
@@ -273,10 +290,11 @@ export default function AdminDashboard() {
                     className="border border-gray-300 rounded-md px-3 py-2 text-sm"
                   >
                     <option value="ALL">Todos los estados</option>
-                    <option value="PENDING">Pendientes</option>
+                    <option value="CONTACTED">Contactados</option>
+                    <option value="NEGOTIATING">Negociando</option>
                     <option value="CONFIRMED">Confirmados</option>
                     <option value="PAID">Pagados</option>
-                    <option value="COMPLETED">Completados</option>
+                    <option value="REALIZED">Realizados</option>
                     <option value="CANCELLED">Cancelados</option>
                   </select>
                   <Button size="sm">
@@ -342,8 +360,8 @@ export default function AdminDashboard() {
                         )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStateColor(booking.state)}`}>
-                          {getStateLabel(booking.state)}
+                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStateColor(booking.client.status)}`}>
+                          {getStateLabel(booking.client.status)}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -370,8 +388,21 @@ export default function AdminDashboard() {
                             <Eye className="h-4 w-4" />
                           </Button>
                           
-                          {/* Estado: Pendiente -> Confirmado */}
-                          {booking.state === 'PENDING' && (
+                          {/* Estado: Contactado -> Negociando */}
+                          {booking.client.status === 'CONTACTED' && (
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              onClick={() => changeState(booking.id, 'NEGOTIATING')}
+                              className="text-orange-600 hover:text-orange-700"
+                              title="Iniciar negociación"
+                            >
+                              <Check className="h-4 w-4" />
+                            </Button>
+                          )}
+                          
+                          {/* Estado: Negociando -> Confirmado */}
+                          {booking.client.status === 'NEGOTIATING' && (
                             <Button 
                               variant="ghost" 
                               size="sm" 
@@ -384,7 +415,7 @@ export default function AdminDashboard() {
                           )}
                           
                           {/* Estado: Confirmado -> Pagado */}
-                          {booking.state === 'CONFIRMED' && (
+                          {booking.client.status === 'CONFIRMED' && (
                             <Button 
                               variant="ghost" 
                               size="sm" 
@@ -396,21 +427,21 @@ export default function AdminDashboard() {
                             </Button>
                           )}
                           
-                          {/* Estado: Pagado -> Completado */}
-                          {booking.state === 'PAID' && (
+                          {/* Estado: Pagado -> Realizado */}
+                          {booking.client.status === 'PAID' && (
                             <Button 
                               variant="ghost" 
                               size="sm" 
-                              onClick={() => changeState(booking.id, 'COMPLETED')}
+                              onClick={() => changeState(booking.id, 'REALIZED')}
                               className="text-purple-600 hover:text-purple-700"
-                              title="Marcar como completado"
+                              title="Marcar como realizado"
                             >
                               <Check className="h-4 w-4" />
                             </Button>
                           )}
                           
                           {/* Cancelar en cualquier estado */}
-                          {booking.state !== 'CANCELLED' && (
+                          {booking.client.status !== 'CANCELLED' && (
                             <Button 
                               variant="ghost" 
                               size="sm" 

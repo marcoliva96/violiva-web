@@ -30,8 +30,11 @@ export async function GET(request: NextRequest) {
       where.visible = true
     }
 
+    // Si se especifica un estado, buscar por el estado del cliente
     if (state) {
-      where.state = state as any // Cast to BookingState enum
+      where.client = {
+        status: state as any // Cast to ClientStatus enum
+      }
     }
 
     if (from && to) {
@@ -51,6 +54,7 @@ export async function GET(request: NextRequest) {
               lastName: true,
               email: true,
               phone: true,
+              status: true,
             }
           },
           selections: {
