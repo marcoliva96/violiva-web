@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
     }
     const { searchParams } = new URL(request.url)
     const state = searchParams.get('state')
+    const status = searchParams.get('status')
     const from = searchParams.get('from')
     const to = searchParams.get('to')
     const includeHidden = searchParams.get('includeHidden') === 'true'
@@ -30,10 +31,11 @@ export async function GET(request: NextRequest) {
       where.visible = true
     }
 
-    // Si se especifica un estado, buscar por el estado del cliente
-    if (state) {
+    // Si se especifica un estado o status, buscar por el estado del cliente
+    const clientStatus = state || status
+    if (clientStatus) {
       where.client = {
-        status: state as any // Cast to ClientStatus enum
+        status: clientStatus as any // Cast to ClientStatus enum
       }
     }
 

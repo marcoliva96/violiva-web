@@ -96,7 +96,7 @@ export default function AdminDashboard() {
       const params = new URLSearchParams()
       
       if (filterState !== 'ALL') {
-        params.append('state', filterState)
+        params.append('status', filterState)
       }
       
       if (showHidden) {

@@ -71,7 +71,7 @@ export default function AdminDashboard() {
     const fetchData = async () => {
       try {
         // Fetch pending bookings only
-        const bookingsResponse = await fetch('/api/admin/bookings?state=CONTACTED')
+        const bookingsResponse = await fetch('/api/admin/bookings?status=CONTACTED')
         if (bookingsResponse.ok) {
           const bookingsData = await bookingsResponse.json()
           setBookings(bookingsData.bookings || [])
