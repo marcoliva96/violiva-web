@@ -80,7 +80,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true)
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null)
   const [showDetails, setShowDetails] = useState(false)
-  const [filterState, setFilterState] = useState<string>('ALL')
+  const [filterState, setFilterState] = useState<string>('CONTACTED')
   const [showHidden, setShowHidden] = useState(false)
 
   useEffect(() => {
@@ -289,13 +289,13 @@ export default function AdminDashboard() {
                     onChange={(e) => setFilterState(e.target.value)}
                     className="border border-gray-300 rounded-md px-3 py-2 text-sm"
                   >
-                    <option value="ALL">Todos los estados</option>
                     <option value="CONTACTED">Contactados</option>
                     <option value="NEGOTIATING">Negociando</option>
                     <option value="CONFIRMED">Confirmados</option>
                     <option value="PAID">Pagados</option>
                     <option value="REALIZED">Realizados</option>
                     <option value="CANCELLED">Cancelados</option>
+                    <option value="ALL">Todos los estados</option>
                   </select>
                   <Button size="sm">
                     <Plus className="h-4 w-4 mr-2" />
