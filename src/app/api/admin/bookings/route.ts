@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
     // Permitir acceso sin autenticación en desarrollo y producción
     // TODO: Implementar autenticación real cuando sea necesario
     console.log('Accessing bookings API - NODE_ENV:', process.env.NODE_ENV)
+    console.log('Request URL:', request.url)
 
     if (!request.url) {
       return NextResponse.json(
@@ -33,11 +34,14 @@ export async function GET(request: NextRequest) {
 
     // Si se especifica un estado o status, buscar por el estado del cliente
     const clientStatus = state || status
+    console.log('Client status filter:', clientStatus)
     if (clientStatus) {
       where.client = {
         status: clientStatus as any // Cast to ClientStatus enum
       }
     }
+    
+    console.log('Where clause:', JSON.stringify(where, null, 2))
 
     if (from && to) {
       where.date = {
@@ -46,6 +50,8 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    console.log('About to query database with where clause:', where)
+    
     const [bookings, total] = await Promise.all([
       prisma.booking.findMany({
         where,
@@ -84,6 +90,8 @@ export async function GET(request: NextRequest) {
       }),
       prisma.booking.count({ where })
     ])
+
+    console.log('Query successful. Found bookings:', bookings.length, 'Total:', total)
 
     return NextResponse.json({
       bookings,
