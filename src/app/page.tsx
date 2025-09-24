@@ -98,7 +98,7 @@ export default function HomePage() {
                     <Music className="h-8 w-8 text-amber-600" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">500+</h3>
-                  <p className="text-gray-600">Bodas realizadas</p>
+                  <p className="text-gray-600">{t('home.stats.weddings')}</p>
                 </div>
 
                 <div className="text-center">
@@ -106,7 +106,7 @@ export default function HomePage() {
                     <Users className="h-8 w-8 text-amber-600" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">10+</h3>
-                  <p className="text-gray-600">Años de experiencia</p>
+                  <p className="text-gray-600">{t('home.stats.experience')}</p>
                 </div>
               </div>
 
@@ -154,15 +154,15 @@ export default function HomePage() {
               <div className="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Music className="h-6 w-6 text-amber-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Repertorio extenso</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{t('home.advantages.repertoire.title')}</h3>
               <p className="text-gray-600 mb-4">
-                Sin requerir de partituras, tiene preparado un repertorio de más de dos horas de música adaptada a violín.
+                {t('home.advantages.repertoire.description')}
               </p>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• Éxitos actuales del pop&rock</li>
-                <li>• Canciones de discoteca</li>
-                <li>• Bandas sonoras de películas</li>
-                <li>• Grandes leyendas</li>
+                <li>• {t('home.advantages.repertoire.features.pop')}</li>
+                <li>• {t('home.advantages.repertoire.features.disco')}</li>
+                <li>• {t('home.advantages.repertoire.features.movies')}</li>
+                <li>• {t('home.advantages.repertoire.features.legends')}</li>
               </ul>
             </div>
 
@@ -170,15 +170,15 @@ export default function HomePage() {
               <div className="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Star className="h-6 w-6 text-amber-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Calidad/Precio</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{t('home.advantages.quality.title')}</h3>
               <p className="text-gray-600 mb-4">
-                Ofrece una relación calidad/precio imbatible. El coste de contratación varía substancialmente en función del número de integrantes.
+                {t('home.advantages.quality.description')}
               </p>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• Equipo propio</li>
-                <li>• Bases instrumentales de calidad</li>
-                <li>• Experiencia envolvente</li>
-                <li>• Sin necesidad de partituras</li>
+                <li>• {t('home.advantages.quality.features.equipment')}</li>
+                <li>• {t('home.advantages.quality.features.bases')}</li>
+                <li>• {t('home.advantages.quality.features.experience')}</li>
+                <li>• {t('home.advantages.quality.features.noSheets')}</li>
               </ul>
             </div>
 
@@ -186,15 +186,15 @@ export default function HomePage() {
               <div className="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Clock className="h-6 w-6 text-amber-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Experiencia</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{t('home.advantages.experience.title')}</h3>
               <p className="text-gray-600 mb-4">
-                Lleva 10 años amenizando bodas, por lo cual supone una apuesta segura.
+                {t('home.advantages.experience.description')}
               </p>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• 10 años de experiencia</li>
-                <li>• Formación en música moderna</li>
-                <li>• Producción musical</li>
-                <li>• Repertorio en constante renovación</li>
+                <li>• {t('home.advantages.experience.features.years')}</li>
+                <li>• {t('home.advantages.experience.features.formation')}</li>
+                <li>• {t('home.advantages.experience.features.production')}</li>
+                <li>• {t('home.advantages.experience.features.renewal')}</li>
               </ul>
             </div>
           </div>

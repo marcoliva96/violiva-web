@@ -274,6 +274,56 @@ export const translations = {
         completedBookings: 'Completadas',
         totalRevenue: 'Ingresos totales'
       }
+    },
+    stats: {
+      weddings: 'Bodas realizadas',
+      experience: 'Años de experiencia',
+      satisfaction: 'Clientes satisfechos'
+    },
+    advantages: {
+      title: 'Ventajas destacadas',
+      elegant: {
+        title: 'Hará que vuestra boda sea elegante y memorable',
+        description: 'Sin partituras, sin imprevistos, sin electricidad. Una actuación que no os molestará en un día lleno de emociones y que os permitirá disfrutar plenamente.'
+      },
+      comfort: {
+        title: 'Máxima comodidad en vuestro gran día',
+        description: 'Sin partituras que distraigan, sin imprevistos y sin necesidad de gestionar nada in situ. Una actuación diseñada al detalle, con la excelencia y la elegancia que os permitirá vivir vuestra boda con total serenidad.'
+      },
+      system: {
+        title: 'Sistema de preparación exclusivo',
+        description: 'Un sistema de preparación exclusivo y pionero: creado por y para parejas, que os permite escuchar con total fidelidad cómo sonará vuestra boda con mis servicios. Una experiencia innovadora que os brinda la seguridad de saber exactamente cómo sonará cada momento especial.'
+      },
+      repertoire: {
+        title: 'Repertorio extenso',
+        description: 'Sin requerir de partituras, tiene preparado un repertorio de más de dos horas de música adaptada a violín.',
+        features: {
+          pop: 'Éxitos actuales del pop&rock',
+          disco: 'Canciones de discoteca',
+          movies: 'Bandas sonoras de películas',
+          legends: 'Grandes leyendas'
+        }
+      },
+      quality: {
+        title: 'Calidad/Precio',
+        description: 'Ofrece una relación calidad/precio imbatible. El coste de contratación varía substancialmente en función del número de integrantes.',
+        features: {
+          equipment: 'Equipo propio',
+          bases: 'Bases instrumentales de calidad',
+          experience: 'Experiencia envolvente',
+          noSheets: 'Sin necesidad de partituras'
+        }
+      },
+      experience: {
+        title: 'Experiencia',
+        description: 'Lleva 10 años amenizando bodas, por lo cual supone una apuesta segura.',
+        features: {
+          years: '10 años de experiencia',
+          formation: 'Formación en música moderna',
+          production: 'Producción musical',
+          renewal: 'Repertorio en constante renovación'
+        }
+      }
     }
   },
   ca: {
@@ -546,6 +596,57 @@ export const translations = {
         totalRevenue: 'Ingressos totals'
       }
     },
+    stats: {
+      weddings: 'Casaments realitzats',
+      experience: 'Anys d\'experiència',
+      satisfaction: 'Clients satisfets'
+    },
+    advantages: {
+      title: 'Avantatges destacats',
+      elegant: {
+        title: 'Farà que el vostre casament sigui elegant i memorable',
+        description: 'Sense partitures, sense imprevistos, sense electricitat. Una actuació que no us molestará en un dia ple d\'emocions i que us permetrà gaudir plenament.'
+      },
+      comfort: {
+        title: 'Màxima comoditat en el vostre gran dia',
+        description: 'Sense partitures que distreguin, sense imprevistos i sense necessitat de gestionar res in situ. Una actuació dissenyada al detall, amb l\'excel·lència i l\'elegància que us permetrà viure el vostre casament amb total serenitat.'
+      },
+      system: {
+        title: 'Sistema de preparació exclusiu',
+        description: 'Un sistema de preparació exclusiu i pioner: creat per i per a parelles, que us permet escoltar amb total fidelitat com sonarà el vostre casament amb els meus serveis. Una experiència innovadora que us brinda la seguretat de saber exactament com sonarà cada moment especial.'
+      },
+      repertoire: {
+        title: 'Repertori extens',
+        description: 'Sense requerir de partitures, té preparat un repertori de més de dues hores de música adaptada a violí.',
+        features: {
+          pop: 'Èxits actuals del pop&rock',
+          disco: 'Cançons de discoteca',
+          movies: 'Bandes sonores de pel·lícules',
+          legends: 'Grans llegendes'
+        }
+      },
+      quality: {
+        title: 'Qualitat/Preu',
+        description: 'Ofereix una relació qualitat/preu imbatible. El cost de contractació varia substancialment en funció del nombre d\'integrants.',
+        features: {
+          equipment: 'Equip propi',
+          bases: 'Bases instrumentals de qualitat',
+          experience: 'Experiència embolcallant',
+          noSheets: 'Sense necessitat de partitures'
+        }
+      },
+      experience: {
+        title: 'Experiència',
+        description: 'Porta 10 anys amenitzant casaments, per la qual cosa suposa una aposta segura.',
+        features: {
+          years: '10 anys d\'experiència',
+          formation: 'Formació en música moderna',
+          production: 'Producció musical',
+          renewal: 'Repertori en constant renovació'
+        }
+      }
+    }
+  },
     calendar: {
       months: [
         'Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny',
@@ -620,7 +721,6 @@ export const translations = {
       }
     }
   }
-}
 
 export function getTranslation(language: Language, key: string): string {
   const keys = key.split('.')
