@@ -238,18 +238,12 @@ export default function HomePage() {
               <p className="text-gray-600 mb-4">{t('home.packs.ceremony.description')}</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">{t('home.packs.ceremony.price')}</div>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.ceremony.features[0]')}</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.ceremony.features[1]')}</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.ceremony.features[2]')}</span>
-                </li>
+                {t('home.packs.ceremony.features').map((feature: string, index: number) => (
+                  <li key={index} className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -259,18 +253,12 @@ export default function HomePage() {
               <p className="text-gray-600 mb-4">{t('home.packs.cocktail1h.description')}</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">{t('home.packs.cocktail1h.price')}</div>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.cocktail1h.features[0]')}</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.cocktail1h.features[1]')}</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.cocktail1h.features[2]')}</span>
-                </li>
+                {t('home.packs.cocktail1h.features').map((feature: string, index: number) => (
+                  <li key={index} className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -280,18 +268,12 @@ export default function HomePage() {
               <p className="text-gray-600 mb-4">{t('home.packs.cocktail1_5h.description')}</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">{t('home.packs.cocktail1_5h.price')}</div>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.cocktail1_5h.features[0]')}</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.cocktail1_5h.features[1]')}</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.cocktail1_5h.features[2]')}</span>
-                </li>
+                {t('home.packs.cocktail1_5h.features').map((feature: string, index: number) => (
+                  <li key={index} className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -299,25 +281,19 @@ export default function HomePage() {
             <div className="bg-white rounded-lg shadow-md p-8 border-2 border-amber-500 relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <span className="bg-amber-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                  {t('home.packs.cocktail1_5h.features[3]')}
+                  Más popular
                 </span>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('home.packs.ceremonyCocktail1h.name')}</h3>
               <p className="text-gray-600 mb-4">{t('home.packs.ceremonyCocktail1h.description')}</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">{t('home.packs.ceremonyCocktail1h.price')}</div>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.ceremonyCocktail1h.features[0]')}</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.ceremonyCocktail1h.features[1]')}</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.ceremonyCocktail1h.features[2]')}</span>
-                </li>
+                {t('home.packs.ceremonyCocktail1h.features').map((feature: string, index: number) => (
+                  <li key={index} className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -327,18 +303,12 @@ export default function HomePage() {
               <p className="text-gray-600 mb-4">{t('home.packs.ceremonyCocktail1_5h.description')}</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">{t('home.packs.ceremonyCocktail1_5h.price')}</div>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.ceremonyCocktail1_5h.features[0]')}</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.ceremonyCocktail1_5h.features[1]')}</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  <span>{t('home.packs.ceremonyCocktail1_5h.features[2]')}</span>
-                </li>
+                {t('home.packs.ceremonyCocktail1_5h.features').map((feature: string, index: number) => (
+                  <li key={index} className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

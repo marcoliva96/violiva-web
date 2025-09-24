@@ -53,6 +53,11 @@ export const translations = {
         quality: 'Calidad',
         qualityDesc: 'Sonido profesional y equipamiento de alta calidad'
       },
+      stats: {
+        weddings: 'Bodas realizadas',
+        experience: 'Años de experiencia',
+        satisfaction: 'Clientes satisfechos'
+      },
       advantages: {
         title: 'Ventajas destacadas',
         elegant: {
@@ -66,13 +71,43 @@ export const translations = {
         system: {
           title: 'Sistema de preparación exclusivo',
           description: 'Un sistema de preparación exclusivo y pionero: creado por y para parejas, que os permite escuchar con total fidelidad cómo sonará vuestra boda con mis servicios. Una experiencia innovadora que os brinda la seguridad de saber exactamente cómo sonará cada momento especial.'
+        },
+        repertoire: {
+          title: 'Repertorio extenso',
+          description: 'Sin requerir de partituras, tiene preparado un repertorio de más de dos horas de música adaptada a violín.',
+          features: {
+            pop: 'Éxitos actuales del pop&rock',
+            disco: 'Canciones de discoteca',
+            movies: 'Bandas sonoras de películas',
+            legends: 'Grandes leyendas'
+          }
+        },
+        quality: {
+          title: 'Calidad/Precio',
+          description: 'Ofrece una relación calidad/precio imbatible. El coste de contratación varía substancialmente en función del número de integrantes.',
+          features: {
+            equipment: 'Equipo propio',
+            bases: 'Bases instrumentales de calidad',
+            experience: 'Experiencia envolvente',
+            noSheets: 'Sin necesidad de partituras'
+          }
+        },
+        experience: {
+          title: 'Experiencia',
+          description: 'Lleva 10 años amenizando bodas, por lo cual supone una apuesta segura.',
+          features: {
+            years: '10 años de experiencia',
+            formation: 'Formación en música moderna',
+            production: 'Producción musical',
+            renewal: 'Repertorio en constante renovación'
+          }
         }
       },
       packs: {
         title: 'Compara los packs',
         subtitle: 'Elige el pack que mejor se adapte a tu boda',
         ceremony: {
-          name: 'Solo Ceremonia',
+          name: 'Ceremonia',
           description: 'Música para la ceremonia',
           price: '200€',
           features: [
@@ -81,14 +116,25 @@ export const translations = {
             'Perfecto para ceremonias íntimas'
           ]
         },
-        cocktail: {
-          name: 'Solo Cóctel',
-          description: 'Música para el cóctel',
+        cocktail1h: {
+          name: 'Aperitivo (1h)',
+          description: 'Música para el aperitivo',
           price: '200€',
           features: [
-            'Música variada para cóctel',
+            '1 hora de música',
             'Múltiples estilos',
             'Ambiente relajado'
+          ]
+        },
+        cocktail1_5h: {
+          name: 'Aperitivo (1,5h)',
+          description: 'Música para el aperitivo extendido',
+          price: '250€',
+          features: [
+            '1,5 horas de música',
+            'Múltiples estilos',
+            'Ambiente relajado',
+            'Más popular'
           ]
         },
         ceremonyCocktail1h: {
@@ -102,15 +148,20 @@ export const translations = {
           ]
         },
         ceremonyCocktail1_5h: {
-          name: 'Ceremonia + Aperitivo (1.5h)',
-          description: 'Servicio completo (1.5h aperitivo)',
+          name: 'Ceremonia + Aperitivo (1,5h)',
+          description: 'Servicio completo extendido',
           price: '340€',
           features: [
-            'Ceremonia + 1.5h Cóctel',
-            'Servicio completo',
-            'Ideal para eventos más largos'
+            'Ceremonia + Aperitivo',
+            '1,5 horas de aperitivo',
+            'Servicio completo'
           ]
         }
+      },
+      cta: {
+        title: '¿Listos para crear el momento perfecto?',
+        subtitle: 'Configura tu boda en menos de 5 minutos y recibe una propuesta personalizada.',
+        button: 'Empezar configuración'
       }
     },
     // Proposal page
@@ -738,6 +789,7 @@ export function getTranslation(language: Language, key: string): string {
   for (const k of keys) {
     value = value?.[k]
   }
+  
   
   return value || key
 }
