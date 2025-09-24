@@ -70,21 +70,17 @@ export default function HomePage() {
               
               {/* Ceremonia */}
               <div className="mb-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Ceremonia</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('home.proposal.ceremony.title')}</h3>
                 <p className="text-lg text-gray-600 mb-4">
-                  Para vuestra ceremonia, violín acompañado de bases profesionales pre-grabadas en estudio de grabación. 
-                  Un sonido íntimo y elegante que realza cada momento especial sin robar protagonismo. 
-                  Música clásica y contemporánea que crea la atmósfera perfecta para vuestro "sí, quiero".
+                  {t('home.proposal.ceremony.description')}
                 </p>
               </div>
 
               {/* Cóctel */}
               <div className="mb-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Cóctel</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('home.proposal.cocktail.title')}</h3>
                 <p className="text-lg text-gray-600 mb-4">
-                  Para el cóctel, violín, guitarra y saxo con repertorio variado y actual. 
-                  Una experiencia musical envolvente que da estilo y elegancia a vuestro aperitivo. 
-                  Música que conecta con todos vuestros invitados, creando un ambiente único y memorable.
+                  {t('home.proposal.cocktail.description')}
                 </p>
               </div>
               
@@ -230,8 +226,8 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Ceremonia */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">{t('home.packs.ceremony.name')}</h3>
-              <p className="text-gray-600 mb-4">{t('home.packs.ceremony.description')}</p>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Ceremonia</h3>
+              <p className="text-gray-600 mb-4">Música para la ceremonia</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">200€</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
@@ -251,8 +247,8 @@ export default function HomePage() {
 
             {/* Aperitivo 1h */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">{t('home.packs.cocktail.name')}</h3>
-              <p className="text-gray-600 mb-4">{t('home.packs.cocktail.description')}</p>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Aperitivo (1h)</h3>
+              <p className="text-gray-600 mb-4">Música para el aperitivo</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">200€</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
@@ -272,8 +268,8 @@ export default function HomePage() {
 
             {/* Aperitivo 1.5h */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">{t('home.packs.cocktail.name')}</h3>
-              <p className="text-gray-600 mb-4">{t('home.packs.cocktail.description')}</p>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Aperitivo (1,5h)</h3>
+              <p className="text-gray-600 mb-4">Música para el aperitivo extendido</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">250€</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
