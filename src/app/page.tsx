@@ -83,6 +83,14 @@ export default function HomePage() {
                   {t('home.proposal.cocktail.description')}
                 </p>
               </div>
+
+              {/* Otros servicios */}
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('home.proposal.otherServices.title')}</h3>
+                <p className="text-lg text-gray-600 mb-4">
+                  {t('home.proposal.otherServices.description')}
+                </p>
+              </div>
               
               <div className="grid md:grid-cols-2 gap-8 mb-8">
                 <div className="text-center">

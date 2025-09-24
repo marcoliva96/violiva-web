@@ -32,6 +32,10 @@ export const translations = {
         cocktail: {
           title: 'Cóctel',
           description: 'Para el cóctel, violín, guitarra y saxo con repertorio variado y actual. Una experiencia musical envolvente que da estilo y elegancia a vuestro aperitivo. Música que conecta con todos vuestros invitados, creando un ambiente único y memorable.'
+        },
+        otherServices: {
+          title: 'Otros servicios',
+          description: 'Si necesitas servicios para entierros, comuniones u otras celebraciones, puedes contactarme en la sección "Contacto" ya que ofrezco estos servicios.'
         }
       },
       experiences: {
@@ -299,6 +303,10 @@ export const translations = {
         cocktail: {
           title: 'Còctel',
           description: 'Per al còctel, violí, guitarra i saxo amb repertori variat i actual. Una experiència musical embolcallant que dóna estil i elegància al vostre aperitiu. Música que connecta amb tots els vostres convidats, creant un ambient únic i memorable.'
+        },
+        otherServices: {
+          title: 'Altres serveis',
+          description: 'Si necessites serveis per a enterraments, comunions o altres celebracions, pots contactar-me a la secció "Contacte" ja que ofereixo aquests serveis.'
         }
       },
       experiences: {
