@@ -27,7 +27,7 @@ export const translations = {
         title: 'Mi propuesta',
         ceremony: {
           title: 'Ceremonia',
-          description: 'Para vuestra ceremonia, violín acompañado de bases profesionales pre-grabadas en estudio de grabación. Un sonido íntimo y elegante que realza cada momento especial sin robar protagonismo. Música clásica y contemporánea que crea la atmósfera perfecta para vuestro "sí, quiero".'
+          description: 'Para vuestra ceremonia, violín acompañado de bases profesionales pre-grabadas en estudio de grabación. Un sonido íntimo y elegante que realza cada momento especial sin robar protagonismo. Música clásica y contemporánea que crea la atmósfera perfecta para vuestro "sí, quiero". Puede ser religiosa o civil, con momentos musicales que amenizan ambas opciones y quedan perfectas en ambas.'
         },
         cocktail: {
           title: 'Cóctel',
@@ -167,6 +167,7 @@ export const translations = {
           pausas: 'Pausas',
           anillos: 'Anillos',
           parlamentos: 'Parlamentos',
+          firma_civil: 'Firma del acta civil',
           salida: 'Salida'
         },
         required: 'Obligatorio'
@@ -293,7 +294,7 @@ export const translations = {
         title: 'La meva proposta',
         ceremony: {
           title: 'Cerimònia',
-          description: 'Per a la vostra cerimònia, violí acompanyat de bases professionals pre-gravades en estudi de gravació. Un so íntim i elegant que realça cada moment especial sense robar protagonisme. Música clàssica i contemporània que crea l\'atmosfera perfecta per al vostre "sí, vull".'
+          description: 'Per a la vostra cerimònia, violí acompanyat de bases professionals pre-gravades en estudi de gravació. Un so íntim i elegant que realça cada moment especial sense robar protagonisme. Música clàssica i contemporània que crea l\'atmosfera perfecta per al vostre "sí, vull". Pot ser religiosa o civil, amb moments musicals que amenitzen ambdues opcions i queden perfectes en ambdues.'
         },
         cocktail: {
           title: 'Còctel',
@@ -433,6 +434,7 @@ export const translations = {
           pausas: 'Pauses',
           anillos: 'Anells',
           parlamentos: 'Parlaments',
+          firma_civil: 'Signatura de l\'acta civil',
           salida: 'Sortida'
         },
         required: 'Obligatori'

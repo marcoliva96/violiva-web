@@ -435,6 +435,7 @@ export function ConfiguratorWizard({
       { id: 'pausas', name: 'Pausas', required: false },
       { id: 'anillos', name: 'Anillos', required: false },
       { id: 'parlamentos', name: 'Parlamentos', required: false },
+      { id: 'firma_civil', name: 'Firma del acta civil', required: false },
       { id: 'salida', name: 'Salida', required: true },
     ]
 
@@ -594,6 +595,7 @@ export function ConfiguratorWizard({
       { id: 'pausas', name: 'Pausas', required: false },
       { id: 'anillos', name: 'Anillos', required: false },
       { id: 'parlamentos', name: 'Parlamentos', required: false },
+      { id: 'firma_civil', name: 'Firma del acta civil', required: false },
       { id: 'salida', name: 'Salida', required: true },
     ]
 
@@ -1895,6 +1897,7 @@ export function ConfiguratorWizard({
                           'pausas': 'Pausas',
                           'anillos': 'Anillos',
                           'parlamentos': 'Parlamentos',
+                          'firma_civil': 'Firma del acta civil',
                           'salida': 'Salida'
                         }
                         displayName = defaultNames[moment as keyof typeof defaultNames] || moment
@@ -1923,6 +1926,7 @@ export function ConfiguratorWizard({
                           'pausas': 'Pausas',
                           'anillos': 'Anillos',
                           'parlamentos': 'Parlamentos',
+                          'firma_civil': 'Firma del acta civil',
                           'salida': 'Salida'
                         }
                         displayName = defaultNames[moment as keyof typeof defaultNames] || moment
