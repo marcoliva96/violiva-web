@@ -48,6 +48,65 @@ export const translations = {
         repertoireDesc: 'Música clásica, pop, jazz y personalizada',
         quality: 'Calidad',
         qualityDesc: 'Sonido profesional y equipamiento de alta calidad'
+      },
+      advantages: {
+        title: 'Ventajas destacadas',
+        elegant: {
+          title: 'Hará que vuestra boda sea elegante y memorable',
+          description: 'Sin partituras, sin imprevistos, sin electricidad. Una actuación que no os molestará en un día lleno de emociones y que os permitirá disfrutar plenamente.'
+        },
+        comfort: {
+          title: 'Máxima comodidad en vuestro gran día',
+          description: 'Sin partituras que distraigan, sin imprevistos y sin necesidad de gestionar nada in situ. Una actuación diseñada al detalle, con la excelencia y la elegancia que os permitirá vivir vuestra boda con total serenidad.'
+        },
+        system: {
+          title: 'Sistema de preparación exclusivo',
+          description: 'Un sistema de preparación exclusivo y pionero: creado por y para parejas, que os permite escuchar con total fidelidad cómo sonará vuestra boda con mis servicios. Una experiencia innovadora que os brinda la seguridad de saber exactamente cómo sonará cada momento especial.'
+        }
+      },
+      packs: {
+        title: 'Compara los packs',
+        subtitle: 'Elige el pack que mejor se adapte a tu boda',
+        ceremony: {
+          name: 'Solo Ceremonia',
+          description: 'Música para la ceremonia',
+          price: '200€',
+          features: [
+            'Música para la ceremonia',
+            'Selección de momentos',
+            'Perfecto para ceremonias íntimas'
+          ]
+        },
+        cocktail: {
+          name: 'Solo Cóctel',
+          description: 'Música para el cóctel',
+          price: '200€',
+          features: [
+            'Música variada para cóctel',
+            'Múltiples estilos',
+            'Ambiente relajado'
+          ]
+        },
+        ceremonyCocktail1h: {
+          name: 'Ceremonia + Aperitivo (1h)',
+          description: 'Servicio completo (1h aperitivo)',
+          price: '300€',
+          features: [
+            'Ceremonia + 1h Cóctel',
+            'Servicio completo',
+            'Más popular'
+          ]
+        },
+        ceremonyCocktail1_5h: {
+          name: 'Ceremonia + Aperitivo (1.5h)',
+          description: 'Servicio completo (1.5h aperitivo)',
+          price: '340€',
+          features: [
+            'Ceremonia + 1.5h Cóctel',
+            'Servicio completo',
+            'Ideal para eventos más largos'
+          ]
+        }
       }
     },
     // Proposal page
@@ -243,6 +302,65 @@ export const translations = {
         repertoireDesc: 'Música clàssica, pop, jazz i personalitzada',
         quality: 'Qualitat',
         qualityDesc: 'So professional i equipament d\'alta qualitat'
+      },
+      advantages: {
+        title: 'Avantatges destacats',
+        elegant: {
+          title: 'Farà que el vostre casament sigui elegant i memorable',
+          description: 'Sense partitures, sense imprevistos, sense electricitat. Una actuació que no us molestarà en un dia ple d\'emocions i que us permetrà gaudir plenament.'
+        },
+        comfort: {
+          title: 'Màxima comoditat en el vostre gran dia',
+          description: 'Sense partitures que distreguin, sense imprevistos i sense necessitat de gestionar res in situ. Una actuació dissenyada al detall, amb l\'excel·lència i l\'elegància que us permetrà viure el vostre casament amb total serenitat.'
+        },
+        system: {
+          title: 'Sistema de preparació exclusiu',
+          description: 'Un sistema de preparació exclusiu i pioner: creat per i per a parelles, que us permet escoltar amb total fidelitat com sonarà el vostre casament amb els meus serveis. Una experiència innovadora que us brinda la seguretat de saber exactament com sonarà cada moment especial.'
+        }
+      },
+      packs: {
+        title: 'Compara els packs',
+        subtitle: 'Tria el pack que millor s\'adapti al teu casament',
+        ceremony: {
+          name: 'Només Cerimònia',
+          description: 'Música per a la cerimònia',
+          price: '200€',
+          features: [
+            'Música per a la cerimònia',
+            'Selecció de moments',
+            'Perfecte per a cerimònies íntimes'
+          ]
+        },
+        cocktail: {
+          name: 'Només Còctel',
+          description: 'Música per al còctel',
+          price: '200€',
+          features: [
+            'Música variada per al còctel',
+            'Múltiples estils',
+            'Ambient relaxat'
+          ]
+        },
+        ceremonyCocktail1h: {
+          name: 'Cerimònia + Aperitiu (1h)',
+          description: 'Servei complet (1h aperitiu)',
+          price: '300€',
+          features: [
+            'Cerimònia + 1h Còctel',
+            'Servei complet',
+            'Més popular'
+          ]
+        },
+        ceremonyCocktail1_5h: {
+          name: 'Cerimònia + Aperitiu (1.5h)',
+          description: 'Servei complet (1.5h aperitiu)',
+          price: '340€',
+          features: [
+            'Cerimònia + 1.5h Còctel',
+            'Servei complet',
+            'Ideal per a esdeveniments més llargs'
+          ]
+        }
       }
     },
     // Proposal page

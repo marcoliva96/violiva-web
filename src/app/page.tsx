@@ -141,7 +141,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">
-              {t('home.services.title')}
+              {t('home.advantages.title')}
             </h2>
           </div>
 
@@ -197,7 +197,7 @@ export default function HomePage() {
 
           <div className="bg-amber-50 rounded-lg p-8">
             <h3 className="text-2xl font-serif font-bold text-gray-900 mb-6 text-center">
-              Hará que vuestra boda sea elegante y memorable
+              {t('home.advantages.elegant.title')}
             </h3>
             <div className="max-w-2xl mx-auto">
               <ul className="space-y-4 text-lg text-gray-700">
@@ -220,18 +220,18 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">
-              Compara los packs
+              {t('home.packs.title')}
             </h2>
             <p className="text-xl text-gray-600">
-              Elige el pack que mejor se adapte a tu boda
+              {t('home.packs.subtitle')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Ceremonia */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Ceremonia</h3>
-              <p className="text-gray-600 mb-4">Música para la ceremonia</p>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">{t('home.packs.ceremony.name')}</h3>
+              <p className="text-gray-600 mb-4">{t('home.packs.ceremony.description')}</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">200€</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
@@ -251,8 +251,8 @@ export default function HomePage() {
 
             {/* Aperitivo 1h */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Aperitivo (1h)</h3>
-              <p className="text-gray-600 mb-4">Música para el aperitivo</p>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">{t('home.packs.cocktail.name')}</h3>
+              <p className="text-gray-600 mb-4">{t('home.packs.cocktail.description')}</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">200€</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
@@ -272,8 +272,8 @@ export default function HomePage() {
 
             {/* Aperitivo 1.5h */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Aperitivo (1,5h)</h3>
-              <p className="text-gray-600 mb-4">Música para el aperitivo extendido</p>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">{t('home.packs.cocktail.name')}</h3>
+              <p className="text-gray-600 mb-4">{t('home.packs.cocktail.description')}</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">250€</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
@@ -298,7 +298,7 @@ export default function HomePage() {
                   Más popular
                 </span>
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Ceremonia + Aperitivo (1h)</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Ceremonia + Aperitivo (1h)</h3>
               <p className="text-gray-600 mb-4">Servicio completo</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">300€</div>
               <ul className="space-y-3 mb-8">
@@ -319,7 +319,7 @@ export default function HomePage() {
 
             {/* Ceremonia + Aperitivo 1.5h */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Ceremonia + Aperitivo (1,5h)</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Ceremonia + Aperitivo (1,5h)</h3>
               <p className="text-gray-600 mb-4">Servicio completo extendido</p>
               <div className="text-4xl font-bold text-amber-600 mb-6">340€</div>
               <ul className="space-y-3 mb-8">
