@@ -31,6 +31,25 @@ export default function ReviewForm() {
     setIsSubmitting(true)
     setMessage('')
 
+    // Validación del frontend
+    if (!formData.member1.trim() || !formData.member2.trim()) {
+      setMessage('Por favor, completa los nombres de ambos miembros de la pareja.')
+      setIsSubmitting(false)
+      return
+    }
+
+    if (formData.rating < 0 || formData.rating > 5) {
+      setMessage('La puntuación debe estar entre 0 y 5.')
+      setIsSubmitting(false)
+      return
+    }
+
+    if (formData.comment.trim().length < 10) {
+      setMessage('El comentario debe tener al menos 10 caracteres.')
+      setIsSubmitting(false)
+      return
+    }
+
     try {
       const response = await fetch('/api/reviews/create', {
         method: 'POST',
@@ -54,7 +73,12 @@ export default function ReviewForm() {
         })
         setIsOpen(false)
       } else {
-        setMessage(result.error || 'Error al enviar la review')
+        console.error('Review submission error:', result)
+        if (result.details) {
+          setMessage(`Error: ${result.message || result.error}. Detalles: ${JSON.stringify(result.details)}`)
+        } else {
+          setMessage(result.error || 'Error al enviar la review')
+        }
       }
     } catch (error) {
       setMessage('Error al enviar la review. Inténtalo de nuevo.')

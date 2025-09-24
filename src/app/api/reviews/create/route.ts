@@ -14,7 +14,10 @@ const reviewSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
+    console.log('Review data received:', body)
+    
     const validatedData = reviewSchema.parse(body)
+    console.log('Review data validated:', validatedData)
 
     const review = await prisma.review.create({
       data: {
@@ -34,9 +37,11 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     if (error instanceof z.ZodError) {
+      console.error('Validation error:', error.errors)
       return NextResponse.json({ 
         error: 'Datos inválidos', 
-        details: error.errors 
+        details: error.errors,
+        message: 'Los datos enviados no cumplen con los requisitos de validación'
       }, { status: 400 })
     }
     
