@@ -71,7 +71,7 @@ export default function AdminDashboard() {
     const fetchData = async () => {
       try {
         // Fetch pending bookings only
-        const bookingsResponse = await fetch('/api/admin/bookings?state=PENDING')
+        const bookingsResponse = await fetch('/api/admin/bookings?state=CONTACTED')
         if (bookingsResponse.ok) {
           const bookingsData = await bookingsResponse.json()
           setBookings(bookingsData.bookings || [])
@@ -136,7 +136,7 @@ export default function AdminDashboard() {
 
   const getStateColor = (state: string) => {
     switch (state) {
-      case 'PENDING': return 'bg-yellow-100 text-yellow-800'
+      case 'CONTACTED': return 'bg-yellow-100 text-yellow-800'
       case 'CONFIRMED': return 'bg-green-100 text-green-800'
       case 'COMPLETED': return 'bg-blue-100 text-blue-800'
       case 'CANCELLED': return 'bg-red-100 text-red-800'
@@ -231,7 +231,7 @@ export default function AdminDashboard() {
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600">Pendientes</p>
                   <p className="text-2xl font-bold text-gray-900">
-                    {bookings.filter(b => b.state === 'PENDING').length}
+                    {bookings.filter(b => b.client?.status === 'CONTACTED').length}
                   </p>
                 </div>
               </div>
