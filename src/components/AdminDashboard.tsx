@@ -80,6 +80,9 @@ export default function AdminDashboard() {
   const [songs, setSongs] = useState<Song[]>([])
   const [clients, setClients] = useState<Client[]>([])
   const [loading, setLoading] = useState(true)
+  
+  console.log('AdminDashboard - Current clients state:', clients)
+  console.log('AdminDashboard - Loading state:', loading)
 
   useEffect(() => {
     fetchData()
@@ -452,6 +455,7 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
+                  {console.log('Rendering clients table, clients array:', clients, 'length:', clients.length)}
                   {clients.map((client) => (
                     <tr key={client.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
