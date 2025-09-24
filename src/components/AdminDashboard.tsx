@@ -80,9 +80,6 @@ export default function AdminDashboard() {
   const [songs, setSongs] = useState<Song[]>([])
   const [clients, setClients] = useState<Client[]>([])
   const [loading, setLoading] = useState(true)
-  
-  console.log('AdminDashboard - Current clients state:', clients)
-  console.log('AdminDashboard - Loading state:', loading)
 
   useEffect(() => {
     fetchData()

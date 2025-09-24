@@ -98,7 +98,7 @@ export default function HomePage() {
                     <Music className="h-8 w-8 text-amber-600" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">500+</h3>
-                  <p className="text-gray-600">{t('home.stats.weddings')}</p>
+                  <p className="text-gray-600">Bodas realizadas</p>
                 </div>
 
                 <div className="text-center">
@@ -106,7 +106,7 @@ export default function HomePage() {
                     <Users className="h-8 w-8 text-amber-600" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">10+</h3>
-                  <p className="text-gray-600">{t('home.stats.experience')}</p>
+                  <p className="text-gray-600">Años de experiencia</p>
                 </div>
               </div>
 
@@ -154,15 +154,15 @@ export default function HomePage() {
               <div className="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Music className="h-6 w-6 text-amber-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">{t('home.advantages.repertoire.title')}</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Repertorio extenso</h3>
               <p className="text-gray-600 mb-4">
-                {t('home.advantages.repertoire.description')}
+                Sin requerir de partituras, tiene preparado un repertorio de más de dos horas de música adaptada a violín.
               </p>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• {t('home.advantages.repertoire.features.pop')}</li>
-                <li>• {t('home.advantages.repertoire.features.disco')}</li>
-                <li>• {t('home.advantages.repertoire.features.movies')}</li>
-                <li>• {t('home.advantages.repertoire.features.legends')}</li>
+                <li>• Éxitos actuales del pop&rock</li>
+                <li>• Canciones de discoteca</li>
+                <li>• Bandas sonoras de películas</li>
+                <li>• Grandes leyendas</li>
               </ul>
             </div>
 
@@ -170,15 +170,15 @@ export default function HomePage() {
               <div className="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Star className="h-6 w-6 text-amber-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">{t('home.advantages.quality.title')}</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Calidad/Precio</h3>
               <p className="text-gray-600 mb-4">
-                {t('home.advantages.quality.description')}
+                Ofrece una relación calidad/precio imbatible. El coste de contratación varía substancialmente en función del número de integrantes.
               </p>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• {t('home.advantages.quality.features.equipment')}</li>
-                <li>• {t('home.advantages.quality.features.bases')}</li>
-                <li>• {t('home.advantages.quality.features.experience')}</li>
-                <li>• {t('home.advantages.quality.features.noSheets')}</li>
+                <li>• Equipo propio</li>
+                <li>• Bases instrumentales de calidad</li>
+                <li>• Experiencia envolvente</li>
+                <li>• Sin necesidad de partituras</li>
               </ul>
             </div>
 
@@ -186,15 +186,15 @@ export default function HomePage() {
               <div className="bg-amber-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Clock className="h-6 w-6 text-amber-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">{t('home.advantages.experience.title')}</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Experiencia</h3>
               <p className="text-gray-600 mb-4">
-                {t('home.advantages.experience.description')}
+                Lleva 10 años amenizando bodas, por lo cual supone una apuesta segura.
               </p>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• {t('home.advantages.experience.features.years')}</li>
-                <li>• {t('home.advantages.experience.features.formation')}</li>
-                <li>• {t('home.advantages.experience.features.production')}</li>
-                <li>• {t('home.advantages.experience.features.renewal')}</li>
+                <li>• 10 años de experiencia</li>
+                <li>• Formación en música moderna</li>
+                <li>• Producción musical</li>
+                <li>• Repertorio en constante renovación</li>
               </ul>
             </div>
           </div>
@@ -207,11 +207,11 @@ export default function HomePage() {
               <ul className="space-y-4 text-lg text-gray-700">
                 <li className="flex items-start">
                   <span className="text-amber-600 font-bold mr-3">•</span>
-                  <span><strong>{t('home.advantages.experience.features.renewal')}:</strong> {t('home.advantages.experience.features.renewal')}</span>
+                  <span><strong>Repertorio en constante renovación:</strong> Siempre actualizado con éxitos actuales, bandas sonoras y clásicos atemporales para sorprender a vuestros invitados.</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-amber-600 font-bold mr-3">•</span>
-                  <span><strong>{t('home.advantages.comfort.title')}:</strong> {t('home.advantages.comfort.description')}</span>
+                  <span><strong>Máxima comodidad en vuestro gran día:</strong> Sin partituras que distraigan, sin imprevistos y sin necesidad de gestionar nada in situ. Una actuación diseñada al detalle, con la excelencia y la elegancia que os permitirá vivir vuestra boda con total serenidad.</span>
                 </li>
               </ul>
             </div>
@@ -234,46 +234,64 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Ceremonia */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">{t('home.packs.ceremony.name')}</h3>
-              <p className="text-gray-600 mb-4">{t('home.packs.ceremony.description')}</p>
-              <div className="text-4xl font-bold text-amber-600 mb-6">{t('home.packs.ceremony.price')}</div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Ceremonia</h3>
+              <p className="text-gray-600 mb-4">Música para la ceremonia</p>
+              <div className="text-4xl font-bold text-amber-600 mb-6">200€</div>
               <ul className="space-y-3 mb-8">
-                {t('home.packs.ceremony.features').map((feature: string, index: number) => (
-                  <li key={index} className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Música para la ceremonia</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Selección de momentos</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Perfecto para ceremonias íntimas</span>
+                </li>
               </ul>
             </div>
 
             {/* Aperitivo 1h */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">{t('home.packs.cocktail1h.name')}</h3>
-              <p className="text-gray-600 mb-4">{t('home.packs.cocktail1h.description')}</p>
-              <div className="text-4xl font-bold text-amber-600 mb-6">{t('home.packs.cocktail1h.price')}</div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Aperitivo (1h)</h3>
+              <p className="text-gray-600 mb-4">Música para el aperitivo</p>
+              <div className="text-4xl font-bold text-amber-600 mb-6">200€</div>
               <ul className="space-y-3 mb-8">
-                {t('home.packs.cocktail1h.features').map((feature: string, index: number) => (
-                  <li key={index} className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>1 hora de música</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Múltiples estilos</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Ambiente relajado</span>
+                </li>
               </ul>
             </div>
 
             {/* Aperitivo 1.5h */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">{t('home.packs.cocktail1_5h.name')}</h3>
-              <p className="text-gray-600 mb-4">{t('home.packs.cocktail1_5h.description')}</p>
-              <div className="text-4xl font-bold text-amber-600 mb-6">{t('home.packs.cocktail1_5h.price')}</div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Aperitivo (1,5h)</h3>
+              <p className="text-gray-600 mb-4">Música para el aperitivo extendido</p>
+              <div className="text-4xl font-bold text-amber-600 mb-6">250€</div>
               <ul className="space-y-3 mb-8">
-                {t('home.packs.cocktail1_5h.features').map((feature: string, index: number) => (
-                  <li key={index} className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>1,5 horas de música</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Múltiples estilos</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Ambiente relajado</span>
+                </li>
               </ul>
             </div>
 
@@ -284,31 +302,43 @@ export default function HomePage() {
                   Más popular
                 </span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('home.packs.ceremonyCocktail1h.name')}</h3>
-              <p className="text-gray-600 mb-4">{t('home.packs.ceremonyCocktail1h.description')}</p>
-              <div className="text-4xl font-bold text-amber-600 mb-6">{t('home.packs.ceremonyCocktail1h.price')}</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Ceremonia + Aperitivo (1h)</h3>
+              <p className="text-gray-600 mb-4">Servicio completo</p>
+              <div className="text-4xl font-bold text-amber-600 mb-6">300€</div>
               <ul className="space-y-3 mb-8">
-                {t('home.packs.ceremonyCocktail1h.features').map((feature: string, index: number) => (
-                  <li key={index} className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Ceremonia + Aperitivo</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Servicio completo</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Más popular</span>
+                </li>
               </ul>
             </div>
 
             {/* Ceremonia + Aperitivo 1.5h */}
             <div className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('home.packs.ceremonyCocktail1_5h.name')}</h3>
-              <p className="text-gray-600 mb-4">{t('home.packs.ceremonyCocktail1_5h.description')}</p>
-              <div className="text-4xl font-bold text-amber-600 mb-6">{t('home.packs.ceremonyCocktail1_5h.price')}</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Ceremonia + Aperitivo (1,5h)</h3>
+              <p className="text-gray-600 mb-4">Servicio completo extendido</p>
+              <div className="text-4xl font-bold text-amber-600 mb-6">340€</div>
               <ul className="space-y-3 mb-8">
-                {t('home.packs.ceremonyCocktail1_5h.features').map((feature: string, index: number) => (
-                  <li key={index} className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Ceremonia + Aperitivo</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>1,5 horas de aperitivo</span>
+          </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <span>Servicio completo</span>
+          </li>
               </ul>
             </div>
           </div>
@@ -319,14 +349,14 @@ export default function HomePage() {
       <section className="py-20 bg-amber-50">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-4xl font-serif font-bold text-gray-900 mb-6">
-            {t('home.cta.title')}
+            ¿Listos para crear el momento perfecto?
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            {t('home.cta.subtitle')}
+            Configura tu boda en menos de 5 minutos y recibe una propuesta personalizada.
           </p>
           <Button asChild size="lg" className="bg-amber-600 hover:bg-amber-700 text-white">
             <Link href="/configura">
-              {t('home.cta.button')}
+              Empezar configuración
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>

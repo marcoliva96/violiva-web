@@ -53,11 +53,6 @@ export const translations = {
         quality: 'Calidad',
         qualityDesc: 'Sonido profesional y equipamiento de alta calidad'
       },
-      stats: {
-        weddings: 'Bodas realizadas',
-        experience: 'Años de experiencia',
-        satisfaction: 'Clientes satisfechos'
-      },
       advantages: {
         title: 'Ventajas destacadas',
         elegant: {
@@ -71,43 +66,13 @@ export const translations = {
         system: {
           title: 'Sistema de preparación exclusivo',
           description: 'Un sistema de preparación exclusivo y pionero: creado por y para parejas, que os permite escuchar con total fidelidad cómo sonará vuestra boda con mis servicios. Una experiencia innovadora que os brinda la seguridad de saber exactamente cómo sonará cada momento especial.'
-        },
-        repertoire: {
-          title: 'Repertorio extenso',
-          description: 'Sin requerir de partituras, tiene preparado un repertorio de más de dos horas de música adaptada a violín.',
-          features: {
-            pop: 'Éxitos actuales del pop&rock',
-            disco: 'Canciones de discoteca',
-            movies: 'Bandas sonoras de películas',
-            legends: 'Grandes leyendas'
-          }
-        },
-        quality: {
-          title: 'Calidad/Precio',
-          description: 'Ofrece una relación calidad/precio imbatible. El coste de contratación varía substancialmente en función del número de integrantes.',
-          features: {
-            equipment: 'Equipo propio',
-            bases: 'Bases instrumentales de calidad',
-            experience: 'Experiencia envolvente',
-            noSheets: 'Sin necesidad de partituras'
-          }
-        },
-        experience: {
-          title: 'Experiencia',
-          description: 'Lleva 10 años amenizando bodas, por lo cual supone una apuesta segura.',
-          features: {
-            years: '10 años de experiencia',
-            formation: 'Formación en música moderna',
-            production: 'Producción musical',
-            renewal: 'Repertorio en constante renovación'
-          }
         }
       },
       packs: {
         title: 'Compara los packs',
         subtitle: 'Elige el pack que mejor se adapte a tu boda',
         ceremony: {
-          name: 'Ceremonia',
+          name: 'Solo Ceremonia',
           description: 'Música para la ceremonia',
           price: '200€',
           features: [
@@ -116,25 +81,14 @@ export const translations = {
             'Perfecto para ceremonias íntimas'
           ]
         },
-        cocktail1h: {
-          name: 'Aperitivo (1h)',
-          description: 'Música para el aperitivo',
+        cocktail: {
+          name: 'Solo Cóctel',
+          description: 'Música para el cóctel',
           price: '200€',
           features: [
-            '1 hora de música',
+            'Música variada para cóctel',
             'Múltiples estilos',
             'Ambiente relajado'
-          ]
-        },
-        cocktail1_5h: {
-          name: 'Aperitivo (1,5h)',
-          description: 'Música para el aperitivo extendido',
-          price: '250€',
-          features: [
-            '1,5 horas de música',
-            'Múltiples estilos',
-            'Ambiente relajado',
-            'Más popular'
           ]
         },
         ceremonyCocktail1h: {
@@ -148,20 +102,15 @@ export const translations = {
           ]
         },
         ceremonyCocktail1_5h: {
-          name: 'Ceremonia + Aperitivo (1,5h)',
-          description: 'Servicio completo extendido',
+          name: 'Ceremonia + Aperitivo (1.5h)',
+          description: 'Servicio completo (1.5h aperitivo)',
           price: '340€',
           features: [
-            'Ceremonia + Aperitivo',
-            '1,5 horas de aperitivo',
-            'Servicio completo'
+            'Ceremonia + 1.5h Cóctel',
+            'Servicio completo',
+            'Ideal para eventos más largos'
           ]
         }
-      },
-      cta: {
-        title: '¿Listos para crear el momento perfecto?',
-        subtitle: 'Configura tu boda en menos de 5 minutos y recibe una propuesta personalizada.',
-        button: 'Empezar configuración'
       }
     },
     // Proposal page
@@ -597,56 +546,6 @@ export const translations = {
         totalRevenue: 'Ingressos totals'
       }
     },
-    stats: {
-      weddings: 'Casaments realitzats',
-      experience: 'Anys d\'experiència',
-      satisfaction: 'Clients satisfets'
-    },
-    advantages: {
-      title: 'Avantatges destacats',
-      elegant: {
-        title: 'Farà que el vostre casament sigui elegant i memorable',
-        description: 'Sense partitures, sense imprevistos, sense electricitat. Una actuació que no us molestará en un dia ple d\'emocions i que us permetrà gaudir plenament.'
-      },
-      comfort: {
-        title: 'Màxima comoditat en el vostre gran dia',
-        description: 'Sense partitures que distreguin, sense imprevistos i sense necessitat de gestionar res in situ. Una actuació dissenyada al detall, amb l\'excel·lència i l\'elegància que us permetrà viure el vostre casament amb total serenitat.'
-      },
-      system: {
-        title: 'Sistema de preparació exclusiu',
-        description: 'Un sistema de preparació exclusiu i pioner: creat per i per a parelles, que us permet escoltar amb total fidelitat com sonarà el vostre casament amb els meus serveis. Una experiència innovadora que us brinda la seguretat de saber exactament com sonarà cada moment especial.'
-      },
-      repertoire: {
-        title: 'Repertori extens',
-        description: 'Sense requerir de partitures, té preparat un repertori de més de dues hores de música adaptada a violí.',
-        features: {
-          pop: 'Èxits actuals del pop&rock',
-          disco: 'Cançons de discoteca',
-          movies: 'Bandes sonores de pel·lícules',
-          legends: 'Grans llegendes'
-        }
-      },
-      quality: {
-        title: 'Qualitat/Preu',
-        description: 'Ofereix una relació qualitat/preu imbatible. El cost de contractació varia substancialment en funció del nombre d\'integrants.',
-        features: {
-          equipment: 'Equip propi',
-          bases: 'Bases instrumentals de qualitat',
-          experience: 'Experiència embolcallant',
-          noSheets: 'Sense necessitat de partitures'
-        }
-      },
-      experience: {
-        title: 'Experiència',
-        description: 'Porta 10 anys amenitzant casaments, per la qual cosa suposa una aposta segura.',
-        features: {
-          years: '10 anys d\'experiència',
-          formation: 'Formació en música moderna',
-          production: 'Producció musical',
-          renewal: 'Repertori en constant renovació'
-        }
-      }
-    },
     calendar: {
       months: [
         'Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny',
@@ -680,7 +579,7 @@ export const translations = {
       title: 'Compara els packs',
       subtitle: 'Tria el pack que millor s\'adapti al teu casament',
       ceremony: {
-        name: 'Cerimònia',
+        name: 'Només Cerimònia',
         description: 'Música per a la cerimònia',
         price: '200€',
         features: [
@@ -689,94 +588,35 @@ export const translations = {
           'Perfecte per a cerimònies íntimes'
         ]
       },
-      cocktail1h: {
-        name: 'Aperitiu (1h)',
-        description: 'Música per a l\'aperitiu',
+      cocktail: {
+        name: 'Només Còctel',
+        description: 'Música per al còctel',
         price: '200€',
         features: [
-          '1 hora de música',
+          'Música variada per al còctel',
           'Múltiples estils',
           'Ambient relaxat'
         ]
       },
-      cocktail1_5h: {
-        name: 'Aperitiu (1,5h)',
-        description: 'Música per a l\'aperitiu estès',
-        price: '250€',
-        features: [
-          '1,5 hores de música',
-          'Múltiples estils',
-          'Ambient relaxat',
-          'Més popular'
-        ]
-      },
       ceremonyCocktail1h: {
         name: 'Cerimònia + Aperitiu (1h)',
-        description: 'Servei complet',
+        description: 'Servei complet (1h aperitiu)',
         price: '300€',
         features: [
-          'Cerimònia + Aperitiu',
+          'Cerimònia + 1h Còctel',
           'Servei complet',
           'Més popular'
         ]
       },
       ceremonyCocktail1_5h: {
-        name: 'Cerimònia + Aperitiu (1,5h)',
-        description: 'Servei complet estès',
+        name: 'Cerimònia + Aperitiu (1.5h)',
+        description: 'Servei complet (1.5h aperitiu)',
         price: '340€',
         features: [
-          'Cerimònia + Aperitiu',
-          '1,5 hores d\'aperitiu',
-          'Servei complet'
+          'Cerimònia + 1.5h Còctel',
+          'Servei complet',
+          'Ideal per a esdeveniments més llargs'
         ]
-      }
-    },
-    cta: {
-      title: '¿Listos para crear el momento perfecto?',
-      subtitle: 'Configura tu boda en menos de 5 minutos y recibe una propuesta personalizada.',
-      button: 'Empezar configuración'
-    },
-    availability: {
-      title: 'Disponibilidad',
-      subtitle: 'Consulta las fechas disponibles para tu boda',
-      available: 'Disponible',
-      busy: 'Ocupado',
-      info: {
-        title: 'Información importante',
-        availability: 'Disponibilidad',
-        description: 'Las fechas marcadas en verde están disponibles para tu boda. Las fechas en rojo ya están ocupadas.',
-        reserve: 'Reserva',
-        reserveDescription: 'Para reservar una fecha, configura tu boda y envíanos la solicitud. Te confirmaremos la disponibilidad en menos de 24 horas.',
-        button: 'Configurar mi boda'
-      }
-    },
-    contact: {
-      title: 'Información de contacto',
-      email: 'Email',
-      emailValue: 'info@violiva.com',
-      emailDescription: 'Respuesta en menos de 24 horas',
-      phone: 'Teléfono',
-      phoneValue: '+34 600 000 000',
-      phoneDescription: 'Lunes a Viernes, 9:00 - 18:00',
-      zone: 'Zona de actuación',
-      zoneValue: 'Barcelona y alrededores',
-      zoneDescription: 'Consultar disponibilidad para otras zonas',
-      schedule: 'Horarios',
-      scheduleValue: 'Flexible según tu boda',
-      scheduleDescription: 'Desde ceremonias hasta cócteles',
-      cta: {
-        title: '¿Prefieres configurar tu boda?',
-        description: 'Si ya tienes una idea de lo que quieres, puedes configurar tu boda directamente y recibir una propuesta personalizada.',
-        button1: 'Configurar mi boda',
-        button2: 'Envíanos un mensaje'
-      },
-      form: {
-        name: 'Nombre',
-        email: 'Email',
-        phone: 'Teléfono',
-        message: 'Mensaje',
-        messagePlaceholder: 'Cuéntanos sobre tu boda, fecha, lugar, cualquier detalle que consideres importante...',
-        submit: 'Enviar mensaje'
       }
     }
   }
@@ -789,7 +629,6 @@ export function getTranslation(language: Language, key: string): string {
   for (const k of keys) {
     value = value?.[k]
   }
-  
   
   return value || key
 }

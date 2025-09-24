@@ -37,54 +37,25 @@ export async function GET(request: NextRequest) {
 
     console.log('Fetching clients with where clause:', where)
     
-    const [clients, total] = await Promise.all([
-      prisma.client.findMany({
-        where,
-        select: {
-          id: true,
-          firstName: true,
-          lastName: true,
-          email: true,
-          phone: true,
-          partnerName: true,
-          weddingDate: true,
-          createdAt: true,
-          bookings: {
-            select: {
-              id: true,
-              date: true,
-              venue: true,
-              ceremonyVenue: true,
-              cocktailVenue: true,
-              pack: true,
-              priceCents: true,
-              state: true,
-              languagePreference: true,
-              createdAt: true,
-              selections: {
-                select: {
-                  id: true,
-                  moment: true,
-                  customTitle: true,
-                  customSource: true,
-                  song: {
-                    select: {
-                      id: true,
-                      title: true,
-                      composer: true
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        orderBy: { createdAt: 'desc' },
-        skip: (page - 1) * limit,
-        take: limit
-      }),
-      prisma.client.count({ where })
-    ])
+    // Primero obtener solo los clientes básicos
+    const clients = await prisma.client.findMany({
+      where,
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        phone: true,
+        partnerName: true,
+        weddingDate: true,
+        createdAt: true
+      },
+      orderBy: { createdAt: 'desc' },
+      skip: (page - 1) * limit,
+      take: limit
+    })
+
+    const total = await prisma.client.count({ where })
 
     console.log('Found clients:', clients.length, 'Total:', total)
     console.log('Clients data:', JSON.stringify(clients, null, 2))
