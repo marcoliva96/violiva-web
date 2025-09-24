@@ -109,9 +109,13 @@ export default function AdminDashboard() {
       if (clientsResponse.ok) {
         const clientsData = await clientsResponse.json()
         console.log('Clients data received:', clientsData)
+        console.log('Clients array:', clientsData.clients)
+        console.log('Clients length:', clientsData.clients?.length)
         setClients(clientsData.clients || [])
       } else {
-        console.error('Error fetching clients:', await clientsResponse.text())
+        const errorText = await clientsResponse.text()
+        console.error('Error fetching clients:', errorText)
+        setClients([])
       }
     } catch (error) {
       console.error('Error fetching data:', error)

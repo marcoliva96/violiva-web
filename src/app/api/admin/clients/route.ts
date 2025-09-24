@@ -37,32 +37,8 @@ export async function GET(request: NextRequest) {
 
     console.log('Fetching clients with where clause:', where)
     
-    // Primero intentar sin relaciones para ver si hay clientes
     const [clients, total] = await Promise.all([
       prisma.client.findMany({
-        where,
-        select: {
-          id: true,
-          firstName: true,
-          lastName: true,
-          email: true,
-          phone: true,
-          partnerName: true,
-          weddingDate: true,
-          createdAt: true
-        },
-        orderBy: { createdAt: 'desc' },
-        skip: (page - 1) * limit,
-        take: limit
-      }),
-      prisma.client.count({ where })
-    ])
-
-    console.log('Simple clients query result:', clients.length, 'Total:', total)
-    
-    // Si hay clientes, hacer la consulta completa con relaciones
-    if (clients.length > 0) {
-      const clientsWithBookings = await prisma.client.findMany({
         where,
         select: {
           id: true,
@@ -106,21 +82,12 @@ export async function GET(request: NextRequest) {
         orderBy: { createdAt: 'desc' },
         skip: (page - 1) * limit,
         take: limit
-      })
-      
-      console.log('Clients with bookings:', clientsWithBookings.length)
-      return NextResponse.json({
-        clients: clientsWithBookings,
-        pagination: {
-          page,
-          limit,
-          total,
-          pages: Math.ceil(total / limit)
-        }
-      })
-    }
+      }),
+      prisma.client.count({ where })
+    ])
 
     console.log('Found clients:', clients.length, 'Total:', total)
+    console.log('Clients data:', JSON.stringify(clients, null, 2))
 
     return NextResponse.json({
       clients,
