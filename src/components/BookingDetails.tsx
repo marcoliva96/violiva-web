@@ -90,7 +90,7 @@ export function BookingDetails({ booking, onBookingUpdate }: BookingDetailsProps
 
   const getStateColor = (state: string) => {
     switch (state) {
-      case 'PENDING':
+      case 'CONTACTED':
         return 'bg-yellow-100 text-yellow-800'
       case 'CONFIRMED':
         return 'bg-green-100 text-green-800'
@@ -107,8 +107,8 @@ export function BookingDetails({ booking, onBookingUpdate }: BookingDetailsProps
 
   const getStateLabel = (state: string) => {
     switch (state) {
-      case 'PENDING':
-        return 'Pendiente'
+      case 'CONTACTED':
+        return 'Contactado'
       case 'CONFIRMED':
         return 'Confirmada'
       case 'PAID':
@@ -188,7 +188,7 @@ export function BookingDetails({ booking, onBookingUpdate }: BookingDetailsProps
         
         {/* State Changes */}
         <div className="space-y-2">
-          {booking.state === 'PENDING' && (
+          {booking.state === 'CONTACTED' && (
             <Button
               onClick={() => handleStateChange('CONFIRMED')}
               disabled={loading}

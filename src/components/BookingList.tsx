@@ -44,7 +44,7 @@ export function BookingList({ bookings, onBookingSelect, selectedBooking }: Book
 
   const getStateColor = (state: string) => {
     switch (state) {
-      case 'PENDING':
+      case 'CONTACTED':
         return 'bg-yellow-100 text-yellow-800'
       case 'CONFIRMED':
         return 'bg-green-100 text-green-800'
@@ -61,8 +61,8 @@ export function BookingList({ bookings, onBookingSelect, selectedBooking }: Book
 
   const getStateLabel = (state: string) => {
     switch (state) {
-      case 'PENDING':
-        return 'Pendiente'
+      case 'CONTACTED':
+        return 'Contactado'
       case 'CONFIRMED':
         return 'Confirmada'
       case 'PAID':
@@ -87,7 +87,7 @@ export function BookingList({ bookings, onBookingSelect, selectedBooking }: Book
         
         {/* Filters */}
         <div className="flex flex-wrap gap-2">
-          {['ALL', 'PENDING', 'CONFIRMED', 'PAID', 'COMPLETED', 'CANCELLED'].map((state) => (
+          {['ALL', 'CONTACTED', 'NEGOTIATING', 'CONFIRMED', 'PAID', 'REALIZED', 'CANCELLED'].map((state) => (
             <Button
               key={state}
               variant={filter === state ? 'default' : 'outline'}

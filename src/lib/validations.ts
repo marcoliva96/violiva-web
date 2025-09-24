@@ -40,7 +40,7 @@ export const songSchema = z.object({
 
 // Admin booking update schema
 export const bookingUpdateSchema = z.object({
-  state: z.enum(['PENDING', 'CONFIRMED', 'PAID', 'COMPLETED', 'CANCELLED']).optional(),
+  state: z.enum(['CONTACTED', 'NEGOTIATING', 'CONFIRMED', 'PAID', 'REALIZED', 'CANCELLED']).optional(),
   priceCents: z.number().positive().optional(),
   finalPrice: z.number().positive().optional(),
   visible: z.boolean().optional(),
