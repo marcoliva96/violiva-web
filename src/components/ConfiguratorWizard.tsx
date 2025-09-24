@@ -1819,35 +1819,28 @@ export function ConfiguratorWizard({
       <div className="bg-white rounded-lg shadow-md p-8 text-center">
         <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-6" />
         <h2 className="text-2xl font-serif font-bold text-gray-900 mb-4">
-          ¡Solicitud enviada correctamente!
+          {t('configure.success.title')}
         </h2>
-        <p className="text-gray-600 mb-8">
-          Hemos recibido tu solicitud. Pronto recibirás un email con la propuesta detallada.
+        <p className="text-gray-600 mb-4">
+          {t('configure.success.message')}
         </p>
-        <div className="bg-amber-50 rounded-lg p-6 mb-8">
-          <h3 className="font-semibold text-gray-900 mb-2">Resumen de tu solicitud:</h3>
-          <p><strong>Pack:</strong> {selectedPackData?.name}</p>
-          <p><strong>Precio:</strong> {totalPrice}€</p>
-          <p><strong>Email:</strong> {clientData.email}</p>
+        <p className="text-gray-600 mb-4">
+          {t('configure.success.contact')}
+        </p>
+        <p className="text-gray-600 mb-6">
+          {t('configure.success.contactFor')}
+        </p>
+        <div className="bg-amber-50 rounded-lg p-6 mb-8 text-left max-w-md mx-auto">
+          <ul className="space-y-2 text-gray-700">
+            {t('configure.success.contactList').map((item: string, index: number) => (
+              <li key={index}>• {item}</li>
+            ))}
+          </ul>
         </div>
-        <div className="flex justify-between">
-          <Button 
-            variant="outline" 
-            onClick={onBack}
-            className="border-black text-black hover:bg-black hover:text-white"
-          >
-            Atrás
-          </Button>
-          <Button
-            onClick={() => {
-              if (validateForm()) {
-                setShowConfirmation(true)
-              }
-            }}
-            className="bg-amber-600 hover:bg-amber-700 text-white"
-          >
-            Enviar solicitud
-          </Button>
+        <div className="text-center">
+          <p className="text-gray-500 text-sm mb-4">
+            {t('configure.success.explore')}
+          </p>
         </div>
       </div>
     )

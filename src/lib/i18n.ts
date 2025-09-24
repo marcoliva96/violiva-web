@@ -226,6 +226,18 @@ export const translations = {
           submit: 'Enviar solicitud',
           confirm: 'Confirmar y enviar',
           cancel: 'Cancelar'
+        },
+        success: {
+          title: '¡Solicitud enviada correctamente!',
+          message: 'Hemos recibido tu solicitud.',
+          contact: 'Me pondré en contacto contigo en menos de 24 horas',
+          contactFor: 'Te contactaré para:',
+          contactList: [
+            'Confirmar todos los detalles de tu boda',
+            'Acordar las canciones específicas',
+            'Cerrar el contrato y formalizar el servicio'
+          ],
+          explore: 'Puedes seguir explorando la web o cerrar esta ventana.'
         }
     },
     // Listen page
@@ -480,6 +492,18 @@ export const translations = {
           submit: 'Enviar sol·licitud',
           confirm: 'Confirmar i enviar',
           cancel: 'Cancel·lar'
+        },
+        success: {
+          title: '¡Sol·licitud enviada correctament!',
+          message: 'Hem rebut la teva sol·licitud.',
+          contact: 'Em posaré en contacte amb tu en menys de 24 hores',
+          contactFor: 'Et contactaré per:',
+          contactList: [
+            'Confirmar tots els detalls del teu casament',
+            'Acordar les cançons específiques',
+            'Tancar el contracte i formalitzar el servei'
+          ],
+          explore: 'Pots seguir explorant la web o tancar aquesta finestra.'
         }
     },
     // Listen page
