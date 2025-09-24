@@ -19,13 +19,19 @@ export async function GET(request: NextRequest) {
     const state = searchParams.get('state')
     const from = searchParams.get('from')
     const to = searchParams.get('to')
+    const includeHidden = searchParams.get('includeHidden') === 'true'
     const page = parseInt(searchParams.get('page') || '1')
     const size = parseInt(searchParams.get('size') || '10')
 
     const where: Record<string, unknown> = {}
 
+    // Solo filtrar por visibilidad si no se incluyen los ocultos
+    if (!includeHidden) {
+      where.visible = true
+    }
+
     if (state) {
-      where.state = state
+      where.state = state as any // Cast to BookingState enum
     }
 
     if (from && to) {

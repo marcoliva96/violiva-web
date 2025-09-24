@@ -64,6 +64,7 @@ model Booking {
   currency       String        @default("EUR")
   state          BookingState  @default(PENDING)
   languagePreference String?   // Preferencia de idioma de contacto
+  visible        Boolean       @default(true) // Campo para ocultar/mostrar registros
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   // relations

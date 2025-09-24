@@ -43,6 +43,7 @@ export const bookingUpdateSchema = z.object({
   state: z.enum(['PENDING', 'CONFIRMED', 'PAID', 'COMPLETED', 'CANCELLED']).optional(),
   priceCents: z.number().positive().optional(),
   finalPrice: z.number().positive().optional(),
+  visible: z.boolean().optional(),
   notes: z.string().optional(),
 })
 

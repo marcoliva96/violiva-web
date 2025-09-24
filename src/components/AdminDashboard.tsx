@@ -13,22 +13,53 @@ import {
   Edit,
   Trash2,
   Eye,
-  Download
+  Download,
+  Check,
+  X,
+  EyeOff,
+  Filter
 } from 'lucide-react'
 
 interface Booking {
   id: string
   client: {
+    id: string
     firstName: string
     lastName: string
     email: string
+    phone?: string
+    partnerName?: string
+    weddingDate?: string
   }
   date: string
-  venue: string
+  venue?: string
+  ceremonyVenue?: string
+  cocktailVenue?: string
   pack: string
   priceCents: number
+  finalPrice?: number
   state: string
+  languagePreference?: string
+  visible: boolean
   createdAt: string
+  updatedAt: string
+  selections: {
+    id: string
+    moment: string
+    customTitle?: string
+    customSource?: string
+    song?: {
+      id: string
+      title: string
+      composer: string
+    }
+  }[]
+  contract?: {
+    id: string
+    generatedAt: string
+    sentAt?: string
+    signedAt?: string
+  }
 }
 
 interface Song {
@@ -40,93 +71,48 @@ interface Song {
   isFeatured: boolean
 }
 
-interface Client {
-  id: string
-  firstName: string
-  lastName: string
-  email: string
-  phone?: string
-  partnerName?: string
-  weddingDate?: string
-  bookings?: {
-    id: string
-    date: string
-    venue: string
-    ceremonyVenue?: string
-    cocktailVenue?: string
-    pack: string
-    priceCents: number
-    state: string
-    languagePreference?: string
-    createdAt: string
-    selections: {
-      id: string
-      moment: string
-      customTitle?: string
-      customSource?: string
-      song?: {
-        id: string
-        title: string
-        composer: string
-      }
-    }[]
-  }[]
-}
-
 export default function AdminDashboard() {
   const { t } = useTranslation()
-  const [activeTab, setActiveTab] = useState('dashboard')
+  const [activeTab, setActiveTab] = useState('bookings')
   const [bookings, setBookings] = useState<Booking[]>([])
   const [songs, setSongs] = useState<Song[]>([])
-  const [clients, setClients] = useState<Client[]>([])
   const [loading, setLoading] = useState(true)
+  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null)
+  const [showDetails, setShowDetails] = useState(false)
+  const [filterState, setFilterState] = useState<string>('ALL')
+  const [showHidden, setShowHidden] = useState(false)
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [filterState, showHidden])
 
   const fetchData = async () => {
     try {
       setLoading(true)
       
-      // Fetch pending bookings (solicitudes)
-      const pendingBookingsResponse = await fetch('/api/admin/bookings?state=PENDING')
-      if (pendingBookingsResponse.ok) {
-        const pendingData = await pendingBookingsResponse.json()
-        setBookings(pendingData.bookings || [])
-        console.log('Pending bookings:', pendingData.bookings?.length)
+      // Fetch bookings with filters
+      let url = '/api/admin/bookings'
+      const params = new URLSearchParams()
+      
+      if (filterState !== 'ALL') {
+        params.append('state', filterState)
       }
-
-      // Fetch confirmed bookings (clientes)
-      const confirmedBookingsResponse = await fetch('/api/admin/bookings?state=CONFIRMED')
-      if (confirmedBookingsResponse.ok) {
-        const confirmedData = await confirmedBookingsResponse.json()
-        // Convert bookings to clients format for display
-        const clientsFromBookings = confirmedData.bookings?.map((booking: any) => ({
-          id: booking.client.id,
-          firstName: booking.client.firstName,
-          lastName: booking.client.lastName,
-          email: booking.client.email,
-          phone: booking.client.phone,
-          partnerName: booking.client.partnerName,
-          weddingDate: booking.client.weddingDate,
-          createdAt: booking.client.createdAt,
-          bookings: [{
-            id: booking.id,
-            date: booking.date,
-            venue: booking.venue,
-            ceremonyVenue: booking.ceremonyVenue,
-            cocktailVenue: booking.cocktailVenue,
-            pack: booking.pack,
-            priceCents: booking.priceCents,
-            state: booking.state,
-            languagePreference: booking.languagePreference,
-            createdAt: booking.createdAt,
-            selections: booking.selections || []
-          }]
-        })) || []
-        setClients(clientsFromBookings)
-        console.log('Confirmed clients:', clientsFromBookings.length)
+      
+      if (showHidden) {
+        params.append('includeHidden', 'true')
+      }
+      
+      if (params.toString()) {
+        url += `?${params.toString()}`
+      }
+      
+      const bookingsResponse = await fetch(url)
+      if (bookingsResponse.ok) {
+        const bookingsData = await bookingsResponse.json()
+        setBookings(bookingsData.bookings || [])
+        console.log('Bookings loaded:', bookingsData.bookings?.length)
+      } else {
+        console.error('Error fetching bookings:', await bookingsResponse.text())
       }
 
       // Fetch songs
@@ -146,9 +132,21 @@ export default function AdminDashboard() {
     switch (state) {
       case 'PENDING': return 'bg-yellow-100 text-yellow-800'
       case 'CONFIRMED': return 'bg-green-100 text-green-800'
-      case 'COMPLETED': return 'bg-blue-100 text-blue-800'
+      case 'PAID': return 'bg-blue-100 text-blue-800'
+      case 'COMPLETED': return 'bg-purple-100 text-purple-800'
       case 'CANCELLED': return 'bg-red-100 text-red-800'
       default: return 'bg-gray-100 text-gray-800'
+    }
+  }
+
+  const getStateLabel = (state: string) => {
+    switch (state) {
+      case 'PENDING': return 'Pendiente'
+      case 'CONFIRMED': return 'Confirmado'
+      case 'PAID': return 'Pagado'
+      case 'COMPLETED': return 'Completado'
+      case 'CANCELLED': return 'Cancelado'
+      default: return state
     }
   }
 
@@ -164,36 +162,46 @@ export default function AdminDashboard() {
     })
   }
 
-  const confirmBooking = async (bookingId: string) => {
+  const updateBooking = async (bookingId: string, updates: Partial<Booking>) => {
     try {
       const response = await fetch(`/api/admin/bookings/${bookingId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          state: 'CONFIRMED'
-        })
+        body: JSON.stringify(updates)
       })
 
       if (response.ok) {
-        // Refresh data
         fetchData()
-        console.log('Booking confirmed successfully')
+        console.log('Booking updated successfully')
       } else {
-        console.error('Error confirming booking')
+        console.error('Error updating booking')
       }
     } catch (error) {
-      console.error('Error confirming booking:', error)
+      console.error('Error updating booking:', error)
     }
+  }
+
+  const toggleVisibility = async (bookingId: string, visible: boolean) => {
+    await updateBooking(bookingId, { visible })
+  }
+
+  const changeState = async (bookingId: string, newState: string) => {
+    await updateBooking(bookingId, { state: newState })
+  }
+
+  const showBookingDetails = (booking: Booking) => {
+    setSelectedBooking(booking)
+    setShowDetails(true)
   }
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando...</p>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+          <p className="mt-4 text-gray-600">Cargando datos...</p>
         </div>
       </div>
     )
@@ -202,109 +210,80 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex justify-between items-center">
+      <div className="bg-white shadow">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
             <div>
-              <h1 className="text-3xl font-serif font-bold text-gray-900">
-                {t('admin.title')}
-              </h1>
-              <p className="text-gray-600">
-                {t('admin.welcome')}
-              </p>
+              <h1 className="text-3xl font-bold text-gray-900">Panel de Administración</h1>
+              <p className="mt-1 text-sm text-gray-500">Gestiona solicitudes, clientes y contenido</p>
             </div>
-            <div className="flex items-center gap-4">
-              <Button variant="outline" size="sm">
-                <Settings className="h-4 w-4 mr-2" />
-                {t('admin.settings')}
+            <div className="flex space-x-4">
+              <Button
+                variant={showHidden ? "default" : "outline"}
+                onClick={() => setShowHidden(!showHidden)}
+                size="sm"
+              >
+                <EyeOff className="h-4 w-4 mr-2" />
+                {showHidden ? 'Ocultar' : 'Mostrar'} ocultos
               </Button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Tabs */}
-        <div className="flex space-x-1 mb-8">
-          {[
-            { id: 'dashboard', label: t('admin.dashboard'), icon: BarChart3 },
-            { id: 'bookings', label: t('admin.bookings'), icon: Calendar },
-            { id: 'songs', label: t('admin.songs'), icon: Music },
-            { id: 'clients', label: t('admin.clients'), icon: Users }
-          ].map((tab) => (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Navigation */}
+        <div className="mb-8">
+          <nav className="flex space-x-8">
             <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors ${
-                activeTab === tab.id
-                  ? 'bg-gold-100 text-gold-800'
-                  : 'text-gray-600 hover:text-gray-900'
+              onClick={() => setActiveTab('bookings')}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                activeTab === 'bookings'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
-              <tab.icon className="h-4 w-4 mr-2" />
-              {tab.label}
+              <Users className="h-5 w-5 inline mr-2" />
+              Registros ({bookings.length})
             </button>
-          ))}
+            <button
+              onClick={() => setActiveTab('songs')}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                activeTab === 'songs'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              <Music className="h-5 w-5 inline mr-2" />
+              Canciones ({songs.length})
+            </button>
+          </nav>
         </div>
-
-        {/* Dashboard Tab */}
-        {activeTab === 'dashboard' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="flex items-center">
-                <Calendar className="h-8 w-8 text-gold-600" />
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">{t('admin.stats.totalBookings')}</p>
-                  <p className="text-2xl font-bold text-gray-900">{bookings.length}</p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="flex items-center">
-                <Calendar className="h-8 w-8 text-yellow-600" />
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">{t('admin.stats.pendingBookings')}</p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {bookings.filter(b => b.state === 'PENDING').length}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="flex items-center">
-                <Calendar className="h-8 w-8 text-green-600" />
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">{t('admin.stats.completedBookings')}</p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {bookings.filter(b => b.state === 'COMPLETED').length}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <div className="flex items-center">
-                <BarChart3 className="h-8 w-8 text-blue-600" />
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">{t('admin.stats.totalRevenue')}</p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {formatPrice(bookings.reduce((sum, b) => sum + b.priceCents, 0))}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Bookings Tab */}
         {activeTab === 'bookings' && (
           <div className="bg-white rounded-lg shadow">
             <div className="px-6 py-4 border-b border-gray-200">
               <div className="flex justify-between items-center">
-                <h2 className="text-lg font-semibold text-gray-900">{t('admin.bookings')}</h2>
-                <Button size="sm">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Nueva solicitud
-                </Button>
+                <h2 className="text-lg font-semibold text-gray-900">Registros</h2>
+                <div className="flex space-x-4">
+                  <select
+                    value={filterState}
+                    onChange={(e) => setFilterState(e.target.value)}
+                    className="border border-gray-300 rounded-md px-3 py-2 text-sm"
+                  >
+                    <option value="ALL">Todos los estados</option>
+                    <option value="PENDING">Pendientes</option>
+                    <option value="CONFIRMED">Confirmados</option>
+                    <option value="PAID">Pagados</option>
+                    <option value="COMPLETED">Completados</option>
+                    <option value="CANCELLED">Cancelados</option>
+                  </select>
+                  <Button size="sm">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Nuevo registro
+                  </Button>
+                </div>
               </div>
             </div>
             <div className="overflow-x-auto">
@@ -327,19 +306,25 @@ export default function AdminDashboard() {
                       Estado
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Visibilidad
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Acciones
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {bookings.map((booking) => (
-                    <tr key={booking.id}>
+                    <tr key={booking.id} className={!booking.visible ? 'opacity-50' : ''}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div>
                           <div className="text-sm font-medium text-gray-900">
                             {booking.client.firstName} {booking.client.lastName}
                           </div>
                           <div className="text-sm text-gray-500">{booking.client.email}</div>
+                          {booking.client.phone && (
+                            <div className="text-sm text-gray-500">{booking.client.phone}</div>
+                          )}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -350,28 +335,93 @@ export default function AdminDashboard() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {formatPrice(booking.priceCents)}
+                        {booking.finalPrice && booking.finalPrice !== booking.priceCents && (
+                          <div className="text-xs text-gray-500">
+                            Final: {formatPrice(booking.finalPrice)}
+                          </div>
+                        )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStateColor(booking.state)}`}>
-                          {booking.state}
+                          {getStateLabel(booking.state)}
                         </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <button
+                          onClick={() => toggleVisibility(booking.id, !booking.visible)}
+                          className={`inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full ${
+                            booking.visible 
+                              ? 'bg-green-100 text-green-800' 
+                              : 'bg-red-100 text-red-800'
+                          }`}
+                        >
+                          {booking.visible ? <Eye className="h-3 w-3 mr-1" /> : <EyeOff className="h-3 w-3 mr-1" />}
+                          {booking.visible ? 'Visible' : 'Oculto'}
+                        </button>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex space-x-2">
-                          <Button variant="ghost" size="sm" title="Ver detalles">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            onClick={() => showBookingDetails(booking)}
+                            title="Ver detalles"
+                          >
                             <Eye className="h-4 w-4" />
                           </Button>
+                          
+                          {/* Estado: Pendiente -> Confirmado */}
                           {booking.state === 'PENDING' && (
                             <Button 
                               variant="ghost" 
                               size="sm" 
-                              onClick={() => confirmBooking(booking.id)}
+                              onClick={() => changeState(booking.id, 'CONFIRMED')}
                               className="text-green-600 hover:text-green-700"
-                              title="Confirmar solicitud"
+                              title="Confirmar"
                             >
-                              ✓
+                              <Check className="h-4 w-4" />
                             </Button>
                           )}
+                          
+                          {/* Estado: Confirmado -> Pagado */}
+                          {booking.state === 'CONFIRMED' && (
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              onClick={() => changeState(booking.id, 'PAID')}
+                              className="text-blue-600 hover:text-blue-700"
+                              title="Marcar como pagado"
+                            >
+                              <Check className="h-4 w-4" />
+                            </Button>
+                          )}
+                          
+                          {/* Estado: Pagado -> Completado */}
+                          {booking.state === 'PAID' && (
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              onClick={() => changeState(booking.id, 'COMPLETED')}
+                              className="text-purple-600 hover:text-purple-700"
+                              title="Marcar como completado"
+                            >
+                              <Check className="h-4 w-4" />
+                            </Button>
+                          )}
+                          
+                          {/* Cancelar en cualquier estado */}
+                          {booking.state !== 'CANCELLED' && (
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              onClick={() => changeState(booking.id, 'CANCELLED')}
+                              className="text-red-600 hover:text-red-700"
+                              title="Cancelar"
+                            >
+                              <X className="h-4 w-4" />
+                            </Button>
+                          )}
+                          
                           <Button variant="ghost" size="sm" title="Descargar">
                             <Download className="h-4 w-4" />
                           </Button>
@@ -390,7 +440,7 @@ export default function AdminDashboard() {
           <div className="bg-white rounded-lg shadow">
             <div className="px-6 py-4 border-b border-gray-200">
               <div className="flex justify-between items-center">
-                <h2 className="text-lg font-semibold text-gray-900">{t('admin.songs')}</h2>
+                <h2 className="text-lg font-semibold text-gray-900">Canciones</h2>
                 <Button size="sm">
                   <Plus className="h-4 w-4 mr-2" />
                   Nueva canción
@@ -424,28 +474,24 @@ export default function AdminDashboard() {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {songs.map((song) => (
                     <tr key={song.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {song.title}
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">{song.title}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {song.composer}
+                        {song.composer || '-'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {song.genre}
+                        {song.genre || '-'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {Math.floor(song.durationSec / 60)}:{(song.durationSec % 60).toString().padStart(2, '0')}
+                        {song.durationSec ? `${Math.floor(song.durationSec / 60)}:${(song.durationSec % 60).toString().padStart(2, '0')}` : '-'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {song.isFeatured ? (
-                          <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gold-100 text-gold-800">
-                            Sí
-                          </span>
-                        ) : (
-                          <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
-                            No
-                          </span>
-                        )}
+                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                          song.isFeatured ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800'
+                        }`}>
+                          {song.isFeatured ? 'Sí' : 'No'}
+                        </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex space-x-2">
@@ -464,109 +510,116 @@ export default function AdminDashboard() {
             </div>
           </div>
         )}
+      </div>
 
-        {/* Clients Tab */}
-        {activeTab === 'clients' && (
-          <div className="bg-white rounded-lg shadow">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <div className="flex justify-between items-center">
-                <h2 className="text-lg font-semibold text-gray-900">{t('admin.clients')}</h2>
-                <Button size="sm">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Nuevo cliente
+      {/* Details Modal */}
+      {showDetails && selectedBooking && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+          <div className="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
+            <div className="mt-3">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-medium text-gray-900">
+                  Detalles del registro
+                </h3>
+                <button
+                  onClick={() => setShowDetails(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                {/* Información del cliente */}
+                <div>
+                  <h4 className="font-semibold text-gray-900">Cliente</h4>
+                  <div className="mt-2 text-sm text-gray-600">
+                    <p><strong>Nombre:</strong> {selectedBooking.client.firstName} {selectedBooking.client.lastName}</p>
+                    <p><strong>Email:</strong> {selectedBooking.client.email}</p>
+                    {selectedBooking.client.phone && <p><strong>Teléfono:</strong> {selectedBooking.client.phone}</p>}
+                    {selectedBooking.client.partnerName && <p><strong>Pareja:</strong> {selectedBooking.client.partnerName}</p>}
+                    {selectedBooking.client.weddingDate && <p><strong>Fecha de boda:</strong> {formatDate(selectedBooking.client.weddingDate)}</p>}
+                  </div>
+                </div>
+
+                {/* Información del booking */}
+                <div>
+                  <h4 className="font-semibold text-gray-900">Reserva</h4>
+                  <div className="mt-2 text-sm text-gray-600">
+                    <p><strong>Fecha:</strong> {formatDate(selectedBooking.date)}</p>
+                    <p><strong>Pack:</strong> {selectedBooking.pack}</p>
+                    <p><strong>Precio:</strong> {formatPrice(selectedBooking.priceCents)}</p>
+                    {selectedBooking.finalPrice && <p><strong>Precio final:</strong> {formatPrice(selectedBooking.finalPrice)}</p>}
+                    <p><strong>Estado:</strong> {getStateLabel(selectedBooking.state)}</p>
+                    {selectedBooking.languagePreference && <p><strong>Idioma:</strong> {selectedBooking.languagePreference}</p>}
+                  </div>
+                </div>
+
+                {/* Lugares */}
+                {(selectedBooking.ceremonyVenue || selectedBooking.cocktailVenue) && (
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Lugares</h4>
+                    <div className="mt-2 text-sm text-gray-600">
+                      {selectedBooking.ceremonyVenue && <p><strong>Ceremonia:</strong> {selectedBooking.ceremonyVenue}</p>}
+                      {selectedBooking.cocktailVenue && <p><strong>Aperitivo:</strong> {selectedBooking.cocktailVenue}</p>}
+                    </div>
+                  </div>
+                )}
+
+                {/* Canciones seleccionadas */}
+                {selectedBooking.selections && selectedBooking.selections.length > 0 && (
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Canciones seleccionadas</h4>
+                    <div className="mt-2 space-y-2">
+                      {selectedBooking.selections.map((selection, index) => (
+                        <div key={index} className="text-sm text-gray-600 border-l-2 border-blue-200 pl-3">
+                          <p><strong>Momento:</strong> {selection.moment}</p>
+                          {selection.song ? (
+                            <p><strong>Canción:</strong> {selection.song.title} - {selection.song.composer}</p>
+                          ) : selection.customTitle ? (
+                            <p><strong>Canción personalizada:</strong> {selection.customTitle}</p>
+                          ) : (
+                            <p><strong>Sin canción seleccionada</strong></p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Contrato */}
+                {selectedBooking.contract && (
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Contrato</h4>
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p><strong>Generado:</strong> {formatDate(selectedBooking.contract.generatedAt)}</p>
+                      {selectedBooking.contract.sentAt && <p><strong>Enviado:</strong> {formatDate(selectedBooking.contract.sentAt)}</p>}
+                      {selectedBooking.contract.signedAt && <p><strong>Firmado:</strong> {formatDate(selectedBooking.contract.signedAt)}</p>}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-6 flex justify-end space-x-3">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowDetails(false)}
+                >
+                  Cerrar
+                </Button>
+                <Button
+                  onClick={() => {
+                    // Aquí podrías implementar la generación de contrato
+                    console.log('Generar contrato para:', selectedBooking.id)
+                  }}
+                >
+                  Generar contrato
                 </Button>
               </div>
             </div>
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Nombre
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Email
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Teléfono
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Pareja
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Fecha boda
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Acciones
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {console.log('Rendering clients table, clients array:', clients, 'length:', clients.length)}
-                  {clients.map((client) => (
-                    <tr key={client.id}>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">
-                          {client.firstName} {client.lastName}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {client.email}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {client.phone || '-'}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {client.partnerName || '-'}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {client.weddingDate ? formatDate(client.weddingDate) : '-'}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex space-x-2">
-                          <Button 
-                            variant="ghost" 
-                            size="sm"
-                            onClick={() => {
-                              // Mostrar detalles de las canciones y lugares
-                              const booking = client.bookings?.[0]
-                              if (booking) {
-                                let details = `Pack: ${booking.pack}\n`
-                                details += `Fecha: ${new Date(booking.date).toLocaleDateString()}\n`
-                                if (booking.ceremonyVenue) details += `Ceremonia: ${booking.ceremonyVenue}\n`
-                                if (booking.cocktailVenue) details += `Aperitivo: ${booking.cocktailVenue}\n`
-                                if (booking.languagePreference) details += `Idioma: ${booking.languagePreference}\n\n`
-                                
-                                if (booking.selections && booking.selections.length > 0) {
-                                  const songs = booking.selections.map(sel => 
-                                    sel.song ? `${sel.song.title} (${sel.song.composer})` : 
-                                    sel.customTitle ? `Personalizada: ${sel.customTitle}` : 'Sin canción'
-                                  ).join('\n')
-                                  details += `Canciones seleccionadas:\n${songs}`
-                                } else {
-                                  details += 'No hay canciones seleccionadas'
-                                }
-                                alert(details)
-                              } else {
-                                alert('No hay información de booking disponible')
-                              }
-                            }}
-                          >
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm">
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }
