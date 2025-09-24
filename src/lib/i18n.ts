@@ -136,13 +136,13 @@ export const translations = {
         songSource: 'Artista/Compositor'
       },
         client: {
-          title: 'Tus datos',
-          subtitle: 'Necesitamos algunos datos para crear tu propuesta personalizada',
+          title: 'Vuestros datos',
+          subtitle: 'Necesitamos algunos datos para crear vuestra propuesta personalizada',
           firstName: 'Nombre',
           lastName: 'Apellidos',
           email: 'Email',
           phone: 'Teléfono',
-          partnerName: 'Nombre de tu pareja',
+          partnerName: 'Nombre de vuestra pareja',
           weddingDate: 'Fecha de la boda',
           venue: 'Lugar de la boda',
           availabilityLink: 'Consulta la disponibilidad antes de elegir',
@@ -331,13 +331,13 @@ export const translations = {
         songSource: 'Artista/Compositor'
       },
         client: {
-          title: 'Les teves dades',
-          subtitle: 'Necessitem algunes dades per crear la teva proposta personalitzada',
+          title: 'Les vostres dades',
+          subtitle: 'Necessitem algunes dades per crear la vostra proposta personalitzada',
           firstName: 'Nom',
           lastName: 'Cognoms',
           email: 'Email',
           phone: 'Telèfon',
-          partnerName: 'Nom del teu company',
+          partnerName: 'Nom del vostre company',
           weddingDate: 'Data del casament',
           venue: 'Lloc del casament',
           availabilityLink: 'Consulta la disponibilitat abans de triar',

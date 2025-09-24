@@ -38,7 +38,8 @@ export function ConfiguratorWizard({
     phone: '',
     partnerName: '',
     weddingDate: '',
-    venue: '',
+    ceremonyVenue: '',
+    cocktailVenue: '',
     languagePreference: 'castellano'
   })
   const [busyDates, setBusyDates] = useState<string[]>([])
@@ -92,8 +93,11 @@ export function ConfiguratorWizard({
     if (!clientData.weddingDate) {
       errors.weddingDate = 'La fecha de la boda es obligatoria'
     }
-    if (!clientData.venue.trim()) {
-      errors.venue = 'El lugar es obligatorio'
+    if (!clientData.ceremonyVenue.trim()) {
+      errors.ceremonyVenue = 'El lugar de la ceremonia es obligatorio'
+    }
+    if (!clientData.cocktailVenue.trim()) {
+      errors.cocktailVenue = 'El lugar del aperitivo es obligatorio'
     }
     
     setFormErrors(errors)
@@ -1701,23 +1705,44 @@ export function ConfiguratorWizard({
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-black mb-1">
-                  Lugar de la boda (opcional)
-                </label>
-                <input
-                  type="text"
-                  value={clientData.venue}
-                  onChange={(e) => setClientData(prev => ({ ...prev, venue: e.target.value }))}
-                  className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black ${
-                    formErrors.venue ? 'border-red-500' : 'border-gray-300'
-                  }`}
-                  required
-                />
-                {formErrors.venue && (
-                  <p className="text-red-500 text-sm mt-1">{formErrors.venue}</p>
-                )}
-              </div>
+              {(selectedPack === 'CEREMONIA' || selectedPack === 'CEREMONIA_APERITIVO_1H' || selectedPack === 'CEREMONIA_APERITIVO_1_5H') && (
+                <div>
+                  <label className="block text-sm font-medium text-black mb-1">
+                    Lugar de la ceremonia
+                  </label>
+                  <input
+                    type="text"
+                    value={clientData.ceremonyVenue}
+                    onChange={(e) => setClientData(prev => ({ ...prev, ceremonyVenue: e.target.value }))}
+                    className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black ${
+                      formErrors.ceremonyVenue ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    required
+                  />
+                  {formErrors.ceremonyVenue && (
+                    <p className="text-red-500 text-sm mt-1">{formErrors.ceremonyVenue}</p>
+                  )}
+                </div>
+              )}
+              {(selectedPack === 'COCTEL' || selectedPack === 'APERITIVO_1H' || selectedPack === 'APERITIVO_1_5H' || selectedPack === 'CEREMONIA_APERITIVO_1H' || selectedPack === 'CEREMONIA_APERITIVO_1_5H') && (
+                <div>
+                  <label className="block text-sm font-medium text-black mb-1">
+                    Lugar del aperitivo
+                  </label>
+                  <input
+                    type="text"
+                    value={clientData.cocktailVenue}
+                    onChange={(e) => setClientData(prev => ({ ...prev, cocktailVenue: e.target.value }))}
+                    className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-black ${
+                      formErrors.cocktailVenue ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    required
+                  />
+                  {formErrors.cocktailVenue && (
+                    <p className="text-red-500 text-sm mt-1">{formErrors.cocktailVenue}</p>
+                  )}
+                </div>
+              )}
               <div>
                 <label className="block text-sm font-medium text-black mb-1">
                   Preferencia de idioma de contacto

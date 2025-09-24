@@ -345,7 +345,7 @@ export default function HomePage() {
       <section className="py-20 bg-amber-50">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-4xl font-serif font-bold text-gray-900 mb-6">
-            ¿Lista para crear el momento perfecto?
+            ¿Listos para crear el momento perfecto?
           </h2>
           <p className="text-xl text-gray-600 mb-8">
             Configura tu boda en menos de 5 minutos y recibe una propuesta personalizada.

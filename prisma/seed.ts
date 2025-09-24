@@ -269,6 +269,46 @@ async function main() {
   }
 
   console.log('Reviews created:', reviews.length)
+
+  // Create gallery items
+  const galleryItems = [
+    {
+      title: 'Ceremonia íntima',
+      description: 'Momento especial durante la ceremonia',
+      type: 'PHOTO',
+      isFeatured: true,
+      orderIndex: 1
+    },
+    {
+      title: 'Cóctel animado',
+      description: 'Ambiente festivo durante el aperitivo',
+      type: 'PHOTO',
+      isFeatured: true,
+      orderIndex: 2
+    },
+    {
+      title: 'Música en vivo',
+      description: 'Interpretación en directo',
+      type: 'VIDEO',
+      isFeatured: true,
+      orderIndex: 3
+    },
+    {
+      title: 'Momento emotivo',
+      description: 'Instante especial de la boda',
+      type: 'PHOTO',
+      isFeatured: false,
+      orderIndex: 4
+    }
+  ]
+
+  for (const item of galleryItems) {
+    await prisma.galleryItem.create({
+      data: item
+    })
+  }
+
+  console.log('Gallery items created:', galleryItems.length)
   console.log('Seed completed successfully!')
 }
 

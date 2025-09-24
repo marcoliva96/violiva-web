@@ -151,3 +151,20 @@ model Review {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 }
+
+model GalleryItem {
+  id          String      @id @default(cuid())
+  title       String
+  description String?
+  type        GalleryType
+  filePath    String?     // Path to uploaded file
+  isFeatured  Boolean     @default(false)
+  orderIndex  Int?        // For custom ordering
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+enum GalleryType {
+  PHOTO
+  VIDEO
+}
