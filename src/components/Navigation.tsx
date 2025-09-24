@@ -85,7 +85,7 @@ export function Navigation() {
               {t('nav.contact')}
             </Link>
             <Button asChild className="bg-amber-600 hover:bg-amber-700 text-white">
-              <Link href="/configura">Configura tu boda</Link>
+              <Link href="/configura">{t('nav.configure')}</Link>
             </Button>
             <LanguageSelector />
           </div>

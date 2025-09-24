@@ -559,6 +559,65 @@ export const translations = {
       weddings: 'Casaments realitzats',
       experience: 'Anys d\'experiència',
       satisfaction: 'Clients satisfets'
+    },
+    advantages: {
+      title: 'Avantatges destacats',
+      elegant: {
+        title: 'Farà que el vostre casament sigui elegant i memorable',
+        description: 'Sense partitures, sense imprevistos, sense electricitat. Una actuació que no us molestará en un dia ple d\'emocions i que us permetrà gaudir plenament.'
+      },
+      comfort: {
+        title: 'Màxima comoditat en el vostre gran dia',
+        description: 'Sense partitures que distreguin, sense imprevistos i sense necessitat de gestionar res in situ. Una actuació dissenyada al detall, amb l\'excel·lència i l\'elegància que us permetrà viure el vostre casament amb total serenitat.'
+      },
+      system: {
+        title: 'Sistema de preparació exclusiu',
+        description: 'Un sistema de preparació exclusiu i pioner: creat per i per a parelles, que us permet escoltar amb total fidelitat com sonarà el vostre casament amb els meus serveis. Una experiència innovadora que us brinda la seguretat de saber exactament com sonarà cada moment especial.'
+      }
+    },
+    packs: {
+      title: 'Compara els packs',
+      subtitle: 'Tria el pack que millor s\'adapti al teu casament',
+      ceremony: {
+        name: 'Només Cerimònia',
+        description: 'Música per a la cerimònia',
+        price: '200€',
+        features: [
+          'Música per a la cerimònia',
+          'Selecció de moments',
+          'Perfecte per a cerimònies íntimes'
+        ]
+      },
+      cocktail: {
+        name: 'Només Còctel',
+        description: 'Música per al còctel',
+        price: '200€',
+        features: [
+          'Música variada per al còctel',
+          'Múltiples estils',
+          'Ambient relaxat'
+        ]
+      },
+      ceremonyCocktail1h: {
+        name: 'Cerimònia + Aperitiu (1h)',
+        description: 'Servei complet (1h aperitiu)',
+        price: '300€',
+        features: [
+          'Cerimònia + 1h Còctel',
+          'Servei complet',
+          'Més popular'
+        ]
+      },
+      ceremonyCocktail1_5h: {
+        name: 'Cerimònia + Aperitiu (1.5h)',
+        description: 'Servei complet (1.5h aperitiu)',
+        price: '340€',
+        features: [
+          'Cerimònia + 1.5h Còctel',
+          'Servei complet',
+          'Ideal per a esdeveniments més llargs'
+        ]
+      }
     }
   }
 }

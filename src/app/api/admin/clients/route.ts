@@ -35,6 +35,8 @@ export async function GET(request: NextRequest) {
       ]
     }
 
+    console.log('Fetching clients with where clause:', where)
+    
     const [clients, total] = await Promise.all([
       prisma.client.findMany({
         where,
@@ -83,6 +85,8 @@ export async function GET(request: NextRequest) {
       }),
       prisma.client.count({ where })
     ])
+
+    console.log('Found clients:', clients.length, 'Total:', total)
 
     return NextResponse.json({
       clients,

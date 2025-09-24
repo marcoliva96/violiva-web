@@ -1474,7 +1474,8 @@ export function ConfiguratorWizard({
         }
 
         const isDatePast = (date: string) => {
-          const selectedDate = new Date(date)
+          const [year, month, day] = date.split('-').map(Number)
+          const selectedDate = new Date(year, month - 1, day)
           const today = new Date()
           today.setHours(0, 0, 0, 0)
           return selectedDate < today
@@ -1482,7 +1483,10 @@ export function ConfiguratorWizard({
 
         const formatDate = (day: number) => {
           const date = new Date(currentYear, currentMonth, day)
-          return date.toISOString().split('T')[0]
+          const year = date.getFullYear()
+          const month = String(date.getMonth() + 1).padStart(2, '0')
+          const dayStr = String(date.getDate()).padStart(2, '0')
+          return `${year}-${month}-${dayStr}`
         }
 
         return (
