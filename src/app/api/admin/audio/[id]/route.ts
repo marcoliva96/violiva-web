@@ -9,11 +9,9 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions)
-    
-    if (!session?.user) {
-      return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
-    }
+    // Permitir acceso sin autenticación
+    // TODO: Implementar autenticación real cuando sea necesario
+    console.log('Accessing API - NODE_ENV:', process.env.NODE_ENV)
 
     const { id } = params
     const filepath = join(process.cwd(), 'public', 'uploads', 'audio', id)

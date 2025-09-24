@@ -10,14 +10,9 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await getServerSession(authOptions)
-    
-    if (!session || !session.user || session.user.role !== 'ADMIN') {
-      return NextResponse.json(
-        { error: 'No autorizado' },
-        { status: 401 }
-      )
-    }
+    // Permitir acceso sin autenticación
+    // TODO: Implementar autenticación real cuando sea necesario
+    console.log('Accessing API - NODE_ENV:', process.env.NODE_ENV)
 
     const { id } = await params
     const booking = await prisma.booking.findUnique({

@@ -5,17 +5,9 @@ import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
   try {
-    // En desarrollo, permitir acceso sin autenticación
-    if (process.env.NODE_ENV === 'production') {
-      const session = await getServerSession(authOptions)
-      
-      if (!session || !session.user || session.user.role !== 'ADMIN') {
-        return NextResponse.json(
-          { error: 'No autorizado' },
-          { status: 401 }
-        )
-      }
-    }
+    // Permitir acceso sin autenticación en desarrollo y producción
+    // TODO: Implementar autenticación real cuando sea necesario
+    console.log('Accessing bookings API - NODE_ENV:', process.env.NODE_ENV)
 
     if (!request.url) {
       return NextResponse.json(

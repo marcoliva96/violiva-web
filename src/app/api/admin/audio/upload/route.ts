@@ -7,11 +7,9 @@ import { existsSync } from 'fs'
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-    
-    if (!session?.user) {
-      return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
-    }
+    // Permitir acceso sin autenticación
+    // TODO: Implementar autenticación real cuando sea necesario
+    console.log('Accessing audio upload API - NODE_ENV:', process.env.NODE_ENV)
 
     const formData = await request.formData()
     const file = formData.get('file') as File
