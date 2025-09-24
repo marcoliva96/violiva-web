@@ -46,7 +46,33 @@ export async function GET(request: NextRequest) {
           phone: true,
           partnerName: true,
           weddingDate: true,
-          createdAt: true
+          createdAt: true,
+          bookings: {
+            select: {
+              id: true,
+              date: true,
+              venue: true,
+              pack: true,
+              priceCents: true,
+              state: true,
+              createdAt: true,
+              selections: {
+                select: {
+                  id: true,
+                  moment: true,
+                  customTitle: true,
+                  customSource: true,
+                  song: {
+                    select: {
+                      id: true,
+                      title: true,
+                      composer: true
+                    }
+                  }
+                }
+              }
+            }
+          }
         },
         orderBy: { createdAt: 'desc' },
         skip: (page - 1) * limit,

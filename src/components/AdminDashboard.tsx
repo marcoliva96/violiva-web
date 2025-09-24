@@ -48,6 +48,26 @@ interface Client {
   phone?: string
   partnerName?: string
   weddingDate?: string
+  bookings?: {
+    id: string
+    date: string
+    venue: string
+    pack: string
+    priceCents: number
+    state: string
+    createdAt: string
+    selections: {
+      id: string
+      moment: string
+      customTitle?: string
+      customSource?: string
+      song?: {
+        id: string
+        title: string
+        composer: string
+      }
+    }[]
+  }[]
 }
 
 export default function AdminDashboard() {
@@ -442,7 +462,23 @@ export default function AdminDashboard() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex space-x-2">
-                          <Button variant="ghost" size="sm">
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => {
+                              // Mostrar detalles de las canciones
+                              const booking = client.bookings?.[0]
+                              if (booking?.selections) {
+                                const songs = booking.selections.map(sel => 
+                                  sel.song ? `${sel.song.title} (${sel.song.composer})` : 
+                                  sel.customTitle ? `Personalizada: ${sel.customTitle}` : 'Sin canción'
+                                ).join(', ')
+                                alert(`Canciones seleccionadas:\n${songs}`)
+                              } else {
+                                alert('No hay canciones seleccionadas')
+                              }
+                            }}
+                          >
                             <Eye className="h-4 w-4" />
                           </Button>
                           <Button variant="ghost" size="sm">

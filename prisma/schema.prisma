@@ -55,20 +55,12 @@ model Booking {
   clientId       String
   client         Client        @relation(fields: [clientId], references: [id])
   date           DateTime
-  ceremonyVenue  String?       // Lugar de la ceremonia
-  cocktailVenue  String?       // Lugar del aperitivo
+  venue          String?
   pack           BookingPack
   priceCents     Int
   finalPrice     Int?          // Precio final acordado en centavos
   currency       String        @default("EUR")
   state          BookingState  @default(PENDING)
-  languagePreference String?   // Preferencia de idioma
-  ceremonyMoments String[]     // Momentos de la ceremonia seleccionados
-  cocktailStyles String[]      // Estilos de cóctel seleccionados
-  cocktailComment String?      // Comentario del cóctel
-  customSongs    Json?         // Canciones personalizadas
-  firstPersonName String?      // Nombre de la primera persona
-  secondPersonName String?     // Nombre de la segunda persona
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   // relations

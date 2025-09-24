@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
       )
     }
     
-    const { client, weddingDate, ceremonyVenue, cocktailVenue, pack, ceremonyMoments = [], ceremonySongs = {}, cocktailStyles = [], cocktailComment = '', customSongs = [], firstPersonName = '', secondPersonName = '', languagePreference = 'castellano' } = validatedData
+    const { client, weddingDate, venue, pack, ceremonyMoments = [], ceremonySongs = {}, cocktailStyles = [], cocktailComment = '', customSongs = [], firstPersonName = '', secondPersonName = '' } = validatedData
 
     // Calculate price based on pack
     const packPrices = {
@@ -59,17 +59,9 @@ export async function POST(request: NextRequest) {
         data: {
           clientId: clientRecord.id,
           date: weddingDate ? new Date(weddingDate) : new Date(),
-          ceremonyVenue,
-          cocktailVenue,
+          venue,
           pack: pack as any,
           priceCents,
-          languagePreference,
-          ceremonyMoments,
-          cocktailStyles,
-          cocktailComment,
-          customSongs: customSongs.length > 0 ? customSongs : null,
-          firstPersonName,
-          secondPersonName,
           source: 'web-form'
         }
       })
