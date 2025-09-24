@@ -52,9 +52,12 @@ interface Client {
     id: string
     date: string
     venue: string
+    ceremonyVenue?: string
+    cocktailVenue?: string
     pack: string
     priceCents: number
     state: string
+    languagePreference?: string
     createdAt: string
     selections: {
       id: string
@@ -466,16 +469,27 @@ export default function AdminDashboard() {
                             variant="ghost" 
                             size="sm"
                             onClick={() => {
-                              // Mostrar detalles de las canciones
+                              // Mostrar detalles de las canciones y lugares
                               const booking = client.bookings?.[0]
-                              if (booking?.selections) {
-                                const songs = booking.selections.map(sel => 
-                                  sel.song ? `${sel.song.title} (${sel.song.composer})` : 
-                                  sel.customTitle ? `Personalizada: ${sel.customTitle}` : 'Sin canción'
-                                ).join(', ')
-                                alert(`Canciones seleccionadas:\n${songs}`)
+                              if (booking) {
+                                let details = `Pack: ${booking.pack}\n`
+                                details += `Fecha: ${new Date(booking.date).toLocaleDateString()}\n`
+                                if (booking.ceremonyVenue) details += `Ceremonia: ${booking.ceremonyVenue}\n`
+                                if (booking.cocktailVenue) details += `Aperitivo: ${booking.cocktailVenue}\n`
+                                if (booking.languagePreference) details += `Idioma: ${booking.languagePreference}\n\n`
+                                
+                                if (booking.selections && booking.selections.length > 0) {
+                                  const songs = booking.selections.map(sel => 
+                                    sel.song ? `${sel.song.title} (${sel.song.composer})` : 
+                                    sel.customTitle ? `Personalizada: ${sel.customTitle}` : 'Sin canción'
+                                  ).join('\n')
+                                  details += `Canciones seleccionadas:\n${songs}`
+                                } else {
+                                  details += 'No hay canciones seleccionadas'
+                                }
+                                alert(details)
                               } else {
-                                alert('No hay canciones seleccionadas')
+                                alert('No hay información de booking disponible')
                               }
                             }}
                           >

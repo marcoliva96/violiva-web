@@ -52,9 +52,12 @@ export async function GET(request: NextRequest) {
               id: true,
               date: true,
               venue: true,
+              ceremonyVenue: true,
+              cocktailVenue: true,
               pack: true,
               priceCents: true,
               state: true,
+              languagePreference: true,
               createdAt: true,
               selections: {
                 select: {

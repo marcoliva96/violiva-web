@@ -1987,22 +1987,24 @@ export function ConfiguratorWizard({
                 Cancelar
               </Button>
               <Button
-                onClick={() => {
-                  const finalData = {
-                    client: clientData,
-                    pack: selectedPack,
-                    weddingDate: clientData.weddingDate,
-                    venue: clientData.venue,
-                    ceremonyMoments,
-                    ceremonySongs,
-                    cocktailStyles,
-                    cocktailComment,
-                    customSongs,
-                    firstPersonName,
-                    secondPersonName
-                  }
-                  onSubmit(finalData)
-                }}
+                  onClick={() => {
+                    const finalData = {
+                      client: clientData,
+                      pack: selectedPack,
+                      weddingDate: clientData.weddingDate,
+                      ceremonyVenue: clientData.ceremonyVenue,
+                      cocktailVenue: clientData.cocktailVenue,
+                      ceremonyMoments,
+                      ceremonySongs,
+                      cocktailStyles,
+                      cocktailComment,
+                      customSongs,
+                      firstPersonName,
+                      secondPersonName,
+                      languagePreference: clientData.languagePreference
+                    }
+                    onSubmit(finalData)
+                  }}
                 className="bg-amber-600 hover:bg-amber-700 text-white"
               >
                 Confirmar y enviar

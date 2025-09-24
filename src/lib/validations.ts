@@ -12,7 +12,9 @@ export const clientSchema = z.object({
 export const bookingSchema = z.object({
   client: clientSchema,
   weddingDate: z.string().optional(),
-  venue: z.string().optional(),
+  venue: z.string().optional(), // Deprecated, mantener para compatibilidad
+  ceremonyVenue: z.string().optional(),
+  cocktailVenue: z.string().optional(),
   pack: z.enum(['CEREMONIA', 'APERITIVO_1H', 'APERITIVO_1_5H', 'CEREMONIA_APERITIVO_1H', 'CEREMONIA_APERITIVO_1_5H']),
   ceremonyMoments: z.array(z.string()).optional(),
   ceremonySongs: z.record(z.string()).optional(),
@@ -24,6 +26,7 @@ export const bookingSchema = z.object({
   })).optional(),
   firstPersonName: z.string().optional(),
   secondPersonName: z.string().optional(),
+  languagePreference: z.string().optional(),
 })
 
 // Song validation schemas
