@@ -5,12 +5,22 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { useTranslation } from '@/hooks/useTranslation'
 import { LanguageSelector } from '@/components/LanguageSelector'
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const { t } = useTranslation()
+  const pathname = usePathname()
+
+  // Función para determinar si un enlace está activo
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return pathname === '/'
+    }
+    return pathname.startsWith(path)
+  }
 
   return (
     <nav className="bg-white shadow-sm border-b">
@@ -34,16 +44,44 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/galeria" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link 
+              href="/galeria" 
+              className={`px-3 py-2 rounded-md transition-colors ${
+                isActive('/galeria') 
+                  ? 'bg-gray-100 text-gray-900' 
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
+            >
               {t('nav.gallery')}
             </Link>
-            <Link href="/escuchar" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link 
+              href="/escuchar" 
+              className={`px-3 py-2 rounded-md transition-colors ${
+                isActive('/escuchar') 
+                  ? 'bg-gray-100 text-gray-900' 
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
+            >
               {t('nav.listen')}
             </Link>
-            <Link href="/disponibilidad" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link 
+              href="/disponibilidad" 
+              className={`px-3 py-2 rounded-md transition-colors ${
+                isActive('/disponibilidad') 
+                  ? 'bg-gray-100 text-gray-900' 
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
+            >
               {t('nav.availability')}
             </Link>
-            <Link href="/contacto" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link 
+              href="/contacto" 
+              className={`px-3 py-2 rounded-md transition-colors ${
+                isActive('/contacto') 
+                  ? 'bg-gray-100 text-gray-900' 
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
+            >
               {t('nav.contact')}
             </Link>
             <Button asChild className="bg-amber-600 hover:bg-amber-700 text-white">
@@ -67,35 +105,51 @@ export function Navigation() {
             <div className="flex flex-col space-y-4">
               <Link 
                 href="/galeria" 
-                className="text-gray-600 hover:text-gray-900 transition-colors"
+                className={`px-3 py-2 rounded-md transition-colors ${
+                  isActive('/galeria') 
+                    ? 'bg-gray-100 text-gray-900' 
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                }`}
                 onClick={() => setIsOpen(false)}
               >
-                Galería
+                {t('nav.gallery')}
               </Link>
               <Link 
                 href="/escuchar" 
-                className="text-gray-600 hover:text-gray-900 transition-colors"
+                className={`px-3 py-2 rounded-md transition-colors ${
+                  isActive('/escuchar') 
+                    ? 'bg-gray-100 text-gray-900' 
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                }`}
                 onClick={() => setIsOpen(false)}
               >
-                Escuchar
+                {t('nav.listen')}
               </Link>
               <Link 
                 href="/disponibilidad" 
-                className="text-gray-600 hover:text-gray-900 transition-colors"
+                className={`px-3 py-2 rounded-md transition-colors ${
+                  isActive('/disponibilidad') 
+                    ? 'bg-gray-100 text-gray-900' 
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                }`}
                 onClick={() => setIsOpen(false)}
               >
-                Disponibilidad
+                {t('nav.availability')}
               </Link>
               <Link 
                 href="/contacto" 
-                className="text-gray-600 hover:text-gray-900 transition-colors"
+                className={`px-3 py-2 rounded-md transition-colors ${
+                  isActive('/contacto') 
+                    ? 'bg-gray-100 text-gray-900' 
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                }`}
                 onClick={() => setIsOpen(false)}
               >
-                Contacto
+                {t('nav.contact')}
               </Link>
               <Button asChild className="bg-amber-600 hover:bg-amber-700 text-white w-full">
                 <Link href="/configura" onClick={() => setIsOpen(false)}>
-                  Configura tu boda
+                  {t('nav.configure')}
                 </Link>
               </Button>
             </div>
