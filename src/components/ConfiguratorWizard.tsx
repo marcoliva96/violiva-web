@@ -181,7 +181,7 @@ export function ConfiguratorWizard({
       id: 'CEREMONIA',
       name: 'Ceremonia',
       description: 'Música para la ceremonia',
-      price: 200,
+      price: 300,
       service: 'ceremonia',
       features: ['Música para la ceremonia', 'Selección de momentos', 'Perfecto para ceremonias íntimas']
     },
@@ -189,7 +189,7 @@ export function ConfiguratorWizard({
       id: 'APERITIVO_1H',
       name: 'Aperitivo (1h)',
       description: 'Música para el aperitivo',
-      price: 200,
+      price: 300,
       service: 'aperitivo',
       features: ['1 hora de música', 'Múltiples estilos', 'Ambiente relajado']
     },
@@ -197,7 +197,7 @@ export function ConfiguratorWizard({
       id: 'APERITIVO_1_5H',
       name: 'Aperitivo (1,5h)',
       description: 'Música para el aperitivo extendido',
-      price: 250,
+      price: 370,
       service: 'aperitivo',
       features: ['1,5 horas de música', 'Múltiples estilos', 'Ambiente relajado']
     },
@@ -205,7 +205,7 @@ export function ConfiguratorWizard({
       id: 'CEREMONIA_APERITIVO_1H',
       name: 'Ceremonia + Aperitivo (1h)',
       description: 'Servicio completo',
-      price: 300,
+      price: 450,
       service: 'completo',
       features: ['Ceremonia + Aperitivo', 'Servicio completo', 'Más popular'],
       isPopular: true
@@ -214,7 +214,7 @@ export function ConfiguratorWizard({
       id: 'CEREMONIA_APERITIVO_1_5H',
       name: 'Ceremonia + Aperitivo (1,5h)',
       description: 'Servicio completo extendido',
-      price: 340,
+      price: 500,
       service: 'completo',
       features: ['Ceremonia + Aperitivo', '1,5 horas de aperitivo', 'Servicio completo']
     }
