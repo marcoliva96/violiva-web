@@ -195,39 +195,85 @@ export default function AdminDashboard() {
   }
 
   const changeState = async (bookingId: string, newState: string) => {
-    // Actualizar el estado del cliente asociado al booking
-    const response = await fetch(`/api/admin/clients/${bookingId}/status`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ status: newState })
-    })
+    console.log('Changing state for booking:', bookingId, 'to:', newState)
+    
+    try {
+      // Actualizar el estado del cliente asociado al booking
+      const response = await fetch(`/api/admin/clients/${bookingId}/status`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: newState })
+      })
 
-    if (response.ok) {
-      fetchData()
-      console.log('Client status updated successfully')
-    } else {
-      console.error('Error updating client status')
+      console.log('Response status:', response.status)
+      
+      if (response.ok) {
+        const result = await response.json()
+        console.log('Client status updated successfully:', result)
+        fetchData()
+      } else {
+        const errorText = await response.text()
+        console.error('Error updating client status:', response.status, errorText)
+      }
+    } catch (error) {
+      console.error('Network error updating client status:', error)
     }
   }
 
   const updateFinalPrice = async (bookingId: string, finalPriceCents: number) => {
-    const response = await fetch(`/api/admin/bookings/${bookingId}/final-price`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ finalPrice: finalPriceCents })
-    })
+    console.log('Updating final price for booking:', bookingId, 'to:', finalPriceCents)
+    
+    try {
+      const response = await fetch(`/api/admin/bookings/${bookingId}/final-price`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ finalPrice: finalPriceCents })
+      })
 
-    if (response.ok) {
-      fetchData()
-      setShowFinalPriceInput(false)
-      setFinalPrice('')
-      console.log('Final price updated successfully')
-    } else {
-      console.error('Error updating final price')
+      console.log('Final price response status:', response.status)
+      
+      if (response.ok) {
+        const result = await response.json()
+        console.log('Final price updated successfully:', result)
+        fetchData()
+        setShowFinalPriceInput(false)
+        setFinalPrice('')
+      } else {
+        const errorText = await response.text()
+        console.error('Error updating final price:', response.status, errorText)
+      }
+    } catch (error) {
+      console.error('Network error updating final price:', error)
+    }
+  }
+
+  const testActions = async () => {
+    console.log('Testing actions...')
+    
+    try {
+      const response = await fetch('/api/test-actions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ test: 'actions working' })
+      })
+
+      if (response.ok) {
+        const result = await response.json()
+        console.log('Test actions successful:', result)
+        alert('Test actions successful! Check console for details.')
+      } else {
+        console.error('Test actions failed:', response.status)
+        alert('Test actions failed! Check console for details.')
+      }
+    } catch (error) {
+      console.error('Test actions error:', error)
+      alert('Test actions error! Check console for details.')
     }
   }
 
@@ -258,6 +304,13 @@ export default function AdminDashboard() {
               <p className="mt-1 text-sm text-gray-500">Gestiona solicitudes, clientes y contenido</p>
             </div>
             <div className="flex space-x-4">
+              <Button
+                variant="outline"
+                onClick={testActions}
+                size="sm"
+              >
+                Test Actions
+              </Button>
               <Button
                 variant={showHidden ? "default" : "outline"}
                 onClick={() => setShowHidden(!showHidden)}
