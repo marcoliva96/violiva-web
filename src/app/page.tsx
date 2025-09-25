@@ -17,7 +17,6 @@ interface Review {
 }
 
 export default function HomePage() {
-  // Precios actualizados v2.0 - 2025-09-25T12:02:25Z
   const { t } = useTranslation()
   const [reviews, setReviews] = useState<Review[]>([])
 
@@ -237,7 +236,7 @@ export default function HomePage() {
             <div className="bg-white rounded-lg shadow-md p-8">
               <h3 className="text-2xl font-semibold text-gray-900 mb-2">Ceremonia</h3>
               <p className="text-gray-600 mb-4">Música para la ceremonia</p>
-              <div className="text-4xl font-bold text-amber-600 mb-6">200€</div>
+              <div className="text-4xl font-bold text-amber-600 mb-6">300€</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
@@ -258,7 +257,7 @@ export default function HomePage() {
             <div className="bg-white rounded-lg shadow-md p-8">
               <h3 className="text-2xl font-semibold text-gray-900 mb-2">Aperitivo (1h)</h3>
               <p className="text-gray-600 mb-4">Música para el aperitivo</p>
-              <div className="text-4xl font-bold text-amber-600 mb-6">200€</div>
+              <div className="text-4xl font-bold text-amber-600 mb-6">300€</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
@@ -279,7 +278,7 @@ export default function HomePage() {
             <div className="bg-white rounded-lg shadow-md p-8">
               <h3 className="text-2xl font-semibold text-gray-900 mb-2">Aperitivo (1,5h)</h3>
               <p className="text-gray-600 mb-4">Música para el aperitivo extendido</p>
-              <div className="text-4xl font-bold text-amber-600 mb-6">250€</div>
+              <div className="text-4xl font-bold text-amber-600 mb-6">370€</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
@@ -305,7 +304,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Ceremonia + Aperitivo (1h)</h3>
               <p className="text-gray-600 mb-4">Servicio completo</p>
-              <div className="text-4xl font-bold text-amber-600 mb-6">300€</div>
+              <div className="text-4xl font-bold text-amber-600 mb-6">450€</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
@@ -326,7 +325,7 @@ export default function HomePage() {
             <div className="bg-white rounded-lg shadow-md p-8">
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Ceremonia + Aperitivo (1,5h)</h3>
               <p className="text-gray-600 mb-4">Servicio completo extendido</p>
-              <div className="text-4xl font-bold text-amber-600 mb-6">340€</div>
+              <div className="text-4xl font-bold text-amber-600 mb-6">500€</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-500 mr-3" />

@@ -71,7 +71,6 @@ export const translations = {
       packs: {
         title: 'Compara los packs',
         subtitle: 'Elige el pack que mejor se adapte a tu boda',
-        // Precios actualizados v2.0 - 2025-09-25T12:02:25Z
         ceremony: {
           name: 'Solo Ceremonia',
           description: 'Música para la ceremonia',
@@ -132,7 +131,7 @@ export const translations = {
         cocktail: {
           name: 'Solo Cóctel',
           description: 'Música para el cóctel',
-          price: '370€',
+          price: '250€',
           features: [
             'Música variada para cóctel',
             'Múltiples estilos',
@@ -343,7 +342,6 @@ export const translations = {
       packs: {
         title: 'Compara els packs',
         subtitle: 'Tria el pack que millor s\'adapti al teu casament',
-        // Precios actualizados v2.0 - 2025-09-25T12:02:25Z
         ceremony: {
           name: 'Només Cerimònia',
           description: 'Música per a la cerimònia',
@@ -404,7 +402,7 @@ export const translations = {
         cocktail: {
           name: 'Només Còctel',
           description: 'Música per al còctel',
-          price: '370€',
+          price: '250€',
           features: [
             'Música variada per al còctel',
             'Múltiples estils',
