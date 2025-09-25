@@ -17,6 +17,7 @@ interface Review {
 }
 
 export default function HomePage() {
+  // Precios actualizados v2.0
   const { t } = useTranslation()
   const [reviews, setReviews] = useState<Review[]>([])
 

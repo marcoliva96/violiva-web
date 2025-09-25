@@ -71,6 +71,7 @@ export const translations = {
       packs: {
         title: 'Compara los packs',
         subtitle: 'Elige el pack que mejor se adapte a tu boda',
+        // Precios actualizados v2.0
         ceremony: {
           name: 'Solo Ceremonia',
           description: 'Música para la ceremonia',
@@ -342,6 +343,7 @@ export const translations = {
       packs: {
         title: 'Compara els packs',
         subtitle: 'Tria el pack que millor s\'adapti al teu casament',
+        // Precios actualizados v2.0
         ceremony: {
           name: 'Només Cerimònia',
           description: 'Música per a la cerimònia',
