@@ -34,14 +34,14 @@ interface Booking {
   }
   date: string
   venue?: string
-  ceremonyVenue?: string
-  cocktailVenue?: string
+  // ceremonyVenue?: string // Comentado hasta que exista en producción
+  // cocktailVenue?: string // Comentado hasta que exista en producción
   pack: string
   priceCents: number
   finalPrice?: number
   state: string // Estado del booking
-  languagePreference?: string
-  visible: boolean
+  // languagePreference?: string // Comentado hasta que exista en producción
+  // visible: boolean // Comentado hasta que exista en producción
   createdAt: string
   updatedAt: string
   selections: {
@@ -582,12 +582,13 @@ export default function AdminDashboard() {
                     <p><strong>Precio:</strong> {formatPrice(selectedBooking.priceCents)}</p>
                     {selectedBooking.finalPrice && <p><strong>Precio final:</strong> {formatPrice(selectedBooking.finalPrice)}</p>}
                     <p><strong>Estado:</strong> {getStateLabel(selectedBooking.state)}</p>
-                    {selectedBooking.languagePreference && <p><strong>Idioma:</strong> {selectedBooking.languagePreference}</p>}
+                    {/* {selectedBooking.languagePreference && <p><strong>Idioma:</strong> {selectedBooking.languagePreference}</p>} */}
                   </div>
                 </div>
 
                 {/* Lugares */}
-                {(selectedBooking.ceremonyVenue || selectedBooking.cocktailVenue) && (
+                {/* Comentado hasta que las columnas existan en producción */}
+                {/* {(selectedBooking.ceremonyVenue || selectedBooking.cocktailVenue) && (
                   <div>
                     <h4 className="font-semibold text-gray-900">Lugares</h4>
                     <div className="mt-2 text-sm text-gray-600">
@@ -595,7 +596,7 @@ export default function AdminDashboard() {
                       {selectedBooking.cocktailVenue && <p><strong>Aperitivo:</strong> {selectedBooking.cocktailVenue}</p>}
                     </div>
                   </div>
-                )}
+                )} */}
 
                 {/* Canciones seleccionadas */}
                 {selectedBooking.selections && selectedBooking.selections.length > 0 && (

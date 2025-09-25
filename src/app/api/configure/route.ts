@@ -60,11 +60,11 @@ export async function POST(request: NextRequest) {
           clientId: clientRecord.id,
           date: weddingDate ? new Date(weddingDate) : new Date(),
           venue: ceremonyVenue || cocktailVenue, // Fallback para compatibilidad
-          ceremonyVenue,
-          cocktailVenue,
+          // ceremonyVenue, // Comentado hasta que exista en producción
+          // cocktailVenue, // Comentado hasta que exista en producción
           pack: pack as any,
           priceCents,
-          languagePreference,
+          // languagePreference, // Comentado hasta que exista en producción
           source: 'web-form'
         }
       })
