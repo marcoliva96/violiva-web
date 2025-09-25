@@ -28,9 +28,10 @@ export async function GET(request: NextRequest) {
     const where: Record<string, unknown> = {}
 
     // Solo filtrar por visibilidad si no se incluyen los ocultos
-    if (!includeHidden) {
-      where.visible = true
-    }
+    // Comentado temporalmente hasta que la columna visible exista en producción
+    // if (!includeHidden) {
+    //   where.visible = true
+    // }
 
     // Si se especifica un estado o status, buscar por el estado del cliente
     const clientStatus = state || status
