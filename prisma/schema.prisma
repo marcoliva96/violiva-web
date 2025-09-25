@@ -56,15 +56,15 @@ model Booking {
   client         Client        @relation(fields: [clientId], references: [id])
   date           DateTime
   venue          String?       // Lugar general (deprecated)
-  ceremonyVenue  String?       // Lugar de la ceremonia
-  cocktailVenue  String?       // Lugar del aperitivo
+  // ceremonyVenue  String?       // Lugar de la ceremonia - Comentado hasta que exista en producción
+  // cocktailVenue  String?       // Lugar del aperitivo - Comentado hasta que exista en producción
   pack           BookingPack
   priceCents     Int
   finalPrice     Int?          // Precio final acordado en centavos
   currency       String        @default("EUR")
   state          BookingState  @default(PENDING)
-  languagePreference String?   // Preferencia de idioma de contacto
-  visible        Boolean       @default(true) // Campo para ocultar/mostrar registros
+  // languagePreference String?   // Preferencia de idioma de contacto - Comentado hasta que exista en producción
+  // visible        Boolean       @default(true) // Campo para ocultar/mostrar registros - Comentado hasta que exista en producción
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   // relations
