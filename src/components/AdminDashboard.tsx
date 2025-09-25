@@ -82,6 +82,8 @@ export default function AdminDashboard() {
   const [showDetails, setShowDetails] = useState(false)
   const [filterState, setFilterState] = useState<string>('CONTACTED')
   const [showHidden, setShowHidden] = useState(false)
+  const [finalPrice, setFinalPrice] = useState<string>('')
+  const [showFinalPriceInput, setShowFinalPriceInput] = useState(false)
 
   useEffect(() => {
     fetchData()
@@ -187,7 +189,9 @@ export default function AdminDashboard() {
   }
 
   const toggleVisibility = async (bookingId: string, visible: boolean) => {
-    await updateBooking(bookingId, { visible })
+    // Comentado hasta que la columna visible exista en producción
+    // await updateBooking(bookingId, { visible })
+    console.log('Toggle visibility not available until visible column exists in production')
   }
 
   const changeState = async (bookingId: string, newState: string) => {
@@ -205,6 +209,25 @@ export default function AdminDashboard() {
       console.log('Client status updated successfully')
     } else {
       console.error('Error updating client status')
+    }
+  }
+
+  const updateFinalPrice = async (bookingId: string, finalPriceCents: number) => {
+    const response = await fetch(`/api/admin/bookings/${bookingId}/final-price`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ finalPrice: finalPriceCents })
+    })
+
+    if (response.ok) {
+      fetchData()
+      setShowFinalPriceInput(false)
+      setFinalPrice('')
+      console.log('Final price updated successfully')
+    } else {
+      console.error('Error updating final price')
     }
   }
 
@@ -365,7 +388,8 @@ export default function AdminDashboard() {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <button
+                        {/* Comentado hasta que la columna visible exista en producción */}
+                        {/* <button
                           onClick={() => toggleVisibility(booking.id, !booking.visible)}
                           className={`inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full ${
                             booking.visible 
@@ -375,7 +399,8 @@ export default function AdminDashboard() {
                         >
                           {booking.visible ? <Eye className="h-3 w-3 mr-1" /> : <EyeOff className="h-3 w-3 mr-1" />}
                           {booking.visible ? 'Visible' : 'Oculto'}
-                        </button>
+                        </button> */}
+                        <span className="text-gray-500">-</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex space-x-2">
@@ -581,6 +606,48 @@ export default function AdminDashboard() {
                     <p><strong>Pack:</strong> {selectedBooking.pack}</p>
                     <p><strong>Precio:</strong> {formatPrice(selectedBooking.priceCents)}</p>
                     {selectedBooking.finalPrice && <p><strong>Precio final:</strong> {formatPrice(selectedBooking.finalPrice)}</p>}
+                    {!selectedBooking.finalPrice && (
+                      <div className="mt-2">
+                        {!showFinalPriceInput ? (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setShowFinalPriceInput(true)}
+                          >
+                            Establecer precio final
+                          </Button>
+                        ) : (
+                          <div className="flex space-x-2">
+                            <input
+                              type="number"
+                              value={finalPrice}
+                              onChange={(e) => setFinalPrice(e.target.value)}
+                              placeholder="Precio en euros"
+                              className="px-2 py-1 border rounded text-sm"
+                            />
+                            <Button
+                              size="sm"
+                              onClick={() => {
+                                const priceCents = Math.round(parseFloat(finalPrice) * 100)
+                                updateFinalPrice(selectedBooking.id, priceCents)
+                              }}
+                            >
+                              Guardar
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => {
+                                setShowFinalPriceInput(false)
+                                setFinalPrice('')
+                              }}
+                            >
+                              Cancelar
+                            </Button>
+                          </div>
+                        )}
+                      </div>
+                    )}
                     <p><strong>Estado:</strong> {getStateLabel(selectedBooking.state)}</p>
                     {/* {selectedBooking.languagePreference && <p><strong>Idioma:</strong> {selectedBooking.languagePreference}</p>} */}
                   </div>

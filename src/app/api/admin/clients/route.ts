@@ -32,18 +32,25 @@ export async function GET(request: NextRequest) {
 
     console.log('Fetching clients with where clause:', where)
     
-    // Primero obtener solo los clientes básicos
+    // Obtener clientes con sus bookings y canciones
     const clients = await prisma.client.findMany({
       where,
-      select: {
-        id: true,
-        firstName: true,
-        lastName: true,
-        email: true,
-        phone: true,
-        partnerName: true,
-        weddingDate: true,
-        createdAt: true
+      include: {
+        bookings: {
+          include: {
+            selections: {
+              include: {
+                song: {
+                  select: {
+                    title: true,
+                    composer: true,
+                  }
+                }
+              }
+            }
+          },
+          orderBy: { createdAt: 'desc' }
+        }
       },
       orderBy: { createdAt: 'desc' },
       skip: (page - 1) * limit,
