@@ -23,11 +23,11 @@ export async function POST(request: NextRequest) {
 
     // Calculate price based on pack
     const packPrices = {
-      CEREMONIA: 20000,              // 200€
-      APERITIVO_1H: 20000,           // 200€
-      APERITIVO_1_5H: 25000,         // 250€
-      CEREMONIA_APERITIVO_1H: 30000, // 300€
-      CEREMONIA_APERITIVO_1_5H: 34000 // 340€
+      CEREMONIA: 30000,              // 300€
+      APERITIVO_1H: 30000,           // 300€
+      APERITIVO_1_5H: 37000,         // 370€
+      CEREMONIA_APERITIVO_1H: 45000, // 450€
+      CEREMONIA_APERITIVO_1_5H: 50000 // 500€
     }
 
     const priceCents = packPrices[pack]

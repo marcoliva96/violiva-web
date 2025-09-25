@@ -74,7 +74,7 @@ export const translations = {
         ceremony: {
           name: 'Solo Ceremonia',
           description: 'Música para la ceremonia',
-          price: '200€',
+          price: '300€',
           features: [
             'Música para la ceremonia',
             'Selección de momentos',
@@ -84,7 +84,7 @@ export const translations = {
         cocktail: {
           name: 'Solo Cóctel',
           description: 'Música para el cóctel',
-          price: '200€',
+          price: '300€',
           features: [
             'Música variada para cóctel',
             'Múltiples estilos',
@@ -94,7 +94,7 @@ export const translations = {
         ceremonyCocktail1h: {
           name: 'Ceremonia + Aperitivo (1h)',
           description: 'Servicio completo (1h aperitivo)',
-          price: '300€',
+          price: '450€',
           features: [
             'Ceremonia + 1h Cóctel',
             'Servicio completo',
@@ -104,7 +104,7 @@ export const translations = {
         ceremonyCocktail1_5h: {
           name: 'Ceremonia + Aperitivo (1.5h)',
           description: 'Servicio completo (1.5h aperitivo)',
-          price: '340€',
+          price: '500€',
           features: [
             'Ceremonia + 1.5h Cóctel',
             'Servicio completo',
@@ -131,7 +131,7 @@ export const translations = {
         cocktail: {
           name: 'Solo Cóctel',
           description: 'Música para el cóctel',
-          price: '250€',
+          price: '370€',
           features: [
             'Música variada para cóctel',
             'Múltiples estilos',
@@ -345,7 +345,7 @@ export const translations = {
         ceremony: {
           name: 'Només Cerimònia',
           description: 'Música per a la cerimònia',
-          price: '200€',
+          price: '300€',
           features: [
             'Música per a la cerimònia',
             'Selecció de moments',
@@ -355,7 +355,7 @@ export const translations = {
         cocktail: {
           name: 'Només Còctel',
           description: 'Música per al còctel',
-          price: '200€',
+          price: '300€',
           features: [
             'Música variada per al còctel',
             'Múltiples estils',
@@ -365,7 +365,7 @@ export const translations = {
         ceremonyCocktail1h: {
           name: 'Cerimònia + Aperitiu (1h)',
           description: 'Servei complet (1h aperitiu)',
-          price: '300€',
+          price: '450€',
           features: [
             'Cerimònia + 1h Còctel',
             'Servei complet',
@@ -375,7 +375,7 @@ export const translations = {
         ceremonyCocktail1_5h: {
           name: 'Cerimònia + Aperitiu (1.5h)',
           description: 'Servei complet (1.5h aperitiu)',
-          price: '340€',
+          price: '500€',
           features: [
             'Cerimònia + 1.5h Còctel',
             'Servei complet',
@@ -402,7 +402,7 @@ export const translations = {
         cocktail: {
           name: 'Només Còctel',
           description: 'Música per al còctel',
-          price: '250€',
+          price: '370€',
           features: [
             'Música variada per al còctel',
             'Múltiples estils',
