@@ -5,8 +5,10 @@ import { Button } from '@/components/ui/button'
 import { ConfiguratorWizard } from '@/components/ConfiguratorWizard'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslation } from '@/hooks/useTranslation'
 
 export default function ConfiguraPage() {
+  const { t } = useTranslation()
   const [currentStep, setCurrentStep] = useState(1)
   const [bookingData, setBookingData] = useState<Record<string, unknown> | null>(null)
 
@@ -88,15 +90,15 @@ export default function ConfiguraPage() {
             <Button variant="ghost" asChild>
               <Link href="/">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Volver
+                {t('common.back')}
               </Link>
             </Button>
             <div>
               <h1 className="text-3xl font-serif font-bold text-gray-900">
-                Configura tu boda
+                {t('configure.title')}
               </h1>
               <p className="text-gray-600">
-                Crea la propuesta perfecta en unos minutos
+                {t('configure.subtitle')}
               </p>
             </div>
           </div>
